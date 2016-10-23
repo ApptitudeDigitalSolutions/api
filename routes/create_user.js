@@ -14,7 +14,7 @@ exports.createUser = function (req, res) {
             for (var i = length; i > 0; --i) result += chars[Math.round(Math.random() * (chars.length - 1))];
             return result;
     }
-    
+
 
     var mysql = require('mysql');
     var connection = mysql.createConnection({ host: 'localhost', user: 'root', password: 'smashing', database: 'MACRO' });
@@ -43,7 +43,7 @@ exports.createUser = function (req, res) {
                 // genrerate that passcode 
                 var passcode = randomString(5, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
                 
-                var query = 'INSERT INTO Users (company_id,username,password,passcode,phone_number,role,first,last) VALUES (\'' + companyID + '\',\'' + username + '\',\'' + password + '\',\'' + passcode + '\',\'' + number + '\',\'' + role + '\',\'' + first + '\',\'' + last + '\',);';
+                var query = 'INSERT INTO Users (company_id,username,password,passcode,phone_number,role,first,last) VALUES (\'' + companyID + '\',\'' + username + '\',\'' + password + '\',\'' + passcode + '\',\'' + number + '\',\'' + role + '\',\'' + first + '\',\'' + last + '\');';
                 connection.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else { 
                 console.log("User successfully created");
                 connection.end();
