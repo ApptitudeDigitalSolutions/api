@@ -5,7 +5,7 @@ exports.createCompany = function (req, res) {
     var connection = mysql.createConnection({ host: 'localhost', user: 'root', password: 'smashing', database: 'MACRO' });
     connection.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
 
-
+    var async = require('async');
      async.series([function(callback) {
             createCompanyNow(callback, companyname);
     }]);
