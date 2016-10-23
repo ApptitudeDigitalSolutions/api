@@ -1,13 +1,13 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var fs = require('fs');
-var Memcached = require('memcached');
+// var Memcached = require('memcached');
 var https = require('https');
 var app = express();
 var cluster = require('cluster');
 // var async = require('async');
 var url = require('url');
-var bcrypt = require('bcrypt');
+// var bcrypt = require('bcrypt');
 
 
 // if (cluster.isMaster) { 

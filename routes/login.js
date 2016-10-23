@@ -15,7 +15,7 @@ exports.login = function (req, res) {
     var connection = mysql.createConnection({ host: 'localhost', user: 'root', password: 'smashing', database: 'MACRO' });
     connection.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
 
-
+    var memcached = require('memcached');
     var async = require('async');
     async.series([function(callback) {
             loginUser(callback);
