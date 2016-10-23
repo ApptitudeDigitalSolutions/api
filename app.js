@@ -10,8 +10,8 @@ var url = require('url');
 
 
 if (cluster.isMaster) { var numCPUs = require('os').cpus().length; for (var i = 0; i < numCPUs; i++) { cluster.fork();} cluster.on('exit', function() { cluster.fork(); });
- } else { 
-	app.use(bodyParser.json());
+ 
+app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({ extended: true }));
 	
 	var memcached = new Memcached('localhost:11211');
@@ -28,8 +28,7 @@ if (cluster.isMaster) { var numCPUs = require('os').cpus().length; for (var i = 
     var routes = require("./routes/routes.js")(app);
 	https.createServer(options, app).listen(443);
 
-		// var server = app.listen(80, function () {
-		//     console.log("Listening on port %s...", server.address().port);
-		// });
 
+ } else { 
+	
 }
