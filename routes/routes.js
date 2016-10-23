@@ -1,14 +1,12 @@
-// defines routes 
-
 var appRouter = function(app) {
 
 	// GENERAL 
 // 0. Create a company's account
 var postCreateCompanyFilehandle = require('./create_company'); 
-	app.post("v1/company/create",postCreateCompanyFilehandle.createCompany);
+	app.post("/v1/company/create",postCreateCompanyFilehandle.createCompany);
 // 0.1 creat new user
 	var postCreateUserFilehandle = require('./create_user'); 
-	app.post("v1/company/createuser",postCreateUserFilehandle.createUser);
+	app.post("/v1/company/createuser",postCreateUserFilehandle.createUser);
 
 // 1. v1/user/login POST to login
    var postLoginFilehandle = require('./login'); 
