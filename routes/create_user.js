@@ -26,6 +26,7 @@ exports.createUser = function (req, res) {
                 var companyID = rows[0].id;
 
                 // hash that passowrd
+                var bcrypt = require('bcrypt');
                 bcrypt.genSalt(10, function(err, salt) {
                 bcrypt.hash(password, salt, function(err, hash) {
                     // Store hash in your password DB. 
