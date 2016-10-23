@@ -5,13 +5,12 @@ var Memcached = require('memcached');
 var https = require('https');
 var app = express();
 var cluster = require('cluster');
-var async = require('async');
-
-
+// var async = require('async');
 var url = require('url');
 
-// if (cluster.isMaster) { var numCPUs = require('os').cpus().length; for (var i = 0; i < numCPUs; i++) { cluster.fork();} cluster.on('exit', function() { cluster.fork(); });
-// } else { 
+
+if (cluster.isMaster) { var numCPUs = require('os').cpus().length; for (var i = 0; i < numCPUs; i++) { cluster.fork();} cluster.on('exit', function() { cluster.fork(); });
+ } else { 
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({ extended: true }));
 	
@@ -33,4 +32,4 @@ var url = require('url');
 		//     console.log("Listening on port %s...", server.address().port);
 		// });
 
-// }
+}
