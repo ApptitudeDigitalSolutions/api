@@ -15,7 +15,7 @@ exports.createUser = function (req, res) {
 
 
      async.series([function(callback) {
-            createUserNow(callback, companyname,username,password,first,last,number,role);
+            createUserNow(callback);
     }]);
 
      function createUserNow(callback) {
