@@ -18,7 +18,7 @@ exports.createUser = function (req, res) {
             createUserNow(callback, companyname,username,password,first,last,number,role);
     }]);
 
-     function createUserNow(callback,companyname,username,password,first,last,number,role) {
+     function createUserNow(callback) {
 
         var query = 'SELECT id FROM Companies WHERE company_name =\'' + companyname + '\';';
         connection.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else { 
