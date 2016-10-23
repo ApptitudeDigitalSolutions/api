@@ -4,15 +4,14 @@ CREATE DATABASE MACRO;
 USE MACRO;
 
 # Macro tables
--- Create syntax for TABLE 'Companies'
 CREATE TABLE `Companies` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `company_name` text,
   `create_date` datetime DEFAULT NULL,
   `billing_date` datetime DEFAULT NULL,
   `plan_type` int(11) DEFAULT NULL,
-  `account_number` int(11) DEFAULT NULL,
-  `account_sort` int(11) DEFAULT NULL,
+  `account_number` text,
+  `account_sort` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -27,13 +26,16 @@ CREATE TABLE `Invoices` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Create syntax for TABLE 'Users'
 CREATE TABLE `Users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `company_id` int(11) DEFAULT NULL,
   `username` text,
   `password` text,
   `passcode` text,
+  `phone_number` text,
+  `role` text,
+  `first` text,
+  `last` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -43,7 +45,6 @@ CREATE DATABASE INTERVIEW_MACRO;
 USE INTERVIEW_MACRO;
 
 # Interview
-
 -- Create syntax for TABLE 'Interview_candidates_id'
 CREATE TABLE `Interview_candidates_id` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -108,9 +109,10 @@ CREATE TABLE `Interview_templates` (
   `company_id` int(11) DEFAULT NULL,
   `created_on` datetime DEFAULT NULL,
   `participants_count` int(11) DEFAULT NULL,
+  `interview_title` text,
+  `to_be_conducted_on` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 
 
 
@@ -135,12 +137,13 @@ CREATE TABLE `Test_admin_id` (
 -- Create syntax for TABLE 'Test_applicants_id'
 CREATE TABLE `Test_applicants_id` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `first` text,
-  `last` text,
-  `email` text,
-  `dob` datetime DEFAULT NULL,
+  `First` text,
+  `Last` text,
+  `Email` text,
+  `DoB` timestamp NULL DEFAULT NULL,
   `min_stage_of_test` int(11) DEFAULT NULL,
-  `test_stage_state` int(11) DEFAULT NULL,
+  `test_stage_state` text,
+  `other` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -149,15 +152,20 @@ CREATE TABLE `Test_id` (
   `question_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `section_id` int(11) DEFAULT NULL,
   `section_title` text,
+  `section_text` text,
   `test_info_ref` text,
   `section_media_url` text,
+  `section_media_type` text,
+  `section_question_count` int(11) DEFAULT NULL,
   `question` text,
   `question_media_url` text,
+  `question_media_type` text,
   `answer_type` int(11) DEFAULT NULL,
   `answer_options` text,
   `answer_catergories` int(11) DEFAULT NULL,
   `correct_answer` text,
   `time_allowed_in_section` int(11) DEFAULT NULL,
+  `test_results_file_ref` text,
   PRIMARY KEY (`question_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -180,5 +188,6 @@ CREATE TABLE `Test_templates` (
   `created_on` datetime DEFAULT NULL,
   `to_be_conducted_on` datetime DEFAULT NULL,
   `test_title` text,
+  `test_key` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
