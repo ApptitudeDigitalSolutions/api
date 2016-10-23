@@ -16,7 +16,7 @@ exports.login = function (req, res) {
     connection.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
 
 
-
+    var async = require('async');
     async.series([function(callback) {
             loginUser(callback);
     }]);
@@ -30,7 +30,7 @@ exports.login = function (req, res) {
                             if (err) console.error(err);
                             console.dir(result);
                         });
-
+                        var bcrypt = require('bcrypt');
                         if (bcrypt.compareSync(password, storedhash) == true) {
                             isAUser = 1;
                         }
