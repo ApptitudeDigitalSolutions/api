@@ -7,6 +7,7 @@ var app = express();
 var cluster = require('cluster');
 // var async = require('async');
 var url = require('url');
+var bcrypt = require('bcrypt');
 
 
 // if (cluster.isMaster) { 
