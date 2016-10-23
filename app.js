@@ -5,6 +5,8 @@ var Memcached = require('memcached');
 var https = require('https');
 var app = express();
 var cluster = require('cluster');
+var async = require('async');
+
 
 var url = require('url');
 
