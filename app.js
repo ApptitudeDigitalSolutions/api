@@ -25,10 +25,10 @@ var url = require('url');
     var date = new Date();
 
     var routes = require("./routes/routes.js")(app);
-	//https.createServer(options, app).listen(443);
+	https.createServer(options, app).listen(443);
 
-		var server = app.listen(80, function () {
-		    console.log("Listening on port %s...", server.address().port);
-		});
+		// var server = app.listen(80, function () {
+		//     console.log("Listening on port %s...", server.address().port);
+		// });
 
 // }
