@@ -1,5 +1,5 @@
 exports.logout = function (req, res) {
-    var usersname = req.body.username;
+    var username = req.body.username;
     var passcode = req.body.passcode;
     var isValid = 0;
 
