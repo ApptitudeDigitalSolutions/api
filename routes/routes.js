@@ -35,7 +35,7 @@ var postCreateCompanyFilehandle = require('./create_company');
 
 //2. /v1/companies/interviews GET for interviews schedule
 	var getInterviewsFilehandle = require('./get_interviews'); 
-	app.get("/v1/companies/interviews/:company_id",getInterviewsFilehandle.getInterviews);
+	app.post("/v1/companies/interviews/",getInterviewsFilehandle.getInterviews);
 
 // 4. /v1/companies/interview/:candidate_id GET of candidates results (having scored for a tother review)
 	var getInterviewResultsFilehandle = require('./get_interview_results'); 
