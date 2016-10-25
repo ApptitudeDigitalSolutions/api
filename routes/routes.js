@@ -74,7 +74,7 @@ var getCandidateFilehandle = require('./get_interview_candidates');
 // 11. /v1/companies/tests/:company_id GET for tests schedule
 var getTestScheduleFilehandle = require('./get_test_schedule'); 
 	// app.get("/v1/companies/tests/:company_id",getTestScheduleFilehandle.getTestSchedule);
-	post.get("/v1/companies/tests",getTestScheduleFilehandle.getTestSchedule);
+	app.post("/v1/companies/tests",getTestScheduleFilehandle.getTestSchedule);
 
 // 12. /v1/companies/tests/:test_id GET a tests for a specific test id
 var getTestFilehandle = require('./get_test'); 
