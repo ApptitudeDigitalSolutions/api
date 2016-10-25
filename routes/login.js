@@ -1,7 +1,7 @@
 exports.login = function (req, res) {
     var username = req.body.email;
     var password = req.body.password;
-    var isValid = 0;
+    var isAUser = 0;
     var companyID = '';
 
     function randomString(length, chars) {
