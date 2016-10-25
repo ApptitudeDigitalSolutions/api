@@ -1,8 +1,8 @@
 exports.getTestSchedule = function (req, res) {
     var username = req.body.username;
     var passcode = req.body.passcode;
-    var company_id = req.query.company_id; 
-    console.log("company id = " + company_id);
+    var company_id = req.body.company_id; 
+
     var isValid = 0;
 
   
@@ -60,7 +60,7 @@ exports.getTestSchedule = function (req, res) {
     function formatJsonForAllTests(callback){
 
             var query = 'SELECT * FROM Test_templates WHERE company_id =\'' + company_id + '\';';
-            console.log(query);
+            
             connectionTo_TEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
 
             var objToStringify = {tests:[]};
