@@ -2,6 +2,7 @@ exports.getTestSchedule = function (req, res) {
     var username = req.body.username;
     var passcode = req.body.passcode;
     var company_id = req.body.company_id; 
+    console.log("company id = " + company_id);
     var isValid = 0;
 
   
