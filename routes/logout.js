@@ -50,9 +50,11 @@ exports.logout = function (req, res) {
                                         // perform logout 
                                         var query2 = 'UPDATE Users SET passcode = NULL WHERE username =\'' + username + '\';';
                                         connection.query(query2, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
-                                            res.send(200);
+                                            res.sendStatus(200);
                                             connection.end();
                                         }});
+                                    }else{
+                                        res.sendStatus(401);
                                     }
                                 }});
                     }
