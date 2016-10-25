@@ -1,5 +1,5 @@
 exports.login = function (req, res) {
-    var username = req.body.email;
+    var username = req.body.username;
     var password = req.body.password;
     var isAUser = 0;
     var companyID = '';
@@ -28,7 +28,7 @@ exports.login = function (req, res) {
                     for (var i in rows) {
                         var Memcached = require('memcached');
                         var memcached = new Memcached('localhost:11211');
-                        Memcached.config.poolSize = 25;
+                        
                         storedhash = rows[i].password;
                         companyID = rows[i].company_id;
                         memcached.set(username, passcode, 300, function(err, result) {

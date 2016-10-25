@@ -1,5 +1,5 @@
 exports.getTestSchedule = function (req, res) {
-    var usersname = req.body.username;
+    var username = req.body.username;
     var passcode = req.body.passcode;
     var company_id = req.query.company_id; 
     var isValid = 0;
@@ -13,12 +13,16 @@ exports.getTestSchedule = function (req, res) {
     connectionTo_TEST_MACRO.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
 
 
-
+    var async = require('async');
     async.series([function(callback) {
             getInterviewsFunction(callback);
     }]);
 
     function getTestScheduleFunction(callback) {
+                    
+                    var Memcached = require('memcached');
+                    var memcached = new Memcached('localhost:11211');
+                    
                     memcached.get(username, function(err, result) {
 
                     if (err) {
@@ -63,7 +67,8 @@ exports.getTestSchedule = function (req, res) {
                 var test = {
                     test_id: rows[i].id,
                     test_title: rows[i].interview_title,
-                    to_be_conducted_on: rows[i].to_be_conducted_on
+                    to_be_conducted_on: rows[i].to_be_conducted_on,
+                    participants_count: rows[i].participants_count
                 };
 
                 var x = objToStringify.tests.length;

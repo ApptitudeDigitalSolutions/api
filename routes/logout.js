@@ -25,7 +25,7 @@ exports.logout = function (req, res) {
 
                     var Memcached = require('memcached');
                     var memcached = new Memcached('localhost:11211');
-                    Memcached.config.poolSize = 25;
+                    
                     memcached.get(username, function(err, result) {
 
                     if (err) {
