@@ -1,7 +1,7 @@
 exports.getInterviews = function (req, res) {
-    var usersname = req.body.username;
+    var username = req.body.username;
     var passcode = req.body.passcode;
-    var company_id = req.query.company_id; 
+    var company_id = req.body.company_id; 
     var isValid = 0;
 
     var mysql = require('mysql');
@@ -12,12 +12,15 @@ exports.getInterviews = function (req, res) {
     connectionTo_INTERVIEW_MACRO.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
 
 
-
+    var async = require('async');
     async.series([function(callback) {
             getInterviewsFunction(callback);
     }]);
 
     function getInterviewsFunction(callback) {
+                    var Memcached = require('memcached');
+                    var memcached = new Memcached('localhost:11211');
+                    
                     memcached.get(username, function(err, result) {
 
                     if (err) {
@@ -38,7 +41,7 @@ exports.getInterviews = function (req, res) {
                                     storedPasscode = rows[0].passcode;
                                     if (passcode == storedPasscode){
 
-                                        formatJsonForAllInterviews();
+                                        formatJsonForAllInterviews(callback);
                                         
                                     }
                                 }});
