@@ -15,7 +15,7 @@ exports.getTestSchedule = function (req, res) {
 
     var async = require('async');
     async.series([function(callback) {
-            getInterviewsFunction(callback);
+            getTestScheduleFunction(callback);
     }]);
 
     function getTestScheduleFunction(callback) {
