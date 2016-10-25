@@ -43,7 +43,7 @@ exports.getTestSchedule = function (req, res) {
                                     storedPasscode = rows[0].passcode;
                                     if (passcode == storedPasscode){
 
-                                        formatJsonForAllTests();
+                                        formatJsonForAllTests(callback);
                                         
                                     }
                                 }});
