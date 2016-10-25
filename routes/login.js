@@ -1,7 +1,8 @@
 exports.login = function (req, res) {
-    var username = req.body.username;
+    var username = req.body.email;
     var password = req.body.password;
     var isValid = 0;
+    var companyID = '';
 
     function randomString(length, chars) {
             var result = '';
@@ -27,8 +28,9 @@ exports.login = function (req, res) {
                     for (var i in rows) {
                         var Memcached = require('memcached');
                         var memcached = new Memcached('localhost:11211');
-                             Memcached.config.poolSize = 25;
+                        Memcached.config.poolSize = 25;
                         storedhash = rows[i].password;
+                        companyID = rows[i].company_id;
                         memcached.set(username, passcode, 300, function(err, result) {
                             if (err) console.error(err);
                             console.dir(result);
@@ -49,7 +51,8 @@ exports.login = function (req, res) {
                                 "Content-Type": "application/json"
                             });
                             var json = JSON.stringify({
-                                passcode: passcode
+                                passcode: passcode,
+                                company_id:companyID
                             });
                             res.end(json);
                             
