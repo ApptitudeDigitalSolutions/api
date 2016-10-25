@@ -66,7 +66,7 @@ exports.getTestSchedule = function (req, res) {
             for(i in rows){
                 var test = {
                     test_id: rows[i].id,
-                    test_title: rows[i].interview_title,
+                    test_title: rows[i].test_title,
                     to_be_conducted_on: rows[i].to_be_conducted_on,
                     participants_count: rows[i].participants_count
                 };
