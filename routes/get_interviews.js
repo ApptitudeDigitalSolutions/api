@@ -1,7 +1,7 @@
 exports.getInterviews = function (req, res) {
     var username = req.body.username;
     var passcode = req.body.passcode;
-    var company_id = req.body.company_id; 
+    var company_id = req.params.company_id; 
     var isValid = 0;
 
     var mysql = require('mysql');
