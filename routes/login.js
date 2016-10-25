@@ -26,6 +26,8 @@ exports.login = function (req, res) {
             connection.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
                     for (var i in rows) {
                         var memcached = require('memcached');
+                        var memcached = new Memcached('localhost:11211');
+                             Memcached.config.poolSize = 25;
                         storedhash = rows[i].password;
                         memcached.set(username, passcode, 300, function(err, result) {
                             if (err) console.error(err);
