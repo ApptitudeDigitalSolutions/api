@@ -15,12 +15,17 @@ exports.logout = function (req, res) {
     connection.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
 
 
-
+    
+    var async = require('async');
     async.series([function(callback) {
             logoutUser(callback);
     }]);
 
     function logoutUser(callback) {
+
+                    var Memcached = require('memcached');
+                    var memcached = new Memcached('localhost:11211');
+                    Memcached.config.poolSize = 25;
                     memcached.get(username, function(err, result) {
 
                     if (err) {
