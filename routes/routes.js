@@ -4,7 +4,7 @@ var appRouter = function(app) {
 //test
 
 var test = require('./test'); 
-	app.post("/",test.hi);
+	app.get("/",test.hi);
 
 // GENERAL 
 // 0. Create a company's account
