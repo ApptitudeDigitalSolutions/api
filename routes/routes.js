@@ -1,6 +1,12 @@
 var appRouter = function(app) {
 
-	// GENERAL 
+
+//test
+
+var test = require('./test'); 
+	app.post("/",test.hi);
+
+// GENERAL 
 // 0. Create a company's account
 var postCreateCompanyFilehandle = require('./create_company'); 
 	app.post("/v1/company/create",postCreateCompanyFilehandle.createCompany);
