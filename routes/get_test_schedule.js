@@ -59,7 +59,7 @@ exports.getTestSchedule = function (req, res) {
 
     function formatJsonForAllTests(callback){
 
-            var query = 'SELECT id,test_title,DATE_FORMAT(to_be_conducted_on,GET_FORMAT(DATE,\'EUR\')) as to_be_conducted_on FROM Test_templates WHERE company_id =\'' + company_id + '\';';
+            var query = 'SELECT id,test_title,DATE_FORMAT(to_be_conducted_on,GET_FORMAT(DATE,\'EUR\')) as to_be_conducted_on,description FROM Test_templates WHERE company_id =\'' + company_id + '\';';
             
             connectionTo_TEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
 
@@ -69,7 +69,8 @@ exports.getTestSchedule = function (req, res) {
                 var test = {
                     test_id: rows[i].id,
                     test_title: rows[i].test_title,
-                    to_be_conducted_on: rows[i].to_be_conducted_on
+                    to_be_conducted_on: rows[i].to_be_conducted_on,
+                    description:rows[i].description
                 };
 
                 var x = objToStringify.tests.length;

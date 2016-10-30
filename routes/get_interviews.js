@@ -56,7 +56,7 @@ exports.getInterviews = function (req, res) {
 
     function formatJsonForAllInterviews(callback){
 
-            var query = 'SELECT id,company_id,interview_title,created_on,participants_count, DATE_FORMAT(to_be_conducted_on,GET_FORMAT(DATE,\'EUR\')) as to_be_conducted_on FROM Interview_templates WHERE company_id =\'' + company_id + '\';';
+            var query = 'SELECT id,company_id,interview_title,created_on,participants_count, DATE_FORMAT(to_be_conducted_on,GET_FORMAT(DATE,\'EUR\')) as to_be_conducted_on,description FROM Interview_templates WHERE company_id =\'' + company_id + '\';';
             connectionTo_INTERVIEW_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
 
             var objToStringify = {interviews:[]};
@@ -68,7 +68,8 @@ exports.getInterviews = function (req, res) {
                     interview_id: rows[i].id,
                     interview_title: rows[i].interview_title,
                     conducted_on: rows[i].to_be_conducted_on,
-                    participants_count: rows[i].participants_count
+                    participants_count: rows[i].participants_count,
+                    description:rows[i].description
                 };
 
                 var x = objToStringify.interviews.length;
