@@ -23,22 +23,22 @@ var url = require('url');
 	var memcached = new Memcached('localhost:11211');
     Memcached.config.poolSize = 25;
 
-    var options = {
-		   key  : fs.readFileSync('certificates/server.key'),
-		   cert : fs.readFileSync('certificates/server.crt')
-	};
+ //    var options = {
+	// 	   key  : fs.readFileSync('certificates/server.key'),
+	// 	   cert : fs.readFileSync('certificates/server.crt')
+	// };
 	
     process.env.TZ = 'UTC';
     var date = new Date();
 
-    var routes = require("./routes/routes.js")(app);
-	https.createServer(options, app).listen(443);
+ //    var routes = require("./routes/routes.js")(app);
+	// https.createServer(options, app).listen(443);
 
-// var routes = require("./routes/routes.js")(app);
+ var routes = require("./routes/routes.js")(app);
  
-// var server = app.listen(80, function () {
-//     console.log("Listening on port %s...", server.address().port);
-// });
+var server = app.listen(80, function () {
+    console.log("Listening on port %s...", server.address().port);
+});
 
 //  } else { 
 	
