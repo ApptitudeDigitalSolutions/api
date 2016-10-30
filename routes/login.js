@@ -3,6 +3,8 @@ exports.login = function (req, res) {
     var password = req.body.password;
     var isAUser = 0;
     var companyID = '';
+    var name = '';
+    var endpoint = '';
 
     function randomString(length, chars) {
             var result = '';
@@ -31,6 +33,8 @@ exports.login = function (req, res) {
                         
                         storedhash = rows[i].password;
                         companyID = rows[i].company_id;
+                        name = rows[i].first + " " + rows[i].last;
+                        endpoint = "35.160.158.110:80";
                         memcached.set(username, passcode, 300, function(err, result) {
                             if (err) console.error(err);
                             console.dir(result);
