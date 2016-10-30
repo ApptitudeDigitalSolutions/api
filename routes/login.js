@@ -56,7 +56,9 @@ exports.login = function (req, res) {
                             });
                             var json = JSON.stringify({
                                 passcode: passcode,
-                                company_id:companyID
+                                company_id:companyID,
+                                name: name,
+                                endpoint:endpoint
                             });
                             res.end(json);
                             
