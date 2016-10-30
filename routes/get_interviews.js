@@ -56,12 +56,14 @@ exports.getInterviews = function (req, res) {
 
     function formatJsonForAllInterviews(callback){
 
-            var query = 'SELECT * FROM Interview_templates WHERE company_id =\'' + company_id + '\';';
+            var query = 'SELECT id,company_id,interview_title,created_on,participants_count,GET_FORMAT(to_be_conducted_on,\'EUR\') FROM Interview_templates WHERE company_id =\'' + company_id + '\';';
             connectionTo_INTERVIEW_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
 
             var objToStringify = {interviews:[]};
 
             for(i in rows){
+                var sqlDate = rows[i].to_be_conducted_on;
+
                 var interview = {
                     interview_id: rows[i].id,
                     interview_title: rows[i].interview_title,
