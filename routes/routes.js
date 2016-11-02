@@ -87,7 +87,7 @@ var getTestFilehandle = require('./get_test');
 
 //13. /v1/companies/test/participants/:test_id GET for test participants
 var getTestParticipantsFilehandle = require('./get_test_participants'); 
-	app.get("/v1/companies/test/participants/:test_id",getTestParticipantsFilehandle.getTestParticipants);
+	app.post("/v1/companies/test/participants/:test_id",getTestParticipantsFilehandle.getTestParticipants);
 
 //13.1 /v1/companies/test/participants/add PUT to add a new test participant
 var putParticipantFilehandle = require('./add_participant'); 
