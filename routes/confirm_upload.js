@@ -1,5 +1,5 @@
 exports.confirmUpload = function (req, res) {
-    var usersname = req.body.username;
+    var username = req.body.username;
     var passcode = req.body.passcode;
     var aw = req.query.wavFileName; 
     var qid = req.body.question_id;

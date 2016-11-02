@@ -1,5 +1,5 @@
 exports.upload = function (req, res) {
-    var usersname = req.body.username;
+    var username = req.body.username;
     var passcode = req.body.passcode;
     var filename = req.body.filename; 
  

@@ -1,5 +1,5 @@
 exports.play = function (req, res) {
-    var usersname = req.body.username;
+    var username = req.body.username;
     var passcode = req.body.passcode;
     var company_id = req.body.companyID; 
     var recordID = req.query.record_id; 
@@ -19,6 +19,8 @@ exports.play = function (req, res) {
     }]);
 
     function playFunction(callback) {
+                  var Memcached = require('memcached');
+                  var memcached = new Memcached('localhost:11211');
                     memcached.get(username, function(err, result) {
 
                     if (err) {
