@@ -13,7 +13,7 @@ exports.play = function (req, res) {
     connectionTo_INTERVIEW_MACRO.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
 
 
-
+    var async = require('async');
     async.series([function(callback) {
             playFunction(callback);
     }]);

@@ -11,6 +11,7 @@ exports.testCompletion = function (req, res) {
     var connectionTo_TEST_MACRO = mysql.createConnection({ host: 'localhost', user: 'root', password: 'smashing', database: 'TEST_MACRO' });
     connectionTo_TEST_MACRO.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
 
+    var async = require('async');
     async.series([function(callback) {
             authenticate(callback);
     }]);

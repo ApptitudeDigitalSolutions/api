@@ -15,7 +15,7 @@ exports.getTest = function (req, res) {
     connectionTo_TEST_MACRO.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
 
 
-
+    var async = require('async');
     async.series([function(callback) {
         if(isAdmin == '1' && candidatesEmail =='' && username != '' && passcode !=''){
             // we need to authenticate 
