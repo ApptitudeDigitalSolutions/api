@@ -17,6 +17,8 @@ exports.sectionComplete = function (req, res) {
     }]);
 
     function authenticate(callback) {
+                  var Memcached = require('memcached');
+                  var memcached = new Memcached('localhost:11211');
                     memcached.get(username, function(err, result) {
 
                     if (err) {

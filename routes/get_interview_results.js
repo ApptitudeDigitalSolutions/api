@@ -19,6 +19,8 @@ exports.getInterviewsResults = function (req, res) {
     }]);
 
     function getInterviewResultsFunction(callback) {
+                  var Memcached = require('memcached');
+                  var memcached = new Memcached('localhost:11211');
                     memcached.get(username, function(err, result) {
 
                     if (err) {
