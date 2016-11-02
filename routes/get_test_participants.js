@@ -28,7 +28,7 @@ exports.getTestParticipants = function (req, res) {
                     if (result == passcode) {
                         // perform get of all interviews
                             connection.end();
-                            formatJsonForAllInterviewCandidates();
+                            formatJsonForAllTestParticipants();
                     } else {
                     
                         if (result == '' || result == undefined) {
