@@ -2,7 +2,7 @@ exports.getTestParticipants = function (req, res) {
     var username = req.body.username;
     var passcode = req.body.passcode;
     var testID = req.query.test_id; 
-
+    console.log("The test ID is " + testID);
 
     var mysql = require('mysql');
     var connection = mysql.createConnection({ host: 'localhost', user: 'root', password: 'smashing', database: 'MACRO' });
