@@ -24,7 +24,7 @@ var postCreateCompanyFilehandle = require('./create_company');
 
 // 23. /v1/time GET for the current time on the sever. this is important as will need to identify when a user comes back and establishes how much time there is left for both the section and the test as a whole.
 	var getTimeFilehandle = require('./time'); 
-	app.get("/v1/time",getTimeFilehandle.getTime);
+	app.post("/v1/time",getTimeFilehandle.getTime);
 
 // //24. /v1/app/closed/:candidate_id POST to identify that a user has left the app. // this is for the admins tablet
 //     var postleftAppFilehandle = require('./leftApp'); 
