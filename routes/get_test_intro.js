@@ -1,0 +1,1 @@
+exports.getTestIntro = function (req, res) {}

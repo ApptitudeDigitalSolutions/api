@@ -91,23 +91,26 @@ var getTestScheduleFilehandle = require('./get_test_schedule');
 	app.post("/v1/companies/tests/:company_id",getTestScheduleFilehandle.getTestSchedule);
 
 
+
+
 // 25.  GET the test infro for a particular test_id 
 var getTestIntroFilehandle = require('./get_test_intro'); 
-	app.post("/v1/companies/tests/:test_id/intro",getTestIntroFilehandle.getTestIntro);
+	app.post("/v1/companies/tests/:test_id/intro",getTestIntroFilehandle.getTestIntro); // NEEDS IMP<EMNTING 
 
 // 12. /v1/companies/tests/:test_id GET a tests for a specific test id
 var getTestFilehandle = require('./get_test'); 
 	app.get("/v1/companies/tests/:test_id",getTestFilehandle.getTest);
 
+// 26.  GET the test feedback for a particular test_id 
+var getTestFeebackFilehandle = require('./get_feedback_intro'); 
+	app.post("/v1/companies/tests/:test_id/feedback",getTestFeebackFilehandle.getFeedback); // NEEDS IMP<EMNTING 
 
 // 26.  GET the test feedback for a particular test_id 
-var getTestIntroFilehandle = require('./get_feedback_intro'); 
-	app.post("/v1/companies/tests/:test_id/feedback",getTestIntroFilehandle.getTestIntro);
+var setTestFeedbackResutlsFilehandle = require('./set_feedback_intro'); 
+	app.post("/v1/companies/tests/:test_id/feedback/:candidate_id",setTestFeedbackResutlsFilehandle.setFeedback); // NEEDS IMP<EMNTING 
 
 
-// 26.  GET the test feedback for a particular test_id 
-var getTestIntroFilehandle = require('./set_feedback_intro'); 
-	app.post("/v1/companies/tests/:test_id/feedback/:candidate_id",getTestIntroFilehandle.getTestIntro);
+
 
 
 //13. /v1/companies/test/participants/:test_id GET for test participants
