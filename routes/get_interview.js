@@ -8,8 +8,8 @@ exports.getInterviewDetails = function (req, res) {
     var connection = mysql.createConnection({ host: 'localhost', user: 'root', password: 'smashing', database: 'MACRO' });
     connection.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
 
-    var connectionTo_INTERVIEW_MACRO = mysql.createConnection({ host: 'localhost', user: 'root', password: 'smashing', database: 'INTERVIEW_MACRO' });
-    connectionTo_INTERVIEW_MACRO.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
+    var connectionTo_AC_MACRO = mysql.createConnection({ host: 'localhost', user: 'root', password: 'smashing', database: 'AC_MACRO' });
+    connectionTo_AC_MACRO.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
 
 
     var async = require('async');
@@ -56,7 +56,7 @@ exports.getInterviewDetails = function (req, res) {
     function formatJsonForAllInterviews(callback){
     		// get count of sections
     		var query = 'SELECT section_id FROM Interview_questions_'+interviewID+' ORDER BY section_id DESC LIMIT 1;';
-            connectionTo_INTERVIEW_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
+            connectionTo_AC_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
             
             var objToStringify = {interview_payload:[]};
 
@@ -66,7 +66,7 @@ exports.getInterviewDetails = function (req, res) {
 
             	// we need to first get all meta data for the section  and add to the object to return 
             	var sectionInfoQuery = 'SELECT * FROM Interview_questions_'+interviewID+' WHERE section_id = '+i+' ORDER BY question_id ASC;';
-            	connectionTo_INTERVIEW_MACRO.query(sectionInfoQuery, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
+            	connectionTo_AC_MACRO.query(sectionInfoQuery, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
             		//1. strip out the section info  
             		var sectionTitle = rows[0].section_title;
             		var sectionText = rows[0].section_text;
@@ -111,7 +111,7 @@ exports.getInterviewDetails = function (req, res) {
             var json = JSON.stringify(objToStringify);
             console.log('RES QUESTIONS + PROMPTS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ' + json);
             res.end(json);
-            connectionTo_INTERVIEW_MACRO.end();
+            connectionTo_AC_MACRO.end();
 
         	}});
     }

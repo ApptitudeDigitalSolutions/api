@@ -39,6 +39,15 @@ var postCreateCompanyFilehandle = require('./create_company');
 
 	// Create Interview Stubs needed here , i.e add interview section , add interview quesiton with prompts , add interview section time 
 
+//24. retuns a list of activiites gven a specicfied ac id 
+	var getcreateACFilehandle = require('./create_ac'); 
+	app.post("/v1/company/createac",getcreateACFilehandle.createAC);
+
+
+//24. retuns a list of activiites gven a specicfied ac id 
+	var getActivitiesFilehandle = require('./get_actvities'); 
+	app.post("/v1/companies/:company_id/ac/:ac_id/activities",getActivitiesFilehandle.getActivities); 
+
 //2. /v1/companies/interviews GET for interviews schedule
 	var getInterviewsFilehandle = require('./get_interviews'); 
 	app.post("/v1/companies/interviews/:company_id",getInterviewsFilehandle.getInterviews);
@@ -81,9 +90,25 @@ var getCandidateFilehandle = require('./get_interview_candidates');
 var getTestScheduleFilehandle = require('./get_test_schedule'); 
 	app.post("/v1/companies/tests/:company_id",getTestScheduleFilehandle.getTestSchedule);
 
+
+// 25.  GET the test infro for a particular test_id 
+var getTestIntroFilehandle = require('./get_test_intro'); 
+	app.post("/v1/companies/tests/:test_id/intro",getTestIntroFilehandle.getTestIntro);
+
 // 12. /v1/companies/tests/:test_id GET a tests for a specific test id
 var getTestFilehandle = require('./get_test'); 
 	app.get("/v1/companies/tests/:test_id",getTestFilehandle.getTest);
+
+
+// 26.  GET the test feedback for a particular test_id 
+var getTestIntroFilehandle = require('./get_feedback_intro'); 
+	app.post("/v1/companies/tests/:test_id/feedback",getTestIntroFilehandle.getTestIntro);
+
+
+// 26.  GET the test feedback for a particular test_id 
+var getTestIntroFilehandle = require('./set_feedback_intro'); 
+	app.post("/v1/companies/tests/:test_id/feedback/:candidate_id",getTestIntroFilehandle.getTestIntro);
+
 
 //13. /v1/companies/test/participants/:test_id GET for test participants
 var getTestParticipantsFilehandle = require('./get_test_participants'); 

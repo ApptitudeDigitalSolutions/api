@@ -40,13 +40,26 @@ CREATE TABLE `Users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-# Interview Macro DB
-CREATE DATABASE INTERVIEW_MACRO;
-USE INTERVIEW_MACRO;
+# Assessment Centers Macro DB
+CREATE DATABASE AC_MACRO;
+USE AC_MACRO;
+
+CREATE TABLE `Assessment_Center_templates` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `company_id` text,
+  `created_on` datetime DEFAULT NULL,
+  `participants_count` text,
+  `title` text,
+  `description` text,
+  `to_be_conducted_on` datetime DEFAULT NULL,
+  `activity_ids` text,
+  `activity_types` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 # Interview
 -- Create syntax for TABLE 'Interview_candidates_id'
-CREATE TABLE `Interview_candidates_id` (
+CREATE TABLE `Assessment_Center_candidates_id` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `First` text,
   `Last` text,
@@ -54,12 +67,29 @@ CREATE TABLE `Interview_candidates_id` (
   `Role` text,
   `Other` text,
   `created_on` datetime DEFAULT NULL,
+  `set_activities` text,
+  `completed_activities` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 -- Create syntax for TABLE 'Interview_questions_id'
 CREATE TABLE `Interview_questions_id` (
-  `question_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `question_id` int(11),
   `section_id` int(11) DEFAULT NULL,
   `section_title` text,
   `section_text` text,
@@ -69,7 +99,7 @@ CREATE TABLE `Interview_questions_id` (
   `prompts` text,
   `answer_type` int(11) DEFAULT NULL,
   `answer_options` text,
-  PRIMARY KEY (`question_id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Create syntax for TABLE 'Interview_results_id'
@@ -118,6 +148,16 @@ CREATE TABLE `Interview_templates` (
 
 
 
+
+
+
+
+
+
+
+
+
+
 # TEST Macro DB
 CREATE DATABASE TEST_MACRO;
 USE TEST_MACRO;
@@ -147,9 +187,11 @@ CREATE TABLE `Test_applicants_id` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+
 -- Create syntax for TABLE 'Test_id'
-CREATE TABLE `Test_id` (
-  `question_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Test_intro_id` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `question_id` int(11) 
   `section_id` int(11) DEFAULT NULL,
   `section_title` text,
   `section_text` text,
@@ -166,7 +208,30 @@ CREATE TABLE `Test_id` (
   `correct_answer` text,
   `time_allowed_in_section` int(11) DEFAULT NULL,
   `test_results_file_ref` text,
-  PRIMARY KEY (`question_id`)
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Create syntax for TABLE 'Test_id'
+CREATE TABLE `Test_id` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `question_id` int(11) 
+  `section_id` int(11) DEFAULT NULL,
+  `section_title` text,
+  `section_text` text,
+  `test_info_ref` text,
+  `section_media_url` text,
+  `section_media_type` text,
+  `section_question_count` int(11) DEFAULT NULL,
+  `question` text,
+  `question_media_url` text,
+  `question_media_type` text,
+  `answer_type` int(11) DEFAULT NULL,
+  `answer_options` text,
+  `answer_catergories` int(11) DEFAULT NULL,
+  `correct_answer` text,
+  `time_allowed_in_section` int(11) DEFAULT NULL,
+  `test_results_file_ref` text,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Create syntax for TABLE 'Test_results_id'
@@ -181,6 +246,27 @@ CREATE TABLE `Test_results_id` (
   PRIMARY KEY (`result_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+
+-- Create syntax for TABLE 'Interview_review_questions_id'
+CREATE TABLE `Test_feedback_id` (
+  `feedback_question_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `feedback_question` text,
+  `feedback_answer_type` int(11) DEFAULT NULL,
+  `feedback_answer_options` text,
+  PRIMARY KEY (`feedback_question_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+-- Create syntax for TABLE 'Test_results_id'
+CREATE TABLE `Test_feedback_results_id` (
+  `result_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `candidate_id` int(11) DEFAULT NULL,
+  `question_id` int(11) DEFAULT NULL,
+  `answer` text,
+  PRIMARY KEY (`result_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
 -- Create syntax for TABLE 'Test_templates'
 CREATE TABLE `Test_templates` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -188,6 +274,7 @@ CREATE TABLE `Test_templates` (
   `created_on` datetime DEFAULT NULL,
   `to_be_conducted_on` datetime DEFAULT NULL,
   `test_title` text,
+  `test_type`text,
   `test_key` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

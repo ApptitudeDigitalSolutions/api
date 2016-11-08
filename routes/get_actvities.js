@@ -1,7 +1,8 @@
-exports.getInterviewCandidates = function (req, res) {
+exports.getActivities = function (req, res) {
     var username = req.body.username;
     var passcode = req.body.passcode;
-    var interviewID = req.query.interview_id; 
+    var company_id = req.params.company_id; 
+    var ac = req.params.ac_id; 
     var isValid = 0;
 
     var mysql = require('mysql');
@@ -11,14 +12,16 @@ exports.getInterviewCandidates = function (req, res) {
     var connectionTo_AC_MACRO = mysql.createConnection({ host: 'localhost', user: 'root', password: 'smashing', database: 'AC_MACRO' });
     connectionTo_AC_MACRO.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
 
+
     var async = require('async');
     async.series([function(callback) {
-            getInterviewCandidatesFunction(callback);
+            getActivitiesFunction(callback);
     }]);
 
-    function getInterviewCandidatesFunction(callback) {
-                  var Memcached = require('memcached');
-                  var memcached = new Memcached('localhost:11211');
+    function getActivitiesFunction(callback) {
+                    var Memcached = require('memcached');
+                    var memcached = new Memcached('localhost:11211');
+                    
                     memcached.get(username, function(err, result) {
 
                     if (err) {
@@ -28,7 +31,7 @@ exports.getInterviewCandidates = function (req, res) {
                     if (result == passcode) {
                         // perform get of all interviews
                             connection.end();
-                            formatJsonForAllInterviewCandidates();
+                            formatJsonForAllActivities();
                     } else {
                     
                         if (result == '' || result == undefined) {
@@ -39,7 +42,7 @@ exports.getInterviewCandidates = function (req, res) {
                                     storedPasscode = rows[0].passcode;
                                     if (passcode == storedPasscode){
 
-                                        formatJsonForAllInterviewCandidates();
+                                        formatJsonForAllActivities(callback);
                                         
                                     }
                                 }});
@@ -52,45 +55,23 @@ exports.getInterviewCandidates = function (req, res) {
     }
 
 
-    function formatJsonForAllInterviewCandidates(callback){
-    		// get count of sections
-    		var query = 'SELECT * FROM Interview_candidates_'+interviewID+';';
+    function formatJsonForAllActivities(callback){
+
+            var query = 'SELECT activity_ids, activity_types FROM Assessment_Center_templates WHERE id = '+ ac_id +';';
             connectionTo_AC_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
-            
-            var objToStringify = {candidates:[]};
 
             for(i in rows){
+            var objToStringify = {activity_ids:rows[i].activity_ids, activity_types:rows[i].activity_types};
+            }   
 
-            		var candidate_id = rows[i].id;
-            		var first = rows[i].First;
-            		var last = rows[i].Last;
-            		var email = rows[i].Email;
-                    var role = rows[i].Role;
-                    var other = rows[i].Other;
-
-       
-
-            		var candidateJSONObject = { candidate_id: id,
-                                                candidate_first: first,
-                                                candidate_last: last,
-                                                candidate_email: email,
-                                                candidate_role: role,
-                                                other: other};
-
-            		console.log("Candidate > " + JSON.stringify(candidateJSONObject));
-                    objToStringify.candidates.push(candidateJSONObject);
-            			
-            }
-
-          	// were all done creating the payload , itls time send 
-          	res.writeHead(200, {
+            res.writeHead(200, {
                 "Content-Type": "application/json"
             });
             var json = JSON.stringify(objToStringify);
-            console.log('Candidates >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ' + json);
+            console.log('the Json block sent looks like : ' + json);
             res.end(json);
-            connectionTo_AC_MACRO.end();
-
-        	}});
+            
+        }});
+        connectionTo_AC_MACRO.end();
     }
 }

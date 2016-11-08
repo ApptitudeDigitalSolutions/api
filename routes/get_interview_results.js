@@ -9,8 +9,8 @@ exports.getInterviewsResults = function (req, res) {
     var connection = mysql.createConnection({ host: 'localhost', user: 'root', password: 'smashing', database: 'MACRO' });
     connection.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
 
-    var connectionTo_INTERVIEW_MACRO = mysql.createConnection({ host: 'localhost', user: 'root', password: 'smashing', database: 'INTERVIEW_MACRO' });
-    connectionTo_INTERVIEW_MACRO.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
+    var connectionTo_AC_MACRO = mysql.createConnection({ host: 'localhost', user: 'root', password: 'smashing', database: 'AC_MACRO' });
+    connectionTo_AC_MACRO.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
 
 
     var async = require('async');
@@ -57,7 +57,7 @@ exports.getInterviewsResults = function (req, res) {
 
 
             var query = 'SELECT * FROM Interview_Review_Results_'+ interviewID +' WHERE candidate_id = \'' + candidateID + '\';';
-            connectionTo_INTERVIEW_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
+            connectionTo_AC_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
 
             var objToStringify = {review_results:[], audio_files:[]};
 
@@ -76,7 +76,7 @@ exports.getInterviewsResults = function (req, res) {
 
 
 					var query = 'SELECT * FROM Interview_Results_'+ interviewID +' WHERE candidate_id = \'' + candidateID + '\';';
-		            connectionTo_INTERVIEW_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
+		            connectionTo_AC_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
 
 		            var objToStringify = {review_results:[], audio_files:[]};
 
@@ -102,9 +102,9 @@ exports.getInterviewsResults = function (req, res) {
 		            res.end(json);
 		            
 		        }});
-		        connectionTo_INTERVIEW_MACRO.end();
+		        connectionTo_AC_MACRO.end();
 
         }});
-        connectionTo_INTERVIEW_MACRO.end();
+        connectionTo_AC_MACRO.end();
     }
 }

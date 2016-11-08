@@ -8,14 +8,14 @@ exports.addCandidate = function (req, res) {
     var email = req.body.email;
     var role = req.body.role;
     var other = req.body.other;
+    var activities_set = req.body.activities_set;
   
     var mysql = require('mysql');
     var connection = mysql.createConnection({ host: 'localhost', user: 'root', password: 'smashing', database: 'MACRO' });
     connection.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
 
-    var connectionTo_INTERVIEW_MACRO = mysql.createConnection({ host: 'localhost', user: 'root', password: 'smashing', database: 'INTERVIEW_MACRO' });
+    var connectionTo_INTERVIEW_MACRO = mysql.createConnection({ host: 'localhost', user: 'root', password: 'smashing', database: 'AC_MACRO' });
     connectionTo_INTERVIEW_MACRO.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
-
 
     var async = require('async');
     async.series([function(callback) {
@@ -59,7 +59,8 @@ exports.addCandidate = function (req, res) {
 
     function addNewCandidate(callback){
     		// get count of sections
-    		var query = 'INSERT INTO Interview_Candidates_'+interviewID+' (Frist,Last,Email,Role,Other,created_on) VALUES (\''+first+'\',\''+last+'\',\''+email+'\',\''+role+'\',\''+other+'\',NOW());';
+
+    		var query = 'INSERT INTO Assessment_Center_candidates_'+interviewID+' (Frist,Last,Email,Role,Other,set_activities,completed_activities,created_on) VALUES (\''+first+'\',\''+last+'\',\''+email+'\',\''+role+'\',\''+other+'\',\''+activities_set+'\',\'\',NOW());';
             connectionTo_INTERVIEW_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
            
             res.end(200);
