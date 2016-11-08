@@ -2,6 +2,7 @@ exports.validateTestID = function (req, res) {
     var testID = req.params.test_id; 
     console.log("The test ID is " + testID);
 
+    var mysql = require('mysql');
     var connectionTo_TEST_MACRO = mysql.createConnection({ host: 'localhost', user: 'root', password: 'smashing', database: 'TEST_MACRO' });
     connectionTo_TEST_MACRO.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
    
