@@ -93,7 +93,7 @@ var getTestScheduleFilehandle = require('./get_test_schedule');
 
 //26 does a test exist and should it be conducted today
 var isTestIDValidFilehandle = require('./is_testid_valid'); 
-	app.post("/v1/companies/test/validation/:test_id",isTestIDValidFilehandle.validateTestID);
+	app.post("/v1/companies/test/validation/:TEST",isTestIDValidFilehandle.validateTestID);
 
 // 25.  GET the test infro for a particular test_id 
 var getTestIntroFilehandle = require('./get_test_intro'); 
