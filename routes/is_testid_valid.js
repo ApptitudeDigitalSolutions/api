@@ -15,7 +15,7 @@ exports.validateTestID = function (req, res) {
             // get count of sections
             var query = 'SELECT * FROM Test_templates WHERE id = '+testID+' AND DATE(to_be_conducted_on) = CURDATE();';
             connectionTo_TEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
-       console.log(query);
+       
             var testInfoJSON;
             for(i in rows){
 
@@ -28,8 +28,6 @@ exports.validateTestID = function (req, res) {
                                             test_title: test_title,
                                             description: description,
                                             test_ids_in_series: test_ids_in_series};
-
-                                            console.log(JSON.stringify(testInfoJSON));
      
             }
 
