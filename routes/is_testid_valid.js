@@ -1,4 +1,4 @@
-exports.getTestParticipants = function (req, res) {
+exports.validateTestID = function (req, res) {
     var username = req.body.username;
     var passcode = req.body.passcode;
     var testID = req.params.test_id; 
