@@ -1,5 +1,5 @@
 exports.validateTestID = function (req, res) {
-    var testID = req.params.test_id; 
+    var testID = req.params.TEST; 
     console.log("The test ID is " + testID);
 
     var mysql = require('mysql');
