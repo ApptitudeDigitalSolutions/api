@@ -70,7 +70,7 @@ exports.getTestParticipants = function (req, res) {
 
        
 
-                    var candidateJSONObject = { candidate_id: id,
+                    var candidateJSONObject = { candidate_id: candidate_id,
                                                 candidate_first: first,
                                                 candidate_last: last,
                                                 candidate_email: email,
