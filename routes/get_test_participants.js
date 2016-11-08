@@ -54,7 +54,7 @@ exports.getTestParticipants = function (req, res) {
 
     function formatJsonForAllTestParticipants(callback){
             // get count of sections
-            var query = 'SELECT * FROM Test_applicants_'+testID+';';
+            var query = 'SELECT * FROM Test_admin_'+testID+';';
             connectionTo_TEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
             
             var objToStringify = {candidates:[]};
