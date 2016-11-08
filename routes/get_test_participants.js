@@ -61,7 +61,7 @@ exports.getTestParticipants = function (req, res) {
 
             for(i in rows){
 
-                    var candidate_id = rows[i].id;
+                    var candidate_id = rows[i].candidate_id;
                     var first = rows[i].candidate_first;
                     var last = rows[i].candidate_last;
                     var email = rows[i].candidate_email;
