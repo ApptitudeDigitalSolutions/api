@@ -1,12 +1,6 @@
 exports.validateTestID = function (req, res) {
-    var username = req.body.username;
-    var passcode = req.body.passcode;
     var testID = req.params.test_id; 
     console.log("The test ID is " + testID);
-
-    var mysql = require('mysql');
-    var connection = mysql.createConnection({ host: 'localhost', user: 'root', password: 'smashing', database: 'MACRO' });
-    connection.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
 
     var connectionTo_TEST_MACRO = mysql.createConnection({ host: 'localhost', user: 'root', password: 'smashing', database: 'TEST_MACRO' });
     connectionTo_TEST_MACRO.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
