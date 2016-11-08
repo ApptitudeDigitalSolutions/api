@@ -164,7 +164,7 @@ USE TEST_MACRO;
 # TEST
 
 -- Create syntax for TABLE 'Test_admin_id'
-CREATE TABLE `Test_admin_id` (
+CREATE TABLE `Test_admin_TESTNUMBER` (
   `candidate_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `candidate_first` text,
   `candidate_last` text,
@@ -175,7 +175,7 @@ CREATE TABLE `Test_admin_id` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Create syntax for TABLE 'Test_applicants_id'
-CREATE TABLE `Test_applicants_id` (
+CREATE TABLE `Test_applicants_TESTNUMBER` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `First` text,
   `Last` text,
@@ -189,7 +189,7 @@ CREATE TABLE `Test_applicants_id` (
 
 
 -- Create syntax for TABLE 'Test_id'
-CREATE TABLE `Test_intro_id` (
+CREATE TABLE `Test_intro_TESTNUMBER` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `question_id` int(11) 
   `section_id` int(11) DEFAULT NULL,
@@ -212,7 +212,7 @@ CREATE TABLE `Test_intro_id` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Create syntax for TABLE 'Test_id'
-CREATE TABLE `Test_id` (
+CREATE TABLE `Test_TESTNUMBER` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `question_id` int(11) 
   `section_id` int(11) DEFAULT NULL,
@@ -235,7 +235,7 @@ CREATE TABLE `Test_id` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Create syntax for TABLE 'Test_results_id'
-CREATE TABLE `Test_results_id` (
+CREATE TABLE `Test_results_TESTNUMBER` (
   `result_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `candidate_id` int(11) DEFAULT NULL,
   `question_id` int(11) DEFAULT NULL,
@@ -248,7 +248,7 @@ CREATE TABLE `Test_results_id` (
 
 
 -- Create syntax for TABLE 'Interview_review_questions_id'
-CREATE TABLE `Test_feedback_id` (
+CREATE TABLE `Test_feedback_TESTNUMBER` (
   `feedback_question_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `feedback_question` text,
   `feedback_answer_type` int(11) DEFAULT NULL,
@@ -258,7 +258,7 @@ CREATE TABLE `Test_feedback_id` (
 
 
 -- Create syntax for TABLE 'Test_results_id'
-CREATE TABLE `Test_feedback_results_id` (
+CREATE TABLE `Test_feedback_results_TESTNUMBER` (
   `result_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `candidate_id` int(11) DEFAULT NULL,
   `question_id` int(11) DEFAULT NULL,
@@ -267,14 +267,13 @@ CREATE TABLE `Test_feedback_results_id` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
--- Create syntax for TABLE 'Test_templates'
 CREATE TABLE `Test_templates` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `company_id` int(11) DEFAULT NULL,
   `created_on` datetime DEFAULT NULL,
   `to_be_conducted_on` datetime DEFAULT NULL,
   `test_title` text,
-  `test_type`text,
-  `test_key` text,
+  `description` text,
+  `should_be_returned` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
