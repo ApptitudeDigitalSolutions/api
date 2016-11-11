@@ -1,6 +1,6 @@
 exports.addParticipant = function (req, res) {
-    var username = req.body.username;
-    var passcode = req.body.passcode;
+    // var username = req.body.username;
+    // var passcode = req.body.passcode;
     var testID = req.params.test_id; 
 
 
@@ -8,7 +8,7 @@ exports.addParticipant = function (req, res) {
     var last = req.body.last;
     var email = req.body.email;
     var DoB = req.body.dob;
-    var other = req.body.other;
+    var other = "";
   
     var mysql = require('mysql');
     // var connection = mysql.createConnection({ host: 'localhost', user: 'root', password: 'smashing', database: 'MACRO' });
