@@ -9,6 +9,8 @@ exports.addParticipant = function (req, res) {
     var email = req.body.email;
     var DoB = req.body.dob;
     var other = "";
+
+    console.log(req.body);
   
     var mysql = require('mysql');
     // var connection = mysql.createConnection({ host: 'localhost', user: 'root', password: 'smashing', database: 'MACRO' });
@@ -60,6 +62,7 @@ exports.addParticipant = function (req, res) {
     function addNewParticipant(callback){
     		// get count of sections
     		var query = 'INSERT INTO Test_applicants_'+testID+' (First,Last,Email,DoB,min_stage_of_test,test_stage_state,other) VALUES (\''+first+'\',\''+last+'\',\''+email+'\',\''+DoB+'\',0,\'none\',\''+other+'\');';
+        console.log(query);
             connectionTo_TEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
            
             res.end(200);
