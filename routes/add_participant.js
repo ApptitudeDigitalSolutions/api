@@ -59,7 +59,7 @@ exports.addParticipant = function (req, res) {
 
     function addNewParticipant(callback){
     		// get count of sections
-    		var query = 'INSERT INTO Test_applicants_'+testID+' (Frist,Last,Email,DoB,min_stage_of_test,test_stage_state,other) VALUES (\''+first+'\',\''+last+'\',\''+email+'\',\''+DoB+'\',0,\'none\',\''+other+'\');';
+    		var query = 'INSERT INTO Test_applicants_'+testID+' (First,Last,Email,DoB,min_stage_of_test,test_stage_state,other) VALUES (\''+first+'\',\''+last+'\',\''+email+'\',\''+DoB+'\',0,\'none\',\''+other+'\');';
             connectionTo_TEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
            
             res.end(200);
