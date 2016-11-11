@@ -65,7 +65,7 @@ exports.addParticipant = function (req, res) {
         console.log(query);
             connectionTo_TEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
            
-            res.end(200);
+            res.sendStatus(200);
             connectionTo_TEST_MACRO.end();
         	}});
     }
