@@ -96,7 +96,7 @@ exports.getTestIntro = function (req, res) {
             connectionTo_TEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
             
 
-            var testObjects = {pages[]};
+            var testObjects = {pages:[]};
 
 
             for(i in rows){
