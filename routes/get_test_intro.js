@@ -100,7 +100,9 @@ exports.getTestIntro = function (req, res) {
 
 
             for(i in rows){
-            	var testObject = {question_id:rows[i].question_id ,
+            	var testObject = {
+            		id:rows[i].id ,
+            		question_id:rows[i].question_id ,
             		section_id:rows[i].section_id ,
             		section_title:rows[i].section_title ,
             		section_text:rows[i].section_text ,
