@@ -13,14 +13,19 @@ exports.getTestIntro = function (req, res) {
     var connectionTo_TEST_MACRO = mysql.createConnection({ host: 'localhost', user: 'root', password: 'smashing', database: 'TEST_MACRO' });
     connectionTo_TEST_MACRO.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
 
+
     var async = require('async');
-    async.series([function(callback) {     
+    async.series([function(callback) {
+     	
+     	if(isAdmin == '1' && candidatesEmail =='' && username != '' && passcode !=''){
+            // we need to authenticate 
             authenticateAsAdmin(callback);
         }
-    if(candidatesEmail != '' && isAdmin == '' && username == '' && passcode ==''){
-         // this is a test participant and hence we need to send them down the other way 
-           authenticateAsParticipant(callback);
-    }
+
+        if(candidatesEmail != '' && isAdmin == '' && username == '' && passcode ==''){
+            // this is a test participant and hence we need to send them down the other way 
+            authenticateAsParticipant(callback);
+        }
 
 
     }]);
