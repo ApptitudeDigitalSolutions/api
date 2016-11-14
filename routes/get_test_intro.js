@@ -17,12 +17,12 @@ exports.getTestIntro = function (req, res) {
     var async = require('async');
     async.series([function(callback) {
      	
-     	if(isAdmin == '1' && candidatesEmail =='' && username != '' && passcode !=''){
+     	if(isAdmin == '1' && username != '' && passcode !=''){
             // we need to authenticate 
             authenticateAsAdmin(callback);
         }
 
-        if(candidatesEmail != '' && isAdmin == '' && username == '' && passcode ==''){
+        if(candidatesEmail != '' && isAdmin == '0'){
             // this is a test participant and hence we need to send them down the other way 
             authenticateAsParticipant(callback);
         }
