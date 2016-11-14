@@ -19,7 +19,12 @@ exports.getTestIntro = function (req, res) {
     var async = require('async');
     async.series([function(callback) {
      	
-     	if(isAdmin == '1' && username != '' && passcode !=''){
+     	howToAuth();
+
+    }]);
+
+    function howToAuth(callback){
+    	if(isAdmin == '1' && username != '' && passcode !=''){
             // we need to authenticate 
             authenticateAsAdmin(callback);
         }
@@ -29,9 +34,7 @@ exports.getTestIntro = function (req, res) {
             console.log("Auth as a test participant");
             authenticateAsParticipant(callback);
         }
-
-
-    }]);
+    }
 
   
     function authenticateAsAdmin(callback) {
