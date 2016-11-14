@@ -132,7 +132,7 @@ exports.getTestIntro = function (req, res) {
             	};	
 
             	console.log(testObject);
-				testObjects.pages[i].push(testObject);
+				testObjects.pages.push(testObject);
             }
 
             console.log(testObjects);
