@@ -6,6 +6,10 @@ var appRouter = function(app) {
 var test = require('./test'); 
 	app.get("/",test.hi);
 
+
+// 25.  GET the test infro for a particular test_id 
+var getTestIntroFilehandle = require('./get_test_intro'); 
+	app.post("/v1/companies/tests/:test_id/intro",getTestIntroFilehandle.getTestIntro); 
 // GENERAL 
 // 0. Create a company's account
 var postCreateCompanyFilehandle = require('./create_company'); 
@@ -95,9 +99,6 @@ var getTestScheduleFilehandle = require('./get_test_schedule');
 var isTestIDValidFilehandle = require('./is_testid_valid'); 
 	app.post("/v1/companies/test/validation/:TEST",isTestIDValidFilehandle.validateTestID);
 
-// 25.  GET the test infro for a particular test_id 
-var getTestIntroFilehandle = require('./get_test_intro'); 
-	app.post("/v1/companies/tests/:test_id/intro",getTestIntroFilehandle.getTestIntro); // NEEDS IMP<EMNTING 
 
 // 12. /v1/companies/tests/:test_id GET a tests for a specific test id
 var getTestFilehandle = require('./get_test'); 
