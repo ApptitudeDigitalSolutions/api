@@ -141,7 +141,7 @@ exports.getTestIntro = function (req, res) {
           	res.writeHead(200, {
                 "Content-Type": "application/json"
             });
-            var json = JSON.stringify(objToStringify);
+            var json = JSON.stringify(testObjects);
             console.log('INTRO QUESTIONS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ' + json);
             res.end(json);
             connectionTo_TEST_MACRO.end();
