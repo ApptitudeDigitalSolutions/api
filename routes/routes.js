@@ -97,7 +97,7 @@ var isTestIDValidFilehandle = require('./is_testid_valid');
 
 // 25.  GET the test infro for a particular test_id 
 var getTestIntroFilehandle = require('./get_test_intro'); 
-	app.post("/v1/companies/tests/:test_id/intro",getTestIntroFilehandle.getTestIntro); // NEEDS IMP<EMNTING 
+	app.post("/v1/companies/tests/intro/:test_id",getTestIntroFilehandle.getTestIntro); // NEEDS IMP<EMNTING 
 
 // 12. /v1/companies/tests/:test_id GET a tests for a specific test id
 var getTestFilehandle = require('./get_test'); 
