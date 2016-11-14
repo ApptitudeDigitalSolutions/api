@@ -130,10 +130,12 @@ exports.getTestIntro = function (req, res) {
 					time_allowed_in_section:rows[i].time_allowed_in_section ,
 					test_results_file_ref:rows[i].test_results_file_ref 
             	};	
+
+            	console.log(testObject);
 				testObjects.pages[i].push(testObject);
             }
 
-            console.log(testObject);
+            console.log(testObjects);
 
           	// were all done creating the payload , itls time send 
           	res.writeHead(200, {
