@@ -33,7 +33,10 @@ exports.getTestIntro = function (req, res) {
             // this is a test participant and hence we need to send them down the other way 
             console.log("Auth as a test participant");
             authenticateAsParticipant(callback);
+        }else{
+        	console.log("roger");
         }
+
     }
 
   
