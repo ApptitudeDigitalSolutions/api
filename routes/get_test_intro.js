@@ -91,7 +91,7 @@ exports.getTestIntro = function (req, res) {
                     res.end(401);
                 }
             }});
-            connectionTo_TEST_MACRO.end();        
+                   
     }
 
 
@@ -140,7 +140,7 @@ exports.getTestIntro = function (req, res) {
                 "Content-Type": "application/json"
             });
             var json = JSON.stringify(objToStringify);
-            console.log('RES QUESTIONS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ' + json);
+            console.log('INTRO QUESTIONS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ' + json);
             res.end(json);
             connectionTo_TEST_MACRO.end();
 
