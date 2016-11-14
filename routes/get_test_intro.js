@@ -24,6 +24,7 @@ exports.getTestIntro = function (req, res) {
 
         if(candidatesEmail != '' && isAdmin == '0'){
             // this is a test participant and hence we need to send them down the other way 
+            console.log("Auth as a test participant");
             authenticateAsParticipant(callback);
         }
 
@@ -93,6 +94,7 @@ exports.getTestIntro = function (req, res) {
 // get the test meta data.
 // get count of sections in this test
             var query = 'SELECT * FROM Test_intro_'+testID+';';
+            console.log(query);
             connectionTo_TEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
             
 
