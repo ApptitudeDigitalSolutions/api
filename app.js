@@ -22,7 +22,8 @@ var url = require('url');
 	
 	var memcached = new Memcached('localhost:11211');
     Memcached.config.poolSize = 25;
-
+	
+	app.use(express.static('public'));
  //    var options = {
 	// 	   key  : fs.readFileSync('certificates/server.key'),
 	// 	   cert : fs.readFileSync('certificates/server.crt')
