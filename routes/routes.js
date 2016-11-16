@@ -112,6 +112,9 @@ var getTestFeebackFilehandle = require('./get_feedback_intro');
 var setTestFeedbackResutlsFilehandle = require('./set_feedback_intro'); 
 	app.post("/v1/companies/tests/:test_id/feedback/:candidate_id",setTestFeedbackResutlsFilehandle.setFeedback); // NEEDS IMP<EMNTING 
 
+// 27. get test status 
+var getTestStatusFilehandle = require('./get_test_status_for_user'); 
+	app.post("/v1/companies/test/:test_id/status",getTestStatusFilehandle.getstatus); // NEEDS IMP<EMNTING 
 
 
 
