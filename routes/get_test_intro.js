@@ -26,6 +26,7 @@ exports.getTestIntro = function (req, res) {
     function howToAuth(callback){
     	if(isAdmin == '1' && username != '' && passcode !=''){
             // we need to authenticate 
+            console.log("Auth as a admin");
             authenticateAsAdmin(callback);
         }
 
