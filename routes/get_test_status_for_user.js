@@ -2,7 +2,7 @@ exports.getstatus = function (req, res) {
 
     var testID = req.query.test_id; 
     var candidatesEmail = req.body.candidate_email;
-    
+
     var min_page_of_test = {min_page_of_test:''};
 
     console.log(req.body);
@@ -21,7 +21,7 @@ exports.getstatus = function (req, res) {
 
     function howToAuth(callback){
       
-        if(candidatesEmail != '' && isAdmin == '0'){
+        if(candidatesEmail != ''){
             // this is a test participant and hence we need to send them down the other way 
             console.log("Auth as a test participant");
             authenticateAsParticipant(callback);
