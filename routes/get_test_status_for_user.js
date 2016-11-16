@@ -1,4 +1,4 @@
-exports.getststus = function (req, res) {
+exports.getstatus = function (req, res) {
 
     var testID = req.query.test_id; 
     var candidatesEmail = req.body.candidate_email;
