@@ -36,7 +36,6 @@ exports.getstatus = function (req, res) {
          var query = 'SELECT * FROM Test_applicants_'+testID+' WHERE email =\'' + candidatesEmail + '\';';
             connectionTo_TEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
         
-                var storedPasscode = rows[0].passcode;
                 if (rows.length > 0){
                     min_page_of_test = {min_page_of_test:rows[0].min_page_of_test}; 
                     respondToRequest();
