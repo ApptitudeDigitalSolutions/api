@@ -80,6 +80,7 @@ exports.getTestIntro = function (req, res) {
 
     function authenticateAsParticipant(callback) {
          var query = 'SELECT * FROM Test_applicants_'+testID+' WHERE email =\'' + candidatesEmail + '\';';
+         console.log(query);
             connectionTo_TEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
         
                 if (rows.length > 0){
