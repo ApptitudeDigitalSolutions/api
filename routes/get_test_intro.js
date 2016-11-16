@@ -82,7 +82,6 @@ exports.getTestIntro = function (req, res) {
          var query = 'SELECT * FROM Test_applicants_'+testID+' WHERE email =\'' + candidatesEmail + '\';';
             connectionTo_TEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
         
-                storedPasscode = rows[0].passcode;
                 if (rows.length > 0){
 
                     formatJsonForTest();
@@ -128,7 +127,8 @@ exports.getTestIntro = function (req, res) {
 					answer_catergories:rows[i].answer_catergories ,
 					correct_answer:rows[i].correct_answer ,
 					time_allowed_in_section:rows[i].time_allowed_in_section ,
-					test_results_file_ref:rows[i].test_results_file_ref 
+					test_results_file_ref:rows[i].test_results_file_ref ,
+					macro_section_type: rows[i].macro_section_type
             	};	
 
             	console.log(testObject);
