@@ -1,6 +1,6 @@
 exports.getstatus = function (req, res) {
 
-    var testID = req.query.test_id; 
+    var testID = req.params.test_id; 
     var candidatesEmail = req.body.candidate_email;
 
     var min_page_of_test = {min_page_of_test:''};
