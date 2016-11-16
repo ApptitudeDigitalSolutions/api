@@ -65,7 +65,13 @@ exports.addParticipant = function (req, res) {
         console.log(query);
             connectionTo_TEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
            
-            res.sendStatus(200);
+           
+            res.writeHead(200, {
+                "Content-Type": "application/json"
+            });
+            var json = JSON.stringify({success:1});
+            console.log('TEST STATE IS ........................... ' + json);
+            res.end(json);
             connectionTo_TEST_MACRO.end();
         	}});
     }
