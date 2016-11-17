@@ -1,7 +1,7 @@
 exports.answerQuestion = function (req, res) {
 
     var answer = req.body.answer;
-    var timeOnQuestion = "";
+    var timeOnQuestion = "1000";
     var testID = req.params.test_id; 
     var candidate_email = req.body.candidate_email;
     var correct_answer = req.body.correct_answer;
