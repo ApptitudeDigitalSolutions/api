@@ -4,8 +4,14 @@ exports.answerQuestion = function (req, res) {
     var timeOnQuestion = "";
     var testID = req.params.test_id; 
     var candidate_email = req.body.candidate_email;
+    var correct_answer = req.body.correct_answer;
     var question_id = req.body.question_id; 
+    var section_id = req.body.section_id; 
     var candidate_id = 0;
+    var was_correct = 0;
+    if(correct_answer == answer){
+        was_correct = 1;
+    }
 
   
     var mysql = require('mysql');
@@ -37,7 +43,7 @@ exports.answerQuestion = function (req, res) {
 
     function answerQuestionFunction(callback){
     		// get count of sections
-    		var query = 'INSERT INTO Test_Results_'+testID+' (candidate_id,candidate_email,question_id,section_id,answer,was_correct,time_taken_on_question) VALUES (\''+candidate_id+'\',\''+candidate_email+'\','+question_id+','+section_id+','+answer+',NULL,'+timeOnQuestion+');';
+    		var query = 'INSERT INTO Test_Results_'+testID+' (candidate_id,candidate_email,question_id,section_id,answer,was_correct,time_taken_on_question) VALUES (\''+candidate_id+'\',\''+candidate_email+'\','+question_id+','+section_id+',\''+answer+'\','+was_correct+','+timeOnQuestion+');';
             connectionTo_TEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
            
                             res.writeHead(200, {
