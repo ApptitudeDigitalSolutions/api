@@ -47,7 +47,7 @@ exports.answerQuestion = function (req, res) {
             console.log(query);
             connectionTo_TEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
 
-                var query2 = 'UPDATE Test_admin_'+testID+' SET `currently_on_question` = '+ question_id +', `currently_on_section` = ' + section_id + ' WHERE email = \'' + candidate_email +'\';';
+                var query2 = 'UPDATE Test_admin_'+testID+' SET `currently_on_question` = '+ question_id +', `currently_on_section` = ' + section_id + ' WHERE candidate_email = \'' + candidate_email +'\';';
                   console.log(query2);
                   connectionTo_TEST_MACRO.query(query2, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
                  
