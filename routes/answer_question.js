@@ -43,7 +43,7 @@ exports.answerQuestion = function (req, res) {
 
     function answerQuestionFunction(callback){
     		// get count of sections
-    		var query = 'INSERT INTO Test_Results_'+testID+' (candidate_id,candidate_email,question_id,section_id,answer,was_correct,time_taken_on_question) VALUES (\''+candidate_id+'\',\''+candidate_email+'\','+question_id+','+section_id+',\''+answer+'\','+was_correct+','+timeOnQuestion+');';
+    		var query = 'INSERT INTO Test_results_'+testID+' (candidate_id,candidate_email,question_id,section_id,answer,was_correct,time_taken_on_question) VALUES (\''+candidate_id+'\',\''+candidate_email+'\','+question_id+','+section_id+',\''+answer+'\','+was_correct+','+timeOnQuestion+');';
             connectionTo_TEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
            
                             res.writeHead(200, {
