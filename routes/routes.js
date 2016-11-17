@@ -145,7 +145,7 @@ var postStopTestFilehandle = require('./stop_test');
 
 //19. /v1/companies/test/answer/:test_id/:candidate_id/:question_id/:section_id POST answer to question
 var postAnswerFilehandle = require('./answer_question'); 
-	app.post("/v1/companies/test/answer/:test_id/:candidate_id/:question_id/:section_id",postAnswerFilehandle.answerQuestion);
+	app.post("/v1/companies/test/answer/:test_id",postAnswerFilehandle.answerQuestion);
 
 //20. /v1/companies/test/completesection/:test_id/:section_id/:candidate_id POST to identify section completion
 var postSectionCompleteFilehandle = require('./section_complete'); 
