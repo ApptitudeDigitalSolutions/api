@@ -1,7 +1,7 @@
 exports.setPage = function (req, res) {
     var username = req.body.username;
     var passcode = req.body.passcode;
-    var testID = req.query.test_id; 
+    var testID = req.params.test_id; 
     var pageNumber = req.body.page_number;
   
     var mysql = require('mysql');
