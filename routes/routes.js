@@ -100,13 +100,13 @@ var isTestIDValidFilehandle = require('./is_testid_valid');
 	app.post("/v1/companies/test/validation/:TEST",isTestIDValidFilehandle.validateTestID);
 
 
-// 12. /v1/companies/tests/:test_id GET a tests for a specific test id
-var getTestFilehandle = require('./get_test'); 
-	app.get("/v1/companies/tests/:test_id",getTestFilehandle.getTest);
+// // 12. /v1/companies/tests/:test_id GET a tests for a specific test id
+// var getTestFilehandle = require('./get_test'); 
+// 	app.get("/v1/companies/tests/:test_id",getTestFilehandle.getTest);
 
-// 26.  GET the test feedback for a particular test_id 
-var getTestFeebackFilehandle = require('./get_feedback_intro'); 
-	app.post("/v1/companies/tests/:test_id/feedback",getTestFeebackFilehandle.getFeedback); // NEEDS IMP<EMNTING 
+// // 26.  GET the test feedback for a particular test_id 
+// var getTestFeebackFilehandle = require('./get_feedback_intro'); 
+// 	app.post("/v1/companies/tests/:test_id/feedback",getTestFeebackFilehandle.getFeedback); // NEEDS IMP<EMNTING 
 
 // 26.  GET the test feedback for a particular test_id 
 var setTestFeedbackResutlsFilehandle = require('./set_feedback_intro'); 
@@ -128,32 +128,32 @@ var putParticipantFilehandle = require('./add_participant');
 	app.post("/v1/companies/test/:test_id/participants/add",putParticipantFilehandle.addParticipant);
 
 //14. /v1/companies/test/start/:test_id POST to start test
-var postStartTestFilehandle = require('./start_test'); 
-	app.post("/v1/companies/test/start/:test_id",postStartTestFilehandle.startTest);
+var setTestPageFilehandle = require('./set_test_page'); 
+	app.post("/v1/companies/test/set/:test_id",setTestPageFilehandle.setPage);
 
-//15. /v1/companies/test/sectionnext/:test_id POST to move to next sections intro
-var postNextSectionFilehandle = require('./next_section'); 
-	app.post("/v1/companies/test/sectionnext/:test_id",postNextSectionFilehandle.nextSection);
+// //15. /v1/companies/test/sectionnext/:test_id POST to move to next sections intro
+// var postNextSectionFilehandle = require('./next_section'); 
+// 	app.post("/v1/companies/test/sectionnext/:test_id",postNextSectionFilehandle.nextSection);
 
-//16. /v1/companies/test/startsection/:test_id POST to start next section
-var postStartNextSectionFilehandle = require('./start_next_section'); 
-	app.post("/v1/companies/test/startsection/:test_id",postStartNextSectionFilehandle.startNextSection);
+// //16. /v1/companies/test/startsection/:test_id POST to start next section
+// var postStartNextSectionFilehandle = require('./start_next_section'); 
+// 	app.post("/v1/companies/test/startsection/:test_id",postStartNextSectionFilehandle.startNextSection);
 
-//17. /v1/companies/test/stop/:test_id POST to stop
-var postStopTestFilehandle = require('./stop_test'); 
-	app.post("/v1/companies/test/stop/:test_id",postStopTestFilehandle.stopTest);
+// //17. /v1/companies/test/stop/:test_id POST to stop
+// var postStopTestFilehandle = require('./stop_test'); 
+// 	app.post("/v1/companies/test/stop/:test_id",postStopTestFilehandle.stopTest);
 
 //19. /v1/companies/test/answer/:test_id/:candidate_id/:question_id/:section_id POST answer to question
 var postAnswerFilehandle = require('./answer_question'); 
 	app.post("/v1/companies/test/answer/:test_id",postAnswerFilehandle.answerQuestion);
 
-//20. /v1/companies/test/completesection/:test_id/:section_id/:candidate_id POST to identify section completion
-var postSectionCompleteFilehandle = require('./section_complete'); 
-	app.post("/v1/companies/test/completesection/:test_id/:section_id/:candidate_id",postSectionCompleteFilehandle.sectionComplete);
+// //20. /v1/companies/test/completesection/:test_id/:section_id/:candidate_id POST to identify section completion
+// var postSectionCompleteFilehandle = require('./section_complete'); 
+// 	app.post("/v1/companies/test/completesection/:test_id/:section_id/:candidate_id",postSectionCompleteFilehandle.sectionComplete);
 
-//21. /v1/companies/test/completetest/:test_id/:candidate_id POST to identify test completion
-var postTestCompleteFilehandle = require('./test_completion'); 
-	app.post("/v1/companies/test/completetest/:test_id/:candidate_id",postTestCompleteFilehandle.testCompletion);
+// //21. /v1/companies/test/completetest/:test_id/:candidate_id POST to identify test completion
+// var postTestCompleteFilehandle = require('./test_completion'); 
+// 	app.post("/v1/companies/test/completetest/:test_id/:candidate_id",postTestCompleteFilehandle.testCompletion);
 
 
 }
