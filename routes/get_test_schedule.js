@@ -68,7 +68,8 @@ exports.getTestSchedule = function (req, res) {
                     test_id: rows[i].id,
                     test_title: rows[i].test_title,
                     to_be_conducted_on: rows[i].to_be_conducted_on,
-                    description:rows[i].description
+                    description:rows[i].description,
+                    test_ids_in_series:rows[i].test_ids_in_series
                 };
 
                 var x = objToStringify.tests.length;
