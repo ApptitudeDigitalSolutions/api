@@ -130,7 +130,8 @@ exports.getTestIntro = function (req, res) {
 					correct_answer:rows[i].correct_answer ,
 					time_allowed_in_section:rows[i].time_allowed_in_section ,
 					test_results_file_ref:rows[i].test_results_file_ref ,
-					macro_section_type: rows[i].macro_section_type
+					macro_section_type: rows[i].macro_section_type,
+					should_show_next: rows[i].should_show_next
             	};	
 
             	console.log(testObject);
