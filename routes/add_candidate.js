@@ -8,7 +8,7 @@ exports.addCandidate = function (req, res) {
     var email = req.body.email;
     var role = req.body.role;
     var other = req.body.other;
-    var activities_set = req.body.activities_set;
+    var activities_set = req.body.set_activities;
   
     var mysql = require('mysql');
     var connection = mysql.createConnection({ host: 'localhost', user: 'root', password: 'smashing', database: 'MACRO' });
