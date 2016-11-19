@@ -1,11 +1,17 @@
 exports.createAC = function (req, res) {
-    var company_id = req.body.company_id;
-    var title = req.body.title;
-    var description = req.body.description;
-    var activity_titles = req.body.activity_titles;
-    var activity_types = req.body.activity_types;
+    var detail= {company_id:1,
+                 title:"Mock AC LSBU",
+                 description:"A test AC containing Interview, Presentation and Roleplay",
+                 activity_titles:"Demo Interview,Demo Presentation,Demo Roleplay",
+                 activity_types:"i,p,rp"};
+    console.log(detail);
+    
+    var company_id = detail.company_id;
+    var title = detail.title;
+    var description = detail.description;
+    var activity_titles = detail.activity_titles;
+    var activity_types = detail.activity_types;
 
-    console.log(req.body);
     var activity_titles_array = activity_titles.split(",");
     var activity_types_array = activity_types.split(",");
 
