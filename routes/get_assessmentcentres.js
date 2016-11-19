@@ -1,4 +1,4 @@
-exports.getInterviews = function (req, res) {
+exports.getACs = function (req, res) {
     var username = req.body.username;
     var passcode = req.body.passcode;
     var company_id = req.params.company_id; 
@@ -56,7 +56,7 @@ exports.getInterviews = function (req, res) {
 
     function formatJsonForAllInterviews(callback){
 
-            var query = 'SELECT id,company_id,interview_title,created_on,participants_count, DATE_FORMAT(to_be_conducted_on,GET_FORMAT(DATE,\'EUR\')) as to_be_conducted_on,description FROM Interview_templates WHERE company_id =\'' + company_id + '\';';
+            var query = 'SELECT id,company_id,created_on,participants_count,title, description, DATE_FORMAT(to_be_conducted_on,GET_FORMAT(DATE,\'EUR\')) as to_be_conducted_on , activity_ids, activity_types FROM Assessment_Center_templates WHERE company_id =\'' + company_id + '\';';
             connectionTo_AC_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
 
             var objToStringify = {interviews:[]};
@@ -66,10 +66,13 @@ exports.getInterviews = function (req, res) {
 
                 var interview = {
                     interview_id: rows[i].id,
-                    interview_title: rows[i].interview_title,
+                    title: rows[i].title,
                     conducted_on: rows[i].to_be_conducted_on,
                     participants_count: rows[i].participants_count,
-                    description:rows[i].description
+                    description:rows[i].description,
+                    activity_ids:rows[i].activity_ids,
+                    activity_types:rows[i].activity_types
+                      
                 };
 
                 var x = objToStringify.interviews.length;

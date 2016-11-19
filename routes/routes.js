@@ -53,8 +53,8 @@ var postCreateCompanyFilehandle = require('./create_company');
 	app.post("/v1/companies/:company_id/ac/:ac_id/activities",getActivitiesFilehandle.getActivities); 
 
 //2. /v1/companies/interviews GET for interviews schedule
-	var getInterviewsFilehandle = require('./get_interviews'); 
-	app.post("/v1/companies/interviews/:company_id",getInterviewsFilehandle.getInterviews);
+	var getInterviewsFilehandle = require('./get_assessmentcentres'); 
+	app.post("/v1/companies/assessmentcentres/:company_id",getInterviewsFilehandle.getACs);
 
 // 4. /v1/companies/interview/:candidate_id GET of candidates results (having scored for a tother review)
 	var getInterviewResultsFilehandle = require('./get_interview_results'); 
