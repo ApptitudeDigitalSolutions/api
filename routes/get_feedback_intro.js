@@ -1,1 +1,0 @@
-exports.getFeedback = function (req, res) {}

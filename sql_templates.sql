@@ -57,6 +57,18 @@ CREATE TABLE `Assessment_Center_templates` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+
+CREATE TABLE `Assessment_Center_activities` (
+  `activity_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `ac_id` int(11),
+  `company_id` text,
+  `created_on` datetime DEFAULT NULL,
+  `title` text,
+  `description` text,
+  `activity_type` text,
+  PRIMARY KEY (`activity_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 # Interview
 -- Create syntax for TABLE 'Interview_candidates_id'
 CREATE TABLE `Assessment_Center_candidates_id` (
@@ -83,8 +95,10 @@ CREATE TABLE `Assessment_Center_candidates_id` (
 
 
 
-
-
+"CREATE TABLE `Interview_questions_"+intertedrow+"` (  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,  `question_id` int(11),  `section_id` int(11) DEFAULT NULL,  `section_title` text,  `section_text` text,  `section_media_url` text,  `section_media_type` text,  `question` text,  `prompts` text,  `answer_type` int(11) DEFAULT NULL,  `answer_options` text,  PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;",
+"CREATE TABLE `Interview_results_"+intertedrow+"` (  `result_id` int(11) unsigned NOT NULL AUTO_INCREMENT,  `candidate_id` int(11) DEFAULT NULL,  `question_id` int(11) DEFAULT NULL,  `section_id` int(11) DEFAULT NULL,  `answer_text` text,  `answer_wav` text,  `answer_notes` text,   PRIMARY KEY (`result_id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;",
+"CREATE TABLE `Interview_review_questions_"+intertedrow+"` (  `review_question_id` int(11) unsigned NOT NULL AUTO_INCREMENT,  `review_question` text,  `positive_indicators` text,  `negative_indicators` text,  PRIMARY KEY (`review_question_id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;",
+"CREATE TABLE `Interview_review_results_"+intertedrow+"` (  `result_id` int(11) unsigned NOT NULL AUTO_INCREMENT,  `candidate_id` int(11) DEFAULT NULL,  `question_id` int(11) DEFAULT NULL,  `answer_text` text,  `answer_selection` text,  PRIMARY KEY (`result_id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
 
 -- Create syntax for TABLE 'Interview_questions_id'
 CREATE TABLE `Interview_questions_id` (
@@ -110,7 +124,7 @@ CREATE TABLE `Interview_results_id` (
   `section_id` int(11) DEFAULT NULL,
   `answer_text` text,
   `answer_wav` text,
-  `answer_notes` text,
+  `answer_notes` text, 
   PRIMARY KEY (`result_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -118,8 +132,8 @@ CREATE TABLE `Interview_results_id` (
 CREATE TABLE `Interview_review_questions_id` (
   `review_question_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `review_question` text,
-  `review_answer_type` int(11) DEFAULT NULL,
-  `review_answer_options` text,
+  `positive_indicators` text,
+  `negative_indicators` text,
   PRIMARY KEY (`review_question_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -127,23 +141,107 @@ CREATE TABLE `Interview_review_questions_id` (
 CREATE TABLE `Interview_review_results_id` (
   `result_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `candidate_id` int(11) DEFAULT NULL,
-  `review_question_id` int(11) DEFAULT NULL,
-  `review_answer_values` text,
-  `review_answer_notes` text,
+  `question_id` int(11) DEFAULT NULL,
+  `answer_text` text,
+  `answer_selection` text,
   PRIMARY KEY (`result_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Create syntax for TABLE 'Interview_templates'
-CREATE TABLE `Interview_templates` (
+
+
+
+"CREATE TABLE `Presentation_"+intertedrow+"` (  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,  `presentation_info_ref` text,  `presentation_info_text` text,  PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;",
+"CREATE TABLE `Presentation_results_"+intertedrow+"` (  `result_id` int(11) unsigned NOT NULL AUTO_INCREMENT,  `candidate_id` int(11) DEFAULT NULL,  `question_id` int(11) DEFAULT NULL,  `section_id` int(11) DEFAULT NULL,  `answer_text` text,  `answer_wav` text,  `answer_notes` text,   PRIMARY KEY (`result_id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;",
+"CREATE TABLE `Presentation_review_questions_"+intertedrow+"` (  `review_question_id` int(11) unsigned NOT NULL AUTO_INCREMENT,  `review_question` text,  `positive_indicators` text,  `negative_indicators` text,  PRIMARY KEY (`review_question_id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;",
+"CREATE TABLE `Presentation_review_results_"+intertedrow+"` (  `result_id` int(11) unsigned NOT NULL AUTO_INCREMENT,  `candidate_id` int(11) DEFAULT NULL,  `question_id` int(11) DEFAULT NULL,  `answer_text` text,  `answer_selection` text,  PRIMARY KEY (`result_id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
+
+-- Create syntax for TABLE 'Interview_questions_id'
+CREATE TABLE `Presentation_id` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `company_id` int(11) DEFAULT NULL,
-  `created_on` datetime DEFAULT NULL,
-  `participants_count` int(11) DEFAULT NULL,
-  `interview_title` text,
-  `to_be_conducted_on` datetime DEFAULT NULL,
+  `presentation_info_ref` text,
+  `presentation_info_text` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- Create syntax for TABLE 'Interview_results_id'
+CREATE TABLE `Presentation_results_id` (
+  `result_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `candidate_id` int(11) DEFAULT NULL,
+  `question_id` int(11) DEFAULT NULL,
+  `section_id` int(11) DEFAULT NULL,
+  `answer_text` text,
+  `answer_wav` text,
+  `answer_notes` text, 
+  PRIMARY KEY (`result_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Create syntax for TABLE 'Interview_review_questions_id'
+CREATE TABLE `Presentation_review_questions_id` (
+  `review_question_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `review_question` text,
+  `positive_indicators` text,
+  `negative_indicators` text,
+  PRIMARY KEY (`review_question_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Create syntax for TABLE 'Interview_review_results_id'
+CREATE TABLE `Presentation_review_results_id` (
+  `result_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `candidate_id` int(11) DEFAULT NULL,
+  `question_id` int(11) DEFAULT NULL,
+  `answer_text` text,
+  `answer_selection` text,
+  PRIMARY KEY (`result_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+
+
+
+"CREATE TABLE `Roleplay_"+intertedrow+"` (  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,  `roleplay_info_ref` text,  `roleplay_info_text` text,  PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;",
+"CREATE TABLE `Roleplay_results_"+intertedrow+"` (  `result_id` int(11) unsigned NOT NULL AUTO_INCREMENT,  `candidate_id` int(11) DEFAULT NULL,  `question_id` int(11) DEFAULT NULL,  `section_id` int(11) DEFAULT NULL,  `answer_text` text,  `answer_wav` text,  `answer_notes` text,   PRIMARY KEY (`result_id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;",
+"CREATE TABLE `Roleplay_review_questions_"+intertedrow+"` (  `review_question_id` int(11) unsigned NOT NULL AUTO_INCREMENT,  `review_question` text,  `positive_indicators` text,  `negative_indicators` text,  PRIMARY KEY (`review_question_id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;",
+"CREATE TABLE `Roleplay_review_results_"+intertedrow+"` (  `result_id` int(11) unsigned NOT NULL AUTO_INCREMENT,  `candidate_id` int(11) DEFAULT NULL,  `question_id` int(11) DEFAULT NULL,  `answer_text` text,  `answer_selection` text,  PRIMARY KEY (`result_id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
+
+-- Create syntax for TABLE 'Interview_questions_id'
+CREATE TABLE `Roleplay_id` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `roleplay_info_ref` text,
+  `roleplay_info_text` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Create syntax for TABLE 'Interview_results_id'
+CREATE TABLE `Roleplay_results_id` (
+  `result_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `candidate_id` int(11) DEFAULT NULL,
+  `question_id` int(11) DEFAULT NULL,
+  `section_id` int(11) DEFAULT NULL,
+  `answer_text` text,
+  `answer_wav` text,
+  `answer_notes` text, 
+  PRIMARY KEY (`result_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Create syntax for TABLE 'Interview_review_questions_id'
+CREATE TABLE `Roleplay_review_questions_id` (
+  `review_question_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `review_question` text,
+  `positive_indicators` text,
+  `negative_indicators` text,
+  PRIMARY KEY (`review_question_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Create syntax for TABLE 'Interview_review_results_id'
+CREATE TABLE `Roleplay_review_results_id` (
+  `result_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `candidate_id` int(11) DEFAULT NULL,
+  `question_id` int(11) DEFAULT NULL,
+  `answer_text` text,
+  `answer_selection` text,
+  PRIMARY KEY (`result_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 
