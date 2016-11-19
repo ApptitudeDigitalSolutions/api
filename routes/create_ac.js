@@ -28,7 +28,7 @@ exports.createAC = function (req, res) {
 
     var async = require('async');
      async.series([function(callback) {
-            createCompanyNow(callback, companyname);
+            createCompanyNow(callback);
     }]);
 
      function createCompanyNow(callback) {
