@@ -59,13 +59,13 @@ exports.getACs = function (req, res) {
             var query = 'SELECT id,company_id,created_on,participants_count,title, description, DATE_FORMAT(to_be_conducted_on,GET_FORMAT(DATE,\'EUR\')) as to_be_conducted_on , activity_ids, activity_types FROM Assessment_Center_templates WHERE company_id =\'' + company_id + '\';';
             connectionTo_AC_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
 
-            var objToStringify = {interviews:[]};
+            var objToStringify = {acs:[]};
 
             for(i in rows){
                 var sqlDate = rows[i].to_be_conducted_on;
 
-                var interview = {
-                    interview_id: rows[i].id,
+                var ac = {
+                    ac_id: rows[i].id,
                     title: rows[i].title,
                     conducted_on: rows[i].to_be_conducted_on,
                     participants_count: rows[i].participants_count,
@@ -75,8 +75,8 @@ exports.getACs = function (req, res) {
                       
                 };
 
-                var x = objToStringify.interviews.length;
-                objToStringify.interviews[x] = interview;
+                var x = objToStringify.acs.length;
+                objToStringify.acs[x] = ac;
             }
 
             res.writeHead(200, {
