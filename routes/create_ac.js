@@ -12,7 +12,7 @@ exports.createAC = function (req, res) {
     var intertedrow ;
     var ac_id_generated;
 
-    var arrayofActivity_ids[];
+    var arrayofActivity_ids = [];
 
      var mysql = require('mysql');
     var connection = mysql.createConnection({ host: 'localhost', user: 'root', password: 'smashing', database: 'AC_MACRO' });
