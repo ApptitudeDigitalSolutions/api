@@ -1,7 +1,7 @@
-exports.getInterviewCandidates = function (req, res) {
+exports.getAssessmentCentresCandidates = function (req, res) {
     var username = req.body.username;
     var passcode = req.body.passcode;
-    var interviewID = req.query.interview_id; 
+    var ac_id = req.params.ac_id; 
     var isValid = 0;
 
     var mysql = require('mysql');
@@ -13,10 +13,10 @@ exports.getInterviewCandidates = function (req, res) {
 
     var async = require('async');
     async.series([function(callback) {
-            getInterviewCandidatesFunction(callback);
+            getACCandidatesFunction(callback);
     }]);
 
-    function getInterviewCandidatesFunction(callback) {
+    function getACCandidatesFunction(callback) {
                   var Memcached = require('memcached');
                   var memcached = new Memcached('localhost:11211');
                     memcached.get(username, function(err, result) {
@@ -28,7 +28,7 @@ exports.getInterviewCandidates = function (req, res) {
                     if (result == passcode) {
                         // perform get of all interviews
                             connection.end();
-                            formatJsonForAllInterviewCandidates();
+                            formatJsonForAllACCandidates();
                     } else {
                     
                         if (result == '' || result == undefined) {
@@ -39,7 +39,7 @@ exports.getInterviewCandidates = function (req, res) {
                                     storedPasscode = rows[0].passcode;
                                     if (passcode == storedPasscode){
 
-                                        formatJsonForAllInterviewCandidates();
+                                        formatJsonForAllACCandidates();
                                         
                                     }
                                 }});
@@ -52,9 +52,9 @@ exports.getInterviewCandidates = function (req, res) {
     }
 
 
-    function formatJsonForAllInterviewCandidates(callback){
+    function formatJsonForAllACCandidates(callback){
     		// get count of sections
-    		var query = 'SELECT * FROM Interview_candidates_'+interviewID+';';
+    		var query = 'SELECT * FROM Assessment_Center_candidates__'+ac_id+';';
             connectionTo_AC_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
             
             var objToStringify = {candidates:[]};
@@ -67,15 +67,20 @@ exports.getInterviewCandidates = function (req, res) {
             		var email = rows[i].Email;
                     var role = rows[i].Role;
                     var other = rows[i].Other;
-
-       
+                    var set_activities = rows[i].set_activities;
+                    var completed_activities = rows[i].completed_activities;
+                    var completed_activitie_lables = rows[i].completed_activitie_lables;
 
             		var candidateJSONObject = { candidate_id: id,
                                                 candidate_first: first,
                                                 candidate_last: last,
                                                 candidate_email: email,
                                                 candidate_role: role,
-                                                other: other};
+                                                other: other,
+                                                set_activities:set_activities,
+                                                completed_activities:completed_activities,
+                                                completed_activitie_lables:completed_activitie_lables
+                                            };
 
             		console.log("Candidate > " + JSON.stringify(candidateJSONObject));
                     objToStringify.candidates.push(candidateJSONObject);

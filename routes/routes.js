@@ -44,45 +44,45 @@ var postCreateCompanyFilehandle = require('./create_company');
 	// Create Interview Stubs needed here , i.e add interview section , add interview quesiton with prompts , add interview section time 
 
 //24. retuns a list of activiites gven a specicfied ac id 
-	var getcreateACFilehandle = require('./create_ac'); 
-	app.post("/v1/company/createac",getcreateACFilehandle.createAC);
+var getcreateACFilehandle = require('./create_ac'); 
+app.post("/v1/company/createac",getcreateACFilehandle.createAC);
 
 
 //24. retuns a list of activiites gven a specicfied ac id 
-	var getActivitiesFilehandle = require('./get_actvities'); 
-	app.post("/v1/companies/:company_id/ac/:ac_id/activities",getActivitiesFilehandle.getActivities); 
+var getActivitiesFilehandle = require('./get_actvities'); 
+app.post("/v1/companies/:company_id/ac/:ac_id/activities",getActivitiesFilehandle.getActivities); 
 
-//2. /v1/companies/interviews GET for interviews schedule
-	var getInterviewsFilehandle = require('./get_assessmentcentres'); 
-	app.post("/v1/companies/assessmentcentres/:company_id",getInterviewsFilehandle.getACs);
+		//2. /v1/companies/interviews GET for interviews schedule
+		var getInterviewsFilehandle = require('./get_assessmentcentres'); 
+		app.post("/v1/companies/assessmentcentres/:company_id",getInterviewsFilehandle.getACs);
 
 // 4. /v1/companies/interview/:candidate_id GET of candidates results (having scored for a tother review)
-	var getInterviewResultsFilehandle = require('./get_interview_results'); 
-	app.get("/v1/companies/interview/:interview_id/:candidate_id",getInterviewResultsFilehandle.getInterviewsResults);
+var getInterviewResultsFilehandle = require('./get_interview_results'); 
+app.get("/v1/companies/interview/:interview_id/:candidate_id",getInterviewResultsFilehandle.getInterviewsResults);
 
 // // 5. /v1/companies/interview/play/:record_id GET of an audio file for playback
-	var getPlayRecordFilehandle = require('./play_record'); 
-	app.get("/v1/companies/interview/:interview_id/play/:record_id",getPlayRecordFilehandle.play);
+var getPlayRecordFilehandle = require('./play_record'); 
+app.get("/v1/companies/interview/:interview_id/play/:record_id",getPlayRecordFilehandle.play);
 
 // 6. /v1/companies/interview/:candidate_id PUT of an audio file to server
-	var putaudioFilesFilehandle = require('./upload'); 
-	app.put("/v1/companies/interview/:candidate_id",putaudioFilesFilehandle.upload);
+var putaudioFilesFilehandle = require('./upload'); 
+app.put("/v1/companies/interview/:candidate_id",putaudioFilesFilehandle.upload);
 
 // 7. /v1/companies/interview/:candidate_id/:wavFileName Confirming upload has been successful for audio file
 var postConfirmUploadFilehandle = require('./confirm_upload'); 
-	app.post("/v1/companies/interview/:candidate_id/:wavFileName",postConfirmUploadFilehandle.confirmUpload);
+app.post("/v1/companies/interview/:candidate_id/:wavFileName",postConfirmUploadFilehandle.confirmUpload);
 
 // 8. /v1/companies/interview/:interview_id GET on interview questions and prompts
 var getInterviewDetailsFilehandle = require('./get_interview'); 
-	app.get("/v1/companies/interview/:interview_id",getInterviewDetailsFilehandle.getInterviewDetails);
+app.get("/v1/companies/interview/:interview_id",getInterviewDetailsFilehandle.getInterviewDetails);
 
-// 9. /v1/companies/interview PUT of a new candidate
-var putNewCandidateFilehandle = require('./add_candidate'); 
-	app.put("/v1/companies/interview/:interview_id",putNewCandidateFilehandle.addCandidate);
+		// 9. /v1/companies/interview PUT of a new candidate
+		var postNewCandidateFilehandle = require('./add_candidate'); 
+		app.post("/v1/companies/assessmentcentre/addcandidate/:ac_id",postNewCandidateFilehandle.addCandidate);
 
-// 10. /v1/companies/interview/:interview_id GET for interview candidates
-var getCandidateFilehandle = require('./get_interview_candidates'); 
-	app.get("/v1/companies/interview/:interview_id",getCandidateFilehandle.getInterviewCandidates);
+		// 10. /v1/companies/interview/:interview_id GET for interview candidates
+		var getCandidateFilehandle = require('./get_assessmentcentres_candidates'); 
+			app.post("/v1/companies/assessmentcentres/candidates/:ac_id",getCandidateFilehandle.getAssessmentCentresCandidates);
 
 
 

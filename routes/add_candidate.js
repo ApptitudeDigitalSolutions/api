@@ -1,7 +1,7 @@
 exports.addCandidate = function (req, res) {
     var username = req.body.username;
     var passcode = req.body.passcode;
-    var interviewID = req.query.interview_id; 
+    var ac_id = req.params.ac_id; 
 
     var first = req.body.first;
     var last = req.body.last;
@@ -60,7 +60,7 @@ exports.addCandidate = function (req, res) {
     function addNewCandidate(callback){
     		// get count of sections
 
-    		var query = 'INSERT INTO Assessment_Center_candidates_'+interviewID+' (Frist,Last,Email,Role,Other,set_activities,completed_activities,created_on) VALUES (\''+first+'\',\''+last+'\',\''+email+'\',\''+role+'\',\''+other+'\',\''+activities_set+'\',\'\',NOW());';
+    		var query = 'INSERT INTO Assessment_Center_candidates_'+ac_id+' (Frist,Last,Email,Role,Other,set_activities,completed_activities,created_on) VALUES (\''+first+'\',\''+last+'\',\''+email+'\',\''+role+'\',\''+other+'\',\''+activities_set+'\',\'\',NOW());';
             connectionTo_INTERVIEW_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
            
             res.end(200);
