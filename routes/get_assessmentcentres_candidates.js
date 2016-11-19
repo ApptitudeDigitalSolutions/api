@@ -72,7 +72,7 @@ exports.getAssessmentCentresCandidates = function (req, res) {
                     var completed_activities = rows[i].completed_activities;
                     var completed_activitie_lables = rows[i].completed_activitie_lables;
 
-            		var candidateJSONObject = { candidate_id: id,
+            		var candidateJSONObject = { candidate_id: candidate_id,
                                                 candidate_first: first,
                                                 candidate_last: last,
                                                 candidate_email: email,
