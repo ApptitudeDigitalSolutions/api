@@ -49,7 +49,7 @@ exports.createAC = function (req, res) {
                 // INSERT INTO Assessment_Center_activities (activity_id, company_id, created_on, title, description, activity_type) VALUES (NULL, NULL, NULL, NULL, NULL, NULL);
                 var query3 = "INSERT INTO Assessment_Center_activities (ac_id,company_id, created_on, title, description, activity_type) VALUES ("+ac_id_generated+","+company_id+", NOW(), \'"+activity_title+"\', \'NULL\', \'"+activity+"\');";
                 console.log(query3);
-                connection.query(query3, function(err, result) {if (err) { console.log('Error : The SQL statement is realy batty'); return;} else { 
+                connection.query(query3, function(err, result) {if (err) { console.log('Error : '+err); return;} else { 
                 console.log("STATUS >>>>> inserted new activity of type >> " + activity + " With title " + activity_title);
                 intertedrow = result.insertId;
                 arrayofActivity_ids.push(intertedrow);
