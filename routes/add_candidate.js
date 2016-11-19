@@ -63,7 +63,12 @@ exports.addCandidate = function (req, res) {
     		var query = 'INSERT INTO Assessment_Center_candidates_'+ac_id+' (Frist,Last,Email,Role,Other,set_activities,completed_activities,created_on) VALUES (\''+first+'\',\''+last+'\',\''+email+'\',\''+role+'\',\''+other+'\',\''+activities_set+'\',\'\',NOW());';
             connectionTo_INTERVIEW_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
            
-            res.end(200);
+            res.writeHead(200, {
+                "Content-Type": "application/json"
+            });
+            var json = JSON.stringify({success:1});
+            console.log('Candidates >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ' + json);
+            res.end(json);
             connectionTo_INTERVIEW_MACRO.end();
 
         	}});
