@@ -1,5 +1,5 @@
 exports.getAssessmentCentresCandidates = function (req, res) {
-    var ac_id = req.body.ac_ida; 
+    var ac_id = req.body.ac_id; 
     var username = req.body.username;
     var passcode = req.body.passcode;
     console.log("AC_ID -s "+ac_id);
