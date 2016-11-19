@@ -5,6 +5,7 @@ exports.createAC = function (req, res) {
     var activity_titles = req.body.activity_titles;
     var activity_types = req.body.activity_types;
 
+    console.log(req.body);
     var activity_titles_array = activity_titles.split(",");
     var activity_types_array = activity_types.split(",");
 
