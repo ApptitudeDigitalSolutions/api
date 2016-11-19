@@ -48,7 +48,7 @@ exports.createAC = function (req, res) {
                 var activity_title = activity_titles_array[i];
                 // INSERT INTO Assessment_Center_activities (activity_id, company_id, created_on, title, description, activity_type) VALUES (NULL, NULL, NULL, NULL, NULL, NULL);
                 var query3 = "INSERT INTO Assessment_Center_activities (ac_id,company_id, created_on, title, description, activity_type) VALUES ("+ac_id_generated+","+company_id+", NOW(), \'"+activity_title+"\', \'NULL\', \'"+activity+"\');";
-                console.log(query3);
+                //console.log(query3);
                 connection.query(query3, function(err, result) {if (err) { console.log('Error : '+err); return;} else { 
                 console.log("STATUS >>>>> inserted new activity of type >> " + activity + " With title " + activity_title);
                 intertedrow = result.insertId;
@@ -59,7 +59,7 @@ exports.createAC = function (req, res) {
                         var arrayOfQuesries =["CREATE TABLE Interview_questions_"+intertedrow+" (  id int(11) unsigned NOT NULL AUTO_INCREMENT,  question_id int(11),  section_id int(11) DEFAULT NULL,  section_title text,  section_text text,  section_media_url text,  section_media_type text,  question text,  prompts text,  answer_type int(11) DEFAULT NULL,  answer_options text,  PRIMARY KEY (id)) ENGINE=InnoDB DEFAULT CHARSET=latin1;","CREATE TABLE Interview_results_"+intertedrow+" (  result_id int(11) unsigned NOT NULL AUTO_INCREMENT,  candidate_id int(11) DEFAULT NULL,  question_id int(11) DEFAULT NULL,  section_id int(11) DEFAULT NULL,  answer_text text,  answer_wav text,  answer_notes text,   PRIMARY KEY (result_id)) ENGINE=InnoDB DEFAULT CHARSET=latin1;","CREATE TABLE Interview_review_questions_"+intertedrow+" (  review_question_id int(11) unsigned NOT NULL AUTO_INCREMENT,  review_question text,  positive_indicators text,  negative_indicators text,  PRIMARY KEY (review_question_id)) ENGINE=InnoDB DEFAULT CHARSET=latin1;","CREATE TABLE Interview_review_results_"+intertedrow+" (  result_id int(11) unsigned NOT NULL AUTO_INCREMENT,  candidate_id int(11) DEFAULT NULL,  question_id int(11) DEFAULT NULL,  answer_text text,  answer_selection text,  PRIMARY KEY (result_id)) ENGINE=InnoDB DEFAULT CHARSET=latin1;"]; 
                         for(j in arrayOfQuesries){
                             var thisquery = arrayOfQuesries[j];
-                            console.log(thisquery);
+                            //console.log(thisquery);
                             connection.query(thisquery, function(err, rows) {if (err) { console.log('Error : The SQL statement is realy batty'); return;} else { 
                             
                             }});
@@ -72,9 +72,9 @@ exports.createAC = function (req, res) {
                         var arrayOfQuesries =["CREATE TABLE Presentation_"+intertedrow+" (  id int(11) unsigned NOT NULL AUTO_INCREMENT,  presentation_info_ref text,  presentation_info_text text,  PRIMARY KEY (id)) ENGINE=InnoDB DEFAULT CHARSET=latin1;","CREATE TABLE Presentation_results_"+intertedrow+" (  result_id int(11) unsigned NOT NULL AUTO_INCREMENT,  candidate_id int(11) DEFAULT NULL,  question_id int(11) DEFAULT NULL,  section_id int(11) DEFAULT NULL,  answer_text text,  answer_wav text,  answer_notes text,   PRIMARY KEY (result_id)) ENGINE=InnoDB DEFAULT CHARSET=latin1;","CREATE TABLE Presentation_review_questions_"+intertedrow+" (  review_question_id int(11) unsigned NOT NULL AUTO_INCREMENT,  review_question text,  positive_indicators text,  negative_indicators text,  PRIMARY KEY (review_question_id)) ENGINE=InnoDB DEFAULT CHARSET=latin1;","CREATE TABLE Presentation_review_results_"+intertedrow+" (  result_id int(11) unsigned NOT NULL AUTO_INCREMENT,  candidate_id int(11) DEFAULT NULL,  question_id int(11) DEFAULT NULL,  answer_text text,  answer_selection text,  PRIMARY KEY (result_id)) ENGINE=InnoDB DEFAULT CHARSET=latin1;"];
                         for(j in arrayOfQuesries){
                             var thisquery = arrayOfQuesries[j];
-                            console.log(thisquery);
+                            //console.log(thisquery);
                             connection.query(thisquery, function(err, rows) {if (err) { console.log('Error : The SQL statement is realy batty'); return;} else { 
-                            console.log("Company successfully created");
+                            //console.log("Company successfully created");
                             }});
                         }
                          console.log("STATUS >>>>> Created all PRESENTATION TABLES");
@@ -85,9 +85,9 @@ exports.createAC = function (req, res) {
                         var arrayOfQuesries =["CREATE TABLE Roleplay_"+intertedrow+" (  id int(11) unsigned NOT NULL AUTO_INCREMENT,  roleplay_info_ref text,  roleplay_info_text text,  PRIMARY KEY (id)) ENGINE=InnoDB DEFAULT CHARSET=latin1;","CREATE TABLE Roleplay_results_"+intertedrow+" (  result_id int(11) unsigned NOT NULL AUTO_INCREMENT,  candidate_id int(11) DEFAULT NULL,  question_id int(11) DEFAULT NULL,  section_id int(11) DEFAULT NULL,  answer_text text,  answer_wav text,  answer_notes text,   PRIMARY KEY (result_id)) ENGINE=InnoDB DEFAULT CHARSET=latin1;","CREATE TABLE Roleplay_review_questions_"+intertedrow+" (  review_question_id int(11) unsigned NOT NULL AUTO_INCREMENT,  review_question text,  positive_indicators text,  negative_indicators text,  PRIMARY KEY (review_question_id)) ENGINE=InnoDB DEFAULT CHARSET=latin1;","CREATE TABLE Roleplay_review_results_"+intertedrow+" (  result_id int(11) unsigned NOT NULL AUTO_INCREMENT,  candidate_id int(11) DEFAULT NULL,  question_id int(11) DEFAULT NULL,  answer_text text,  answer_selection text,  PRIMARY KEY (result_id)) ENGINE=InnoDB DEFAULT CHARSET=latin1;"];
                         for(j in arrayOfQuesries){
                             var thisquery = arrayOfQuesries[j];
-                            console.log(thisquery);
+                            //console.log(thisquery);
                             connection.query(thisquery, function(err, rows) {if (err) { console.log('Error : The SQL statement is realy batty'); return;} else { 
-                            console.log("Company successfully created");
+                            //console.log("Company successfully created");
                             }});
                         }
                          console.log("STATUS >>>>> Created all ROLEPLAY TABLES");
