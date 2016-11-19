@@ -2,7 +2,6 @@ exports.createAC = function (req, res) {
     var company_id = req.body.company_id;
     var title = req.body.title;
     var description = req.body.description;
-    var activity_ids = req.body.activity_ids;
     var activity_titles = req.body.activity_titles;
     var activity_types = req.body.activity_types;
 
