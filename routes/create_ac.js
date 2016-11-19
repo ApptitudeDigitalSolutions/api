@@ -105,7 +105,7 @@ exports.createAC = function (req, res) {
             console.log("STATUS >>>>> UPDATE AC with ids " + arrayofActivity_ids);
         }});
         
-    connection.end();
+    // connection.end();
     }});
         
 
