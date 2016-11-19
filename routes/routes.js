@@ -82,7 +82,7 @@ app.get("/v1/companies/interview/:interview_id",getInterviewDetailsFilehandle.ge
 
 		// 10. /v1/companies/interview/:interview_id GET for interview candidates
 		var getCandidatxeFilehandle = require('./get_assessmentcentres_candidates'); 
-		app.post("/v1/companies/assessmentcentres/candidates",getCandidatxeFilehandle.getAssessmentCentresCandidates);
+		app.post("/v2/companies/assessmentcentres/candidates",getCandidatxeFilehandle.getAssessmentCentresCandidates);
 
 
 
