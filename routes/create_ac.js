@@ -1,9 +1,11 @@
 exports.createAC = function (req, res) {
+    
     var detail= {company_id:1,
                  title:"Mock AC LSBU",
                  description:"A test AC containing Interview, Presentation and Roleplay",
                  activity_titles:"Demo Interview,Demo Presentation,Demo Roleplay",
                  activity_types:"i,p,rp"};
+
     console.log(detail);
     
     var company_id = detail.company_id;
