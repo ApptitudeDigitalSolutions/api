@@ -46,7 +46,8 @@ exports.createAC = function (req, res) {
             for(i in activity_types_array){
                 var activity = activity_types_array[i];
                 var activity_title = activity_titles_array[i];
-                // INSERT INTO Assessment_Center_activities (activity_id, company_id, created_on, title, description, activity_type) VALUES (NULL, NULL, NULL, NULL, NULL, NULL);
+
+                console.log("STATUS >>>>> inserted new activity of type >> " + activity + " With title " + activity_title);
                 var query3 = "INSERT INTO Assessment_Center_activities (ac_id,company_id, created_on, title, description, activity_type) VALUES ("+ac_id_generated+","+company_id+", NOW(), \'"+activity_title+"\', \'NULL\', \'"+activity+"\');";
                 //console.log(query3);
                 connection.query(query3, function(err, result) {if (err) { console.log('Error : '+err); return;} else { 
@@ -93,18 +94,17 @@ exports.createAC = function (req, res) {
                          console.log("STATUS >>>>> Created all ROLEPLAY TABLES");
                     }
 
-                   
+                   var queryq = 'UPDATE Assessment_Center_templates SET activity_ids = \'' + arrayofActivity_ids + '\' WHERE id = '+ac_id_generated+';';
+                        connection.query(queryq, function(err, result) {if (err) { console.log('Error : The SQL statement is realy batty'); return;} else { 
+                        console.log("STATUS >>>>> UPDATE AC with ids " + arrayofActivity_ids);
+                    }}); 
                 }});
             }
 
             }});
         
         // update the list of actitvity ids
-        var queryq = 'UPDATE Assessment_Center_templates SET activity_ids = \'' + arrayofActivity_ids + '\' WHERE id = '+ac_id_generated+';';
-            connection.query(queryq, function(err, result) {if (err) { console.log('Error : The SQL statement is realy batty'); return;} else { 
-            console.log("STATUS >>>>> UPDATE AC with ids " + arrayofActivity_ids);
-        }});
-        
+     
     // connection.end();
     }});
         
