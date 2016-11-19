@@ -6,7 +6,10 @@ var appRouter = function(app) {
 var test = require('./test'); 
 	app.get("/",test.hi);
 
-
+// 10. /v1/companies/interview/:interview_id GET for interview candidates
+		var getCandidateFilehandle = require('./get_assessmentcentres_candidates'); 
+		app.post("/v1/companies/assessmentcentres/candidates/:ac_ida",getCandidateFilehandle.getAssessmentCentresCandidates);
+		
 // 25.  GET the test infro for a particular test_id 
 var getTestIntroFilehandle = require('./get_test_intro'); 
 	app.post("/v1/companies/tests/:test_id/intro",getTestIntroFilehandle.getTestIntro); 
@@ -80,9 +83,9 @@ app.get("/v1/companies/interview/:interview_id",getInterviewDetailsFilehandle.ge
 		var postNewCandidateFilehandle = require('./add_candidate'); 
 		app.post("/v1/companies/assessmentcentre/addcandidate/:ac_id",postNewCandidateFilehandle.addCandidate);
 
-		// 10. /v1/companies/interview/:interview_id GET for interview candidates
-		var getCandidateFilehandle = require('./get_assessmentcentres_candidates'); 
-		app.post("/v1/companies/assessmentcentres/candidates/:ac_ida",getCandidateFilehandle.getAssessmentCentresCandidates);
+		// // 10. /v1/companies/interview/:interview_id GET for interview candidates
+		// var getCandidateFilehandle = require('./get_assessmentcentres_candidates'); 
+		// app.post("/v1/companies/assessmentcentres/candidates/:ac_ida",getCandidateFilehandle.getAssessmentCentresCandidates);
 
 
 
