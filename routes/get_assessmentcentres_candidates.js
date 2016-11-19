@@ -54,7 +54,7 @@ exports.getAssessmentCentresCandidates = function (req, res) {
 
     function formatJsonForAllACCandidates(callback){
     		// get count of sections
-    		var query = 'SELECT * FROM Assessment_Center_candidates__'+ac_id+';';
+    		var query = 'SELECT * FROM Assessment_Center_candidates_'+ac_id+';';
             connectionTo_AC_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
             
             var objToStringify = {candidates:[]};
