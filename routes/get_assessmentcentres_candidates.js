@@ -1,7 +1,7 @@
 exports.getAssessmentCentresCandidates = function (req, res) {
     var username = req.body.username;
     var passcode = req.body.passcode;
-    var ac_id = req.params.ac_id; 
+    var ac_id = req.params.ac_ida; 
     var isValid = 0;
 
     var mysql = require('mysql');
