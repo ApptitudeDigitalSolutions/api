@@ -78,7 +78,7 @@ exports.getInterviewDetails = function (req, res) {
                     objToStringify.pages.push(page);
             }
 
-            console.log(pages);
+            console.log(objToStringify);
 
           	// were all done creating the payload , itls time send 
           	res.writeHead(200, {
