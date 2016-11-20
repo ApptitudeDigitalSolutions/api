@@ -84,6 +84,21 @@ app.post("/v1/companies/interview/:candidate_id/:wavFileName",postConfirmUploadF
 		var getCandidatxeFilehandle = require('./get_assessmentcentres_candidates'); 
 		app.post("/v2/companies/assessmentcentres/candidates",getCandidatxeFilehandle.getAssessmentCentresCandidates);
 
+		
+		// 11. /v1/companies/interview/:interview_id GET for interview candidates
+		var getInterviewReviewFilehandle = require('./get_interview_review'); 
+		app.post("/v1/companies/assessmentcentres/interview/review/:ac_id",getInterviewReviewFilehandle.getInterviewReview);
+
+		// 11. /v1/companies/interview/:interview_id GET for interview candidates
+		var sendCandidateReviewFilehandle = require('./set_interview_review'); 
+		app.post("/v1/companies/assessmentcentres/interview/submitreview/:ac_id",sendCandidateReviewFilehandle.setReview);
+
+		// 11. /v1/companies/interview/:interview_id GET for interview candidates
+		var interviewCompleteFileHandle = require('./interview_complete'); 
+		app.post("/v1/companies/assessmentcentres/interview/complete/:ac_id",interviewCompleteFileHandle.completion);
+
+		
+
 
 
 // 	// TESTS
