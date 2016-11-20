@@ -1,7 +1,7 @@
 exports.getInterviewDetails = function (req, res) {
     var username = req.body.username;
     var passcode = req.body.passcode;
-    var interviewID = req.query.interview_id; 
+    var ac_id = req.params.ac_id; 
     var isValid = 0;
 
     var mysql = require('mysql');
@@ -55,54 +55,30 @@ exports.getInterviewDetails = function (req, res) {
 
     function formatJsonForAllInterviews(callback){
     		// get count of sections
-    		var query = 'SELECT section_id FROM Interview_questions_'+interviewID+' ORDER BY section_id DESC LIMIT 1;';
+    		var query = 'SELECT * FROM Interview_questions_'+ac_id+';';
             connectionTo_AC_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
             
-            var objToStringify = {interview_payload:[]};
+            var objToStringify = {pages:[]};
 
-            var sectionNumberCount = rows[0].section_id;
-
-            for(i =1; i< sectionNumberCount;){
-
-            	// we need to first get all meta data for the section  and add to the object to return 
-            	var sectionInfoQuery = 'SELECT * FROM Interview_questions_'+interviewID+' WHERE section_id = '+i+' ORDER BY question_id ASC;';
-            	connectionTo_AC_MACRO.query(sectionInfoQuery, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
-            		//1. strip out the section info  
-            		var sectionTitle = rows[0].section_title;
-            		var sectionText = rows[0].section_text;
-            		var sectionMediaURL = rows[0].section_media_url;
-            		var sectionMediaType = rows[0].section_media_type;
-
-            		var sectionAndQuestionsJSONObject = {section_id:i,
-            											 section_into_text: sectionText,
-            											 section_media_url: sectionMediaURL,
-            											 section_media_type: sectionMediaType,
-            											 questions:[]};
-            		console.log("That JSON blob for section : "+ i + " looks like > " + JSON.stringify(sectionAndQuestionsJSONObject));
-
-            		// now we need to add the questions for this section
-            		for(j in rows){
-
-            			if(rows[j].question != ''){
-            				var questionID = rows[j].question_id;
-            				var sectionIDNow = i; 
-            				var question = rows[j].question;
-            				var prompts= rows[j].prompts
-
-            				// format the josn object for this question
-
-            				var questionJSONObj = {question_id : questionID, section_id:sectionIDNow,question:question,prompts:prompts};
-            				sectionAndQuestionsJSONObject.questions.push(questionJSONObj);
-
-            				console.log("QUESTION "+ questionID + " in sec_"+i+" > " + JSON.stringify(questionJSONObj));
-            			}
-
-            		}
-
-            	}});
-
-            	i++;// all done in this section we move on to the next section
+            for(i in rows){
+            		var page = {    id:rows[i].id,
+                                    question_id:rows[i].question_id,
+                                    section_id:rows[i].section_id,
+                                    section_title:rows[i].section_title,
+                                    section_text:rows[i].section_text,
+                                    section_media_url:rows[i].section_media_url,
+                                    section_media_type:rows[i].section_media_type,
+                                    question:rows[i].question,
+                                    prompts:rows[i].prompts,
+                                    answer_type:rows[i].answer_type,
+                                    answer_options:rows[i].answer_options,
+                                    type:rows[i].type
+                                };
+                                
+                    objToStringify.pages.push(page);
             }
+
+            console.log(pages);
 
           	// were all done creating the payload , itls time send 
           	res.writeHead(200, {
@@ -114,5 +90,6 @@ exports.getInterviewDetails = function (req, res) {
             connectionTo_AC_MACRO.end();
 
         	}});
+
     }
 }

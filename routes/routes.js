@@ -72,9 +72,9 @@ app.put("/v1/companies/interview/:candidate_id",putaudioFilesFilehandle.upload);
 var postConfirmUploadFilehandle = require('./confirm_upload'); 
 app.post("/v1/companies/interview/:candidate_id/:wavFileName",postConfirmUploadFilehandle.confirmUpload);
 
-// 8. /v1/companies/interview/:interview_id GET on interview questions and prompts
-var getInterviewDetailsFilehandle = require('./get_interview'); 
-app.get("/v1/companies/interview/:interview_id",getInterviewDetailsFilehandle.getInterviewDetails);
+		// 8. /v1/companies/interview/:interview_id GET on interview questions and prompts
+		var getInterviewDetailsFilehandle = require('./get_interview'); 
+		app.get("/v1/companies/interview/:ac_id",getInterviewDetailsFilehandle.getInterviewDetails);
 
 		// 9. /v1/companies/interview PUT of a new candidate
 		var postNewCandidateFilehandle = require('./add_candidate'); 
