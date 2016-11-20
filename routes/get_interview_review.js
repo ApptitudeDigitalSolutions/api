@@ -1,4 +1,4 @@
-exports.get_interview_review = function (req, res) {
+exports.getInterviewReview = function (req, res) {
     var username = req.body.username;
     var passcode = req.body.passcode;
     var ac_id = req.params.ac_id; 
