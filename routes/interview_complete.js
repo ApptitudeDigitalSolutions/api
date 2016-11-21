@@ -54,7 +54,7 @@ exports.completion = function (req, res) {
 
     function addAnswer(callback){
     		// get count of sections
-    		var query = 'UPDATE Assessment_Center_candidates_'+ac_id+' SET completed_activities = concat(\'i,\',completed_activities) WHERE candidate_id = \''+candidate_id+'\';';
+    		var query = 'UPDATE Assessment_Center_candidates_'+ac_id+' SET completed_activities = concat(\'i,\',completed_activities) WHERE id = \''+candidate_id+'\';';
             console.log(query);
             connectionTo_TEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
 
