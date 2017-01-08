@@ -28,7 +28,7 @@ exports.completion = function (req, res) {
                     if (result == passcode) {
                         // perform get of all interviews
                             connection.end();
-                            formatJsonForAllInterviews();
+                            addAnswer();
                     } else {
                     
                         if (result == '' || result == undefined) {
