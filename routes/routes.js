@@ -128,7 +128,7 @@ app.get("/v1/companies/interview/:interview_id/:candidate_id",getInterviewResult
 
 		// get roleplay
 		var getRoleplayDetailsFilehandle = require('./get_roleplay'); 
-		app.post("/v1/companies/presentation/:ac_id",getRoleplayDetailsFilehandle.getRoleplayDetails);
+		app.post("/v1/companies/roleplay/:ac_id",getRoleplayDetailsFilehandle.getRoleplayDetails);
 
 		// get roleplay review
 		var getRoleplayReviewFilehandle = require('./get_roleplay_review'); 
