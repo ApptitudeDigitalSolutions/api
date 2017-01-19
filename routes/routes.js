@@ -52,30 +52,28 @@ app.post("/v1/company/createac",getcreateACFilehandle.createAC);
 var getActivitiesFilehandle = require('./get_actvities'); 
 app.post("/v1/companies/:company_id/ac/:ac_id/activities",getActivitiesFilehandle.getActivities); 
 
-		//2. /v1/companies/interviews GET for interviews schedule
-		var getInterviewsFilehandle = require('./get_assessmentcentres'); 
-		app.post("/v1/companies/assessmentcentres/:company_id",getInterviewsFilehandle.getACs);
 
 // 4. /v1/companies/interview/:candidate_id GET of candidates results (having scored for a tother review)
 var getInterviewResultsFilehandle = require('./get_interview_results'); 
 app.get("/v1/companies/interview/:interview_id/:candidate_id",getInterviewResultsFilehandle.getInterviewsResults);
 
-// // 5. /v1/companies/interview/play/:record_id GET of an audio file for playback
-var getPlayRecordFilehandle = require('./play_record'); 
-app.get("/v1/companies/interview/:interview_id/play/:record_id",getPlayRecordFilehandle.play);
+// // // 5. /v1/companies/interview/play/:record_id GET of an audio file for playback
+// var getPlayRecordFilehandle = require('./play_record'); 
+// app.get("/v1/companies/interview/:interview_id/play/:record_id",getPlayRecordFilehandle.play);
 
-// 6. /v1/companies/interview/:candidate_id PUT of an audio file to server
-var putaudioFilesFilehandle = require('./upload'); 
-app.put("/v1/companies/interview/:candidate_id",putaudioFilesFilehandle.upload);
+// // 6. /v1/companies/interview/:candidate_id PUT of an audio file to server
+// var putaudioFilesFilehandle = require('./upload'); 
+// app.put("/v1/companies/interview/:candidate_id",putaudioFilesFilehandle.upload);
 
-// 7. /v1/companies/interview/:candidate_id/:wavFileName Confirming upload has been successful for audio file
-var postConfirmUploadFilehandle = require('./confirm_upload'); 
-app.post("/v1/companies/interview/:candidate_id/:wavFileName",postConfirmUploadFilehandle.confirmUpload);
-
-		// 8. /v1/companies/interview/:interview_id GET on interview questions and prompts
-		var getInterviewDetailsFilehandle = require('./get_interview'); 
-		app.post("/v1/companies/interview/:ac_id",getInterviewDetailsFilehandle.getInterviewDetails);
-
+// // 7. /v1/companies/interview/:candidate_id/:wavFileName Confirming upload has been successful for audio file
+// var postConfirmUploadFilehandle = require('./confirm_upload'); 
+// app.post("/v1/companies/interview/:candidate_id/:wavFileName",postConfirmUploadFilehandle.confirmUpload);
+		
+		
+		//2. /v1/companies/interviews GET for interviews schedule
+		var getInterviewsFilehandle = require('./get_assessmentcentres'); 
+		app.post("/v1/companies/assessmentcentres/:company_id",getInterviewsFilehandle.getACs);
+		
 		// 9. /v1/companies/interview PUT of a new candidate
 		var postNewCandidateFilehandle = require('./add_candidate'); 
 		app.post("/v1/companies/assessmentcentre/addcandidate/:ac_id",postNewCandidateFilehandle.addCandidate);
@@ -84,6 +82,13 @@ app.post("/v1/companies/interview/:candidate_id/:wavFileName",postConfirmUploadF
 		var getCandidatxeFilehandle = require('./get_assessmentcentres_candidates'); 
 		app.post("/v2/companies/assessmentcentres/candidates",getCandidatxeFilehandle.getAssessmentCentresCandidates);
 
+
+		
+
+
+		// 8. /v1/companies/interview/:interview_id GET on interview questions and prompts
+		var getInterviewDetailsFilehandle = require('./get_interview'); 
+		app.post("/v1/companies/interview/:ac_id",getInterviewDetailsFilehandle.getInterviewDetails);
 		
 		// 11. /v1/companies/interview/:interview_id GET for interview candidates
 		var getInterviewReviewFilehandle = require('./get_interview_review'); 
@@ -116,8 +121,6 @@ app.post("/v1/companies/interview/:candidate_id/:wavFileName",postConfirmUploadF
 		// set presentation complete
 		var presentationCompleteFileHandle = require('./presentation_complete'); 
 		app.post("/v1/companies/assessmentcentres/presentation/complete/:ac_id",presentationCompleteFileHandle.completion);
-
-
 
 
 
