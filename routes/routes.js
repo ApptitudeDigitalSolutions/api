@@ -97,6 +97,49 @@ app.post("/v1/companies/interview/:candidate_id/:wavFileName",postConfirmUploadF
 		var interviewCompleteFileHandle = require('./interview_complete'); 
 		app.post("/v1/companies/assessmentcentres/interview/complete/:ac_id",interviewCompleteFileHandle.completion);
 
+
+
+
+
+		// get presntaiton
+		var getPresentationDetailsFilehandle = require('./get_presentation'); 
+		app.post("/v1/companies/presentation/:ac_id",getPresentationDetailsFilehandle.getPresentationDetails);
+
+		// get presntation review
+		var getPresentationReviewFilehandle = require('./get_presentation_review'); 
+		app.post("/v1/companies/assessmentcentres/presentation/review/:ac_id",getPresentationReviewFilehandle.getPresentationReview);
+
+		// set presentation review
+		var sendCandidatePresentationReviewFilehandle = require('./set_presentation_review'); 
+		app.post("/v1/companies/assessmentcentres/presentation/submitreview/:ac_id",sendCandidatePresentationReviewFilehandle.setPresentationReview);
+
+		// set presentation complete
+		var presentationCompleteFileHandle = require('./presentation_complete'); 
+		app.post("/v1/companies/assessmentcentres/presentation/complete/:ac_id",presentationCompleteFileHandle.completion);
+
+
+
+
+
+
+
+		// get roleplay
+		var getRoleplayDetailsFilehandle = require('./get_roleplay'); 
+		app.post("/v1/companies/presentation/:ac_id",getRoleplayDetailsFilehandle.getRoleplayDetails);
+
+		// get roleplay review
+		var getRoleplayReviewFilehandle = require('./get_roleplay_review'); 
+		app.post("/v1/companies/assessmentcentres/roleplay/review/:ac_id",getRoleplayReviewFilehandle.getRoleplayReview);
+
+		// set roleplay review
+		var sendCandidateRoleplayReviewFilehandle = require('./set_roleplay_review'); 
+		app.post("/v1/companies/assessmentcentres/roleplay/submitreview/:ac_id",sendCandidateRoleplayReviewFilehandle.setRoleplayReview);
+
+		// set roleplay complete
+		var roleplayCompleteFileHandle = require('./roleplay_complete'); 
+		app.post("/v1/companies/assessmentcentres/roleplay/complete/:ac_id",roleplayCompleteFileHandle.completion);
+
+
 		
 
 

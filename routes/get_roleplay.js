@@ -1,4 +1,4 @@
-exports.getInterviewReview = function (req, res) {
+exports.getRoleplayDetails = function (req, res) {
     var username = req.body.username;
     var passcode = req.body.passcode;
     var ac_id = req.params.ac_id; 
@@ -14,10 +14,10 @@ exports.getInterviewReview = function (req, res) {
 
     var async = require('async');
     async.series([function(callback) {
-            auth(callback);
+            getInterviewsFunction(callback);
     }]);
 
-    function auth(callback) {
+    function getInterviewsFunction(callback) {
                   var Memcached = require('memcached');
                   var memcached = new Memcached('localhost:11211');
                     memcached.get(username, function(err, result) {
@@ -29,7 +29,7 @@ exports.getInterviewReview = function (req, res) {
                     if (result == passcode) {
                         // perform get of all interviews
                             connection.end();
-                            getReviewPages();
+                            formatJsonForAllInterviews();
                     } else {
                     
                         if (result == '' || result == undefined) {
@@ -40,7 +40,7 @@ exports.getInterviewReview = function (req, res) {
                                     storedPasscode = rows[0].passcode;
                                     if (passcode == storedPasscode){
 
-                                        getReviewPages();
+                                        formatJsonForAllInterviews();
                                         
                                     }
                                 }});
@@ -53,28 +53,30 @@ exports.getInterviewReview = function (req, res) {
     }
 
 
-    function getReviewPages(callback){
+    function formatJsonForAllInterviews(callback){
     		// get count of sections
-    		var query = 'SELECT * FROM Interview_review_results_'+ac_id+' WHERE candidate_id = '+candidate_id+';';
+    		var query = 'SELECT * FROM Roleplay_'+ac_id+';';
             connectionTo_AC_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
             
             var objToStringify = {pages:[]};
 
             for(i in rows){
-            		var page = {    question_id:rows[i].question_id,
-                                    answer_text:rows[i].answer_text,
-                                    answer_type:rows[i].answer_type
+            		var page = {    id:rows[i].id,
+                                    roleplay_info_ref:rows[i].roleplay_info_ref,
+                                    roleplay_info_text:rows[i].roleplay_info_text
                                 };
                                 
                     objToStringify.pages.push(page);
             }
+
+            console.log(objToStringify);
 
           	// were all done creating the payload , itls time send 
           	res.writeHead(200, {
                 "Content-Type": "application/json"
             });
             var json = JSON.stringify(objToStringify);
-            console.log('REVIEW PAGES  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ' + json);
+            console.log('RES QUESTIONS + PROMPTS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ' + json);
             res.end(json);
             connectionTo_AC_MACRO.end();
 
