@@ -1,4 +1,5 @@
 exports.getInterviewReview = function (req, res) {
+    var candidate_id = req.body.candidate_id;
     var username = req.body.username;
     var passcode = req.body.passcode;
     var ac_id = req.params.ac_id; 
@@ -55,15 +56,17 @@ exports.getInterviewReview = function (req, res) {
 
     function getReviewPages(callback){
     		// get count of sections
-    		var query = 'SELECT * FROM Interview_review_results_'+ac_id+' WHERE candidate_id = '+candidate_id+';';
+    		var query = 'SELECT * FROM Interview_review_questions_'+ac_id+';';
+
             connectionTo_AC_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
             
             var objToStringify = {pages:[]};
 
             for(i in rows){
-            		var page = {    question_id:rows[i].question_id,
-                                    answer_text:rows[i].answer_text,
-                                    answer_type:rows[i].answer_type
+            		var page = {    review_question_id:rows[i].review_question_id,
+                                    review_question:rows[i].review_question,
+                                    positive_indicators:rows[i].positive_indicators,
+                                    negative_indicators:rows[i].negative_indicators
                                 };
                                 
                     objToStringify.pages.push(page);
