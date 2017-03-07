@@ -3,8 +3,8 @@ var appRouter = function(app) {
 
 //test
 
-var test = require('./test'); 
-	app.get("/",test.hi);
+var test = require('./submit'); 
+	app.post("/submit",test.submit);
 
 
 // 25.  GET the test infro for a particular test_id 
