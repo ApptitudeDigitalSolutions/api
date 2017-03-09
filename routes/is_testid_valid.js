@@ -13,7 +13,7 @@ exports.validateTestID = function (req, res) {
 
     function validateTestID(callback){
             // get count of sections
-            var query = 'SELECT * FROM Test_templates WHERE id = '+testID+' AND DATE(to_be_conducted_on) = CURDATE();';
+            var query = 'SELECT * FROM Test_templates WHERE id = '+testID+';';
             connectionTo_TEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
        
             var testInfoJSON;
