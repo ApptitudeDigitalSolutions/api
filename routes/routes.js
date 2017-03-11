@@ -192,6 +192,9 @@ var putParticipantFilehandle = require('./add_participant');
 var setTestPageFilehandle = require('./set_test_page'); 
 	app.post("/v1/companies/test/set/:test_id",setTestPageFilehandle.setPage);
 
+	var reset = require('./reset_test'); 
+	app.post("/v1/companies/test/reset/:test_id",reset.reset);
+
 // //15. /v1/companies/test/sectionnext/:test_id POST to move to next sections intro
 // var postNextSectionFilehandle = require('./next_section'); 
 // 	app.post("/v1/companies/test/sectionnext/:test_id",postNextSectionFilehandle.nextSection);
