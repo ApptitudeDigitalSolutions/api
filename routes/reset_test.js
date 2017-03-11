@@ -1,4 +1,4 @@
-exports.setPage = function (req, res) {
+exports.reset_test = function (req, res) {
     var username = req.body.username;
     var passcode = req.body.passcode;
     var testID = req.params.test_id; 
