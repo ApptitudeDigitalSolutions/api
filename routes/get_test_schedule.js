@@ -7,59 +7,35 @@ exports.getTestSchedule = function (req, res) {
 
   
     var mysql = require('mysql');
-    var connection = mysql.createConnection({ host: 'localhost', user: 'root', password: 'smashing', database: 'MACRO' });
-    connection.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
-
-    var connectionTo_TEST_MACRO = mysql.createConnection({ host: 'localhost', user: 'root', password: 'smashing', database: 'TEST_MACRO' });
-    connectionTo_TEST_MACRO.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
+        var connectionTEST_MACRO = mysql.createConnection({ host: req.app.locals.TEST_MACRO_DB_HOST, user: req.app.locals.TEST_MACRO_DB_USER, password: req.app.locals.TEST_MACRO_DB_PASSWORD, database: req.app.locals.TEST_MACRO_DB_NAME });
+    connectionTEST_MACRO.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
 
 
-    var async = require('async');
-    async.series([function(callback) {
-            getTestScheduleFunction(callback);
-    }]);
 
-    function getTestScheduleFunction(callback) {
-                  var Memcached = require('memcached');
-                  var memcached = new Memcached('localhost:11211');
-                    memcached.get(username, function(err, result) {
-
-                    if (err) {
-                        console.error(err)
-                    };
-                    console.dir(result);
-                    if (result == passcode) {
-                        // perform get of all interviews
-                            connection.end();
-                            formatJsonForAllTests();
-                    } else {
-                    
-                        if (result == '' || result == undefined) {
-
-                             var query = 'SELECT * FROM Users WHERE username =\'' + username + '\';';
-                                connection.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
-                            
-                                    storedPasscode = rows[0].passcode;
-                                    if (passcode == storedPasscode){
-
-                                        formatJsonForAllTests(callback);
-                                        
-                                    }
-                                }});
-                                connection.end();
-
-                            
-                    }
-                  }
-         });
-    }
-
+     var authenticate = require("./auth.js");
+    authenticate.authenticate(req,function(returnValue) {
+      if(returnValue){
+          var async = require('async');
+          async.waterfall([formatJsonForAllTests], function (err, result) { console.log("DONE");  connectionTEST_MACRO.end(); });
+      }else{
+          connectionTEST_MACRO.end(); 
+          if(!res.headersSent){
+          res.writeHead(200, {
+              "Content-Type": "application/json"
+          });
+          var json = JSON.stringify({
+             status:"unauthorized"
+              });
+          res.end(json);
+        }
+      }
+    });
 
     function formatJsonForAllTests(callback){
 
             var query = 'SELECT id,test_title,DATE_FORMAT(to_be_conducted_on,GET_FORMAT(DATE,\'EUR\')) as to_be_conducted_on,description,section_delimiters,section_tags FROM Test_templates WHERE company_id =\'' + company_id + '\' AND should_be_returned <> 0;';
             
-            connectionTo_TEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
+            connectionTEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
 
             var objToStringify = {tests:[]};
             console.log(rows);
@@ -85,6 +61,6 @@ exports.getTestSchedule = function (req, res) {
             res.end(json);
             
         }});
-        connectionTo_TEST_MACRO.end();
+        connectionTEST_MACRO.end();
     }
 }

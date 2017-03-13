@@ -9,8 +9,8 @@ exports.getstatus = function (req, res) {
     
     var mysql = require('mysql');
     
-    var connectionTo_TEST_MACRO = mysql.createConnection({ host: 'localhost', user: 'root', password: 'smashing', database: 'TEST_MACRO' });
-    connectionTo_TEST_MACRO.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
+    var connectionTEST_MACRO = mysql.createConnection({ host: req.app.locals.TEST_MACRO_DB_HOST, user: req.app.locals.TEST_MACRO_DB_USER, password: req.app.locals.TEST_MACRO_DB_PASSWORD, database: req.app.locals.TEST_MACRO_DB_NAME });
+    connectionTEST_MACRO.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
 
     var async = require('async');
     async.series([function(callback) {
@@ -34,7 +34,7 @@ exports.getstatus = function (req, res) {
   
     function authenticateAsParticipant(callback) {
          var query = 'SELECT * FROM Test_applicants_'+testID+' WHERE email =\'' + candidatesEmail + '\';';
-            connectionTo_TEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
+            connectionTEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
         
                 if (rows.length > 0){
                     min_page_of_test = {min_page_of_test:rows[0].min_page_of_test}; 
@@ -44,7 +44,7 @@ exports.getstatus = function (req, res) {
                     res.end(401);
                 }
             }});
-            connectionTo_TEST_MACRO.end();
+            connectionTEST_MACRO.end();
                    
     }
 

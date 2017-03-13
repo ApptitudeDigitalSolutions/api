@@ -5,59 +5,33 @@ exports.getACs = function (req, res) {
     var isValid = 0;
 
     var mysql = require('mysql');
-    var connection = mysql.createConnection({ host: 'localhost', user: 'root', password: 'smashing', database: 'MACRO' });
-    connection.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
+    
+     var connectionAC_MACRO = mysql.createConnection({ host: req.app.locals.AC_MACRO_DB_HOST, user: req.app.locals.AC_MACRO_DB_USER, password: req.app.locals.AC_MACRO_DB_PASSWORD, database: req.app.locals.AC_MACRO_DB_NAME });
+    connectionAC_MACRO.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
 
-    var connectionTo_AC_MACRO = mysql.createConnection({ host: 'localhost', user: 'root', password: 'smashing', database: 'AC_MACRO' });
-    connectionTo_AC_MACRO.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
-
-
-    var async = require('async');
-    async.series([function(callback) {
-            getInterviewsFunction(callback);
-    }]);
-
-    function getInterviewsFunction(callback) {
-                    var Memcached = require('memcached');
-                    var memcached = new Memcached('localhost:11211');
-                    
-                    memcached.get(username, function(err, result) {
-
-                    if (err) {
-                        console.error(err)
-                    };
-                    console.dir(result);
-                    if (result == passcode) {
-                        // perform get of all interviews
-                            connection.end();
-                            formatJsonForAllInterviews();
-                    } else {
-                    
-                        if (result == '' || result == undefined) {
-
-                             var query = 'SELECT * FROM Users WHERE username =\'' + username + '\';';
-                                connection.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
-                            
-                                    storedPasscode = rows[0].passcode;
-                                    if (passcode == storedPasscode){
-
-                                        formatJsonForAllInterviews(callback);
-                                        
-                                    }
-                                }});
-                                connection.end();
-
-                            
-                    }
-                  }
-         });
-    }
-
+  var authenticate = require("./auth.js");
+    authenticate.authenticate(req,function(returnValue) {
+      if(returnValue){
+          var async = require('async');
+          async.waterfall([formatJsonForAllInterviews], function (err, result) { console.log("DONE");  connectionAC_MACRO.end(); });
+      }else{
+          connectionAC_MACRO.end(); 
+          if(!res.headersSent){
+          res.writeHead(200, {
+              "Content-Type": "application/json"
+          });
+          var json = JSON.stringify({
+             status:"unauthorized"
+              });
+          res.end(json);
+        }
+      }
+    });
 
     function formatJsonForAllInterviews(callback){
 
             var query = 'SELECT id,company_id,created_on,participants_count,title, description, DATE_FORMAT(to_be_conducted_on,GET_FORMAT(DATE,\'EUR\')) as to_be_conducted_on , activity_ids, activity_types FROM Assessment_Center_templates WHERE company_id =\'' + company_id + '\';';
-            connectionTo_AC_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
+            connectionAC_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
 
             var objToStringify = {acs:[]};
 
@@ -87,6 +61,6 @@ exports.getACs = function (req, res) {
             res.end(json);
             
         }});
-        connectionTo_AC_MACRO.end();
+        connectionAC_MACRO.end();
     }
 }

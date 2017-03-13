@@ -17,8 +17,8 @@ exports.createUser = function (req, res) {
 
 
     var mysql = require('mysql');
-    var connection = mysql.createConnection({ host: 'localhost', user: 'root', password: 'smashing', database: 'MACRO' });
-    connection.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
+    var connectionMACRO = mysql.createConnection({ host: req.app.locals.USERS_DB_HOST, user: req.app.locals.USERS_DB_USER, password: req.app.locals.USERS_DB_PASSWORD, database: req.app.locals.USERS_DB_NAME});
+    connectionMACRO.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
 
     var async = require('async');
      async.series([function(callback) {
@@ -28,7 +28,7 @@ exports.createUser = function (req, res) {
      function createUserNow(callback) {
 
         var query = 'SELECT id FROM Companies WHERE company_name =\'' + companyname + '\';';
-        connection.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else { 
+        connectionMACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else { 
         console.log("Company successfully created");
                 var companyID = rows[0].id;
 
@@ -44,9 +44,9 @@ exports.createUser = function (req, res) {
                 var passcode = randomString(5, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
                 
                 var query = 'INSERT INTO Users (company_id,username,password,passcode,phone_number,role,first,last) VALUES (\'' + companyID + '\',\'' + username + '\',\'' + password + '\',\'' + passcode + '\',\'' + number + '\',\'' + role + '\',\'' + first + '\',\'' + last + '\');';
-                connection.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else { 
+                connectionMACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else { 
                 console.log("User successfully created");
-                connection.end();
+                connectionMACRO.end();
                 }});
             });
 

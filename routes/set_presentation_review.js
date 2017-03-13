@@ -8,58 +8,34 @@ exports.setPresentationReview = function (req, res) {
     var ac_id = req.params.ac_id; 
   
     var mysql = require('mysql');
-    var connection = mysql.createConnection({ host: 'localhost', user: 'root', password: 'smashing', database: 'MACRO' });
-    connection.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
+    var connectionAC_MACRO = mysql.createConnection({ host: req.app.locals.AC_MACRO_DB_HOST, user: req.app.locals.AC_MACRO_DB_USER, password: req.app.locals.AC_MACRO_DB_PASSWORD, database: req.app.locals.AC_MACRO_DB_NAME });
+    connectionAC_MACRO.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
 
-    var connectionTo_TEST_MACRO = mysql.createConnection({ host: 'localhost', user: 'root', password: 'smashing', database: 'AC_MACRO' });
-    connectionTo_TEST_MACRO.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
 
-    var async = require('async');
-    async.series([function(callback) {
-                   auth(callback);
-    }]);
-
-    function auth(callback) {
-                  var Memcached = require('memcached');
-                  var memcached = new Memcached('localhost:11211');
-                    memcached.get(username, function(err, result) {
-
-                    if (err) {
-                        console.error(err)
-                    };
-                    console.dir(result);
-                    if (result == passcode) {
-                        // perform get of all interviews
-                            connection.end();
-                            addAnswer();
-                    } else {
-                    
-                        if (result == '' || result == undefined) {
-
-                             var query = 'SELECT * FROM Users WHERE username =\'' + username + '\';';
-                                connection.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
-                            
-                                    storedPasscode = rows[0].passcode;
-                                    if (passcode == storedPasscode){
-
-                                        addAnswer();
-                                        
-                                    }
-                                }});
-                                connection.end();
-
-                            
-                    }
-                  }
-         });
-    }
-
+    var authenticate = require("./auth.js");
+     authenticate.authenticate(req,function(returnValue) {
+      if(returnValue){
+          var async = require('async');
+          async.waterfall([addAnswer], function (err, result) { console.log("DONE");  connectionAC_MACRO.end(); });
+      }else{
+          connectionAC_MACRO.end(); 
+          if(!res.headersSent){
+          res.writeHead(200, {
+              "Content-Type": "application/json"
+          });
+          var json = JSON.stringify({
+             status:"unauthorized"
+              });
+          res.end(json);
+        }
+      }
+  });
 
     function addAnswer(callback){
     		// get count of sections
     		var query = 'INSERT INTO Presentation_review_results_'+ac_id+' (candidate_id,question_id,answer_text,answer_type) VALUES (\''+candidate_id+'\','+question_id+',\''+answer+'\',\''+answer_type+'\');';
             console.log(query);
-            connectionTo_TEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
+            connectionAC_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
 
                  
                   res.writeHead(200, {
@@ -68,7 +44,7 @@ exports.setPresentationReview = function (req, res) {
                   var json = JSON.stringify({success:1});
                   console.log('TEST STATE IS ........................... ' + json);
                   res.end(json);
-                  connectionTo_TEST_MACRO.end();
+                  connectionAC_MACRO.end();
         	}});
     }
 }

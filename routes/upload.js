@@ -4,47 +4,26 @@ exports.upload = function (req, res) {
     var filename = req.body.filename; 
  
     var mysql = require('mysql');
-    var connection = mysql.createConnection({ host: 'localhost', user: 'root', password: 'smashing', database: 'MACRO' });
-    connection.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
+   
+    var authenticate = require("./auth.js");
+     authenticate.authenticate(req,function(returnValue) {
+      if(returnValue){
+          var async = require('async');
+          async.waterfall([getSigedPOSTurl], function (err, result) { console.log("DONE");  connection.end(); });
+      }else{
+          connection.end(); 
+          if(!res.headersSent){
+          res.writeHead(200, {
+              "Content-Type": "application/json"
+          });
+          var json = JSON.stringify({
+             status:"unauthorized"
+              });
+          res.end(json);
+        }
+      }
+  });
 
-    var async = require('async');
-    async.series([function(callback) {
-            uploadFunction(callback);
-    }]);
-
-    function uploadFunction(callback) {
-                  var Memcached = require('memcached');
-                  var memcached = new Memcached('localhost:11211');
-                    memcached.get(username, function(err, result) {
-
-                    if (err) {
-                        console.error(err)
-                    };
-                    console.dir(result);
-                    if (result == passcode) {
-                          connection.end();
-                          getSigedPOSTurl();
-
-                    } else {
-                    
-                        if (result == '' || result == undefined) {
-
-                             var query = 'SELECT * FROM Users WHERE username =\'' + username + '\';';
-                                connection.query(query, function(err, rows) {if (err) { console.log('Error : The SQL statement is realy batty'); return;} else {
-                            
-                                    storedPasscode = rows[0].passcode;
-                                    if (passcode == storedPasscode){
-
-                                        getSigedPOSTurl();
-                                        
-                                    }
-                                }});
-                                connection.end();
-                           
-                    }
-                  }
-         });
-    }
 
 
  function getSigedPOSTurl(callback){

@@ -15,8 +15,8 @@ exports.answerQuestion = function (req, res) {
 
   
     var mysql = require('mysql');
-    var connectionTo_TEST_MACRO = mysql.createConnection({ host: 'localhost', user: 'root', password: 'smashing', database: 'TEST_MACRO' });
-    connectionTo_TEST_MACRO.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
+    var connectionTEST_MACRO = mysql.createConnection({ host: req.app.locals.TEST_MACRO_DB_HOST, user: req.app.locals.TEST_MACRO_DB_USER, password: req.app.locals.TEST_MACRO_DB_PASSWORD, database: req.app.locals.TEST_MACRO_DB_NAME });
+    connectionTEST_MACRO.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
 
     var async = require('async');
     async.series([function(callback) {
@@ -26,7 +26,7 @@ exports.answerQuestion = function (req, res) {
 
     function authenticateAsParticipant(callback) {
          var query = 'SELECT * FROM Test_applicants_'+testID+' WHERE email =\'' + candidate_email + '\';';
-            connectionTo_TEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
+            connectionTEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
         
                 if (rows.length > 0){
                     candidate_id = rows[0].id;
@@ -45,11 +45,11 @@ exports.answerQuestion = function (req, res) {
     		// get count of sections
     		var query = 'INSERT INTO Test_results_'+testID+' (candidate_id,candidate_email,question_id,section_id,answer,was_correct,time_taken_on_question,time_answered) VALUES (\''+candidate_id+'\',\''+candidate_email+'\','+question_id+','+section_id+',\''+answer+'\','+was_correct+','+timeOnQuestion+',NOW());';
             console.log(query);
-            connectionTo_TEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
+            connectionTEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
 
                 var query2 = 'UPDATE Test_admin_'+testID+' SET `currently_on_question` = '+ question_id +', `currently_on_section` = ' + section_id + ' WHERE candidate_email = \'' + candidate_email +'\';';
                   console.log(query2);
-                  connectionTo_TEST_MACRO.query(query2, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
+                  connectionTEST_MACRO.query(query2, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
                  
                   res.writeHead(200, {
                       "Content-Type": "application/json"
@@ -57,7 +57,7 @@ exports.answerQuestion = function (req, res) {
                   var json = JSON.stringify({success:1});
                   console.log('TEST STATE IS ........................... ' + json);
                   res.end(json);
-                  connectionTo_TEST_MACRO.end();
+                  connectionTEST_MACRO.end();
 
                 }});
 

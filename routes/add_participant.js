@@ -13,11 +13,9 @@ exports.addParticipant = function (req, res) {
     console.log(req.body);
   
     var mysql = require('mysql');
-    // var connection = mysql.createConnection({ host: 'localhost', user: 'root', password: 'smashing', database: 'MACRO' });
-    // connection.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
-
-    var connectionTo_TEST_MACRO = mysql.createConnection({ host: 'localhost', user: 'root', password: 'smashing', database: 'TEST_MACRO' });
-    connectionTo_TEST_MACRO.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
+    
+    var connectionTEST_MACRO = mysql.createConnection({ host: req.app.locals.TEST_MACRO_DB_HOST, user: req.app.locals.TEST_MACRO_DB_USER, password: req.app.locals.TEST_MACRO_DB_PASSWORD, database: req.app.locals.TEST_MACRO_DB_NAME });
+    connectionTEST_MACRO.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
 
 
     var async = require('async');
@@ -26,36 +24,7 @@ exports.addParticipant = function (req, res) {
     }]);
 
     function authenticate(callback) {
-                   // var Memcached = require('memcached');
-                   // var memcached = new Memcached('localhost:11211');
-                   //  memcached.get(username, function(err, result) {
-
-                   //  if (err) {
-                   //      console.error(err)
-                   //  };
-                   //  console.dir(result);
-                   //  if (result == passcode) {
-                   //      // perform get of all interviews
-                   //          connection.end();
-                   //          addNewParticipant();
-                   //  } else {
-                    
-                   //      if (result == '' || result == undefined) {
-
-                   //           var query = 'SELECT * FROM Users WHERE username =\'' + username + '\';';
-                   //              connection.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
-                            
-                   //                  storedPasscode = rows[0].passcode;
-                   //                  if (passcode == storedPasscode){
-
-                                        addNewParticipant();
-                                        
-         //                            }
-         //                        }});
-         //                        connection.end(); 
-         //            }
-         //          }
-         // });
+           addNewParticipant(); 
     }
 
 
@@ -63,11 +32,11 @@ exports.addParticipant = function (req, res) {
     		// get count of sections
     		var query = 'INSERT INTO Test_applicants_'+testID+' (First,Last,Email,DoB,min_page_of_test,test_stage_state,other) VALUES (\''+first+'\',\''+last+'\',\''+email+'\',\''+DoB+'\',0,\'none\',\''+other+'\');';
         console.log(query);
-            connectionTo_TEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
+            connectionTEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
 
                  var query2 = 'INSERT INTO Test_admin_'+testID+' (`candidate_first`, `candidate_last`, `candidate_email`, `currently_on_question`, `currently_on_section`) VALUES (\''+first+'\',\''+last+'\',\''+email+'\',0,0);';
                   console.log(query2);
-                  connectionTo_TEST_MACRO.query(query2, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
+                  connectionTEST_MACRO.query(query2, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
                  
                  
                   res.writeHead(200, {
@@ -76,7 +45,7 @@ exports.addParticipant = function (req, res) {
                   var json = JSON.stringify({success:1});
                   console.log('TEST STATE IS ........................... ' + json);
                   res.end(json);
-                  connectionTo_TEST_MACRO.end();
+                  connectionTEST_MACRO.end();
                 }});
        
         	}});

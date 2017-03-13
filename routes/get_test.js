@@ -8,11 +8,11 @@ exports.getTest = function (req, res) {
     var isValid = 0;
 
     var mysql = require('mysql');
-    var connection = mysql.createConnection({ host: 'localhost', user: 'root', password: 'smashing', database: 'MACRO' });
-    connection.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
+    var connectionTEST_MACRO = mysql.createConnection({ host: req.app.locals.TEST_MACRO_DB_HOST, user: req.app.locals.TEST_MACRO_DB_USER, password: req.app.locals.TEST_MACRO_DB_PASSWORD, database: req.app.locals.TEST_MACRO_DB_NAME });
+    connectionTEST_MACRO.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
 
-    var connectionTo_TEST_MACRO = mysql.createConnection({ host: 'localhost', user: 'root', password: 'smashing', database: 'TEST_MACRO' });
-    connectionTo_TEST_MACRO.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
+     var connectionMACRO = mysql.createConnection({ host: req.app.locals.USERS_DB_HOST, user: req.app.locals.USERS_DB_USER, password: req.app.locals.USERS_DB_PASSWORD, database: req.app.locals.USERS_DB_NAME});
+    connectionMACRO.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
 
 
     var async = require('async');
@@ -42,14 +42,14 @@ exports.getTest = function (req, res) {
                     console.dir(result);
                     if (result == passcode) {
                         // perform get of all interviews
-                            connection.end();
+                            connectionMACRO.end();
                             formatJsonForTest();
                     } else {
                     
                         if (result == '' || result == undefined) {
 
                              var query = 'SELECT * FROM Users WHERE username =\'' + username + '\';';
-                                connection.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
+                                connectionMACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
                             
                                     storedPasscode = rows[0].passcode;
                                     if (passcode == storedPasscode){
@@ -58,7 +58,7 @@ exports.getTest = function (req, res) {
                                         
                                     }
                                 }});
-                                connection.end();
+                                connectionMACRO.end();
 
                             
                     }
@@ -71,7 +71,7 @@ exports.getTest = function (req, res) {
 
     function authenticateAsParticipant(callback) {
          var query = 'SELECT * FROM Test_applicants_'+testID+' WHERE email =\'' + candidatesEmail + '\';';
-            connectionTo_TEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
+            connectionTEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
         
                 storedPasscode = rows[0].passcode;
                 if (rows.length > 0){
@@ -82,7 +82,7 @@ exports.getTest = function (req, res) {
                     res.end(401);
                 }
             }});
-            connectionTo_TEST_MACRO.end();        
+            connectionTEST_MACRO.end();        
     }
 
 
@@ -93,7 +93,7 @@ exports.getTest = function (req, res) {
 // get the test meta data.
 // get count of sections in this test
             var query = 'SELECT * FROM Test_templates WHERE id = '+testID+';';
-            connectionTo_TEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
+            connectionTEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
             
             var objToStringify = {  test_id: rows[0].id,
                                     test_title: rows[0].test_title,
@@ -103,7 +103,7 @@ exports.getTest = function (req, res) {
 
             		// get count of sections in this test
             		var query = 'SELECT section_id FROM Test_'+testID+' ORDER BY section_id DESC LIMIT 1;';
-                    connectionTo_TEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
+                    connectionTEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
 
                     var sectionNumberCount = rows[0].section_id;
                     
@@ -112,7 +112,7 @@ exports.getTest = function (req, res) {
                     	// we need to first get all meta data for the section
 
                     	var sectionInfoQuery = 'SELECT * Test_'+testID+' WHERE section_id = '+i+' ORDER BY question_id ASC;';
-                    	connectionTo_TEST_MACRO.query(sectionInfoQuery, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
+                    	connectionTEST_MACRO.query(sectionInfoQuery, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
                     		//1. strip out the section info  
                     		var sectionTitle = rows[i].section_title;
                     		var sectionText = rows[i].section_text;
@@ -178,7 +178,7 @@ exports.getTest = function (req, res) {
                     var json = JSON.stringify(objToStringify);
                     console.log('RES QUESTIONS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ' + json);
                     res.end(json);
-                    connectionTo_TEST_MACRO.end();
+                    connectionTEST_MACRO.end();
 
                 	}});
 

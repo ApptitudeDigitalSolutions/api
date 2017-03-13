@@ -15,8 +15,9 @@ exports.login = function (req, res) {
     var passcode = randomString(5, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
 
     var mysql = require('mysql');
-    var connection = mysql.createConnection({ host: 'localhost', user: 'root', password: 'smashing', database: 'MACRO' });
-    connection.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
+    var connectionMACRO = mysql.createConnection({ host: req.app.locals.USERS_DB_HOST, user: req.app.locals.USERS_DB_USER, password: req.app.locals.USERS_DB_PASSWORD, database: req.app.locals.USERS_DB_NAME});
+    connectionMACRO.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
+
 
     
     var async = require('async');
@@ -26,7 +27,7 @@ exports.login = function (req, res) {
 
     function loginUser(callback) {
             var query = 'SELECT * FROM Users WHERE username =\'' + username + '\';';
-            connection.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
+            connectionMACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
                     for (var i in rows) {
                         var Memcached = require('memcached');
                         var memcached = new Memcached('localhost:11211');
@@ -49,7 +50,7 @@ exports.login = function (req, res) {
                     if (isAUser == 1) {
 
                         var updateQuery = 'UPDATE Users SET passcode = \'' + passcode + '\' WHERE username =\'' + username + '\';';
-                        connection.query(updateQuery, function(err, rows) {if (err) {return;} else {
+                        connectionMACRO.query(updateQuery, function(err, rows) {if (err) {return;} else {
                                        
                             res.writeHead(200, {
                                 "Content-Type": "application/json"
@@ -64,10 +65,10 @@ exports.login = function (req, res) {
                             
                           }});
 
-                        connection.end();
+                        connectionMACRO.end();
 
                     }else{
-                        connection.end();
+                        connectionMACRO.end();
                     }
             }
         

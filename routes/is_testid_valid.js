@@ -3,9 +3,9 @@ exports.validateTestID = function (req, res) {
     console.log("The test ID is " + testID);
 
     var mysql = require('mysql');
-    var connectionTo_TEST_MACRO = mysql.createConnection({ host: 'localhost', user: 'root', password: 'smashing', database: 'TEST_MACRO' });
-    connectionTo_TEST_MACRO.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
-   
+        var connectionTEST_MACRO = mysql.createConnection({ host: req.app.locals.TEST_MACRO_DB_HOST, user: req.app.locals.TEST_MACRO_DB_USER, password: req.app.locals.TEST_MACRO_DB_PASSWORD, database: req.app.locals.TEST_MACRO_DB_NAME });
+    connectionTEST_MACRO.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
+
     var async = require('async');
     async.series([function(callback) {
             validateTestID(callback);
@@ -14,7 +14,7 @@ exports.validateTestID = function (req, res) {
     function validateTestID(callback){
             // get count of sections
             var query = 'SELECT * FROM Test_templates WHERE id = '+testID+';';
-            connectionTo_TEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
+            connectionTEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
        
             var testInfoJSON;
             for(i in rows){
@@ -38,7 +38,7 @@ exports.validateTestID = function (req, res) {
             var json = JSON.stringify(testInfoJSON);
             console.log('TEST INFO is >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ' + json);
             res.end(json);
-            connectionTo_TEST_MACRO.end();
+            connectionTEST_MACRO.end();
 
             }});
     }

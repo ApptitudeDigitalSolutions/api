@@ -11,9 +11,8 @@ exports.logout = function (req, res) {
 
     
     var mysql = require('mysql');
-    var connection = mysql.createConnection({ host: 'localhost', user: 'root', password: 'smashing', database: 'MACRO' });
-    connection.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
-
+    var connectionMACRO = mysql.createConnection({ host: req.app.locals.USERS_DB_HOST, user: req.app.locals.USERS_DB_USER, password: req.app.locals.USERS_DB_PASSWORD, database: req.app.locals.USERS_DB_NAME});
+    connectionMACRO.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
 
     
     var async = require('async');
@@ -40,16 +39,16 @@ exports.logout = function (req, res) {
                         if (result == '' || result == undefined) {
 
                                 var query = 'SELECT * FROM Users WHERE username =\'' + username + '\';';
-                                connection.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
+                                connectionMACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
                             
                                     storedPasscode = rows[0].passcode;
                                     if (passcode == storedPasscode){
 
                                         // perform logout 
                                         var query2 = 'UPDATE Users SET passcode = NULL WHERE username =\'' + username + '\';';
-                                        connection.query(query2, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
+                                        connectionMACRO.query(query2, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
                                             res.sendStatus(200);
-                                            connection.end();
+                                            connectionMACRO.end();
                                         }});
                                     }else{
                                         res.sendStatus(401);
