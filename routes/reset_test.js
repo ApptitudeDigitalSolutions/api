@@ -11,7 +11,7 @@ exports.reset_test = function (req, res) {
 
 
 var authenticate = require("./auth.js");
-     authenticate.authenticate(req,function(returnValue) {
+     authenticate.authenticate(username,passcode,function(returnValue) {
       if(returnValue){
           var async = require('async');
           async.waterfall([nextSectionFunction], function (err, result) { console.log("DONE");  connectionTEST_MACRO.end(); });

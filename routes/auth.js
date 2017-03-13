@@ -1,17 +1,10 @@
 // exports.auth = function (req) {
 module.exports = {
 
-authenticate: function(req,callback){
+authenticate: function(username,passcode,callback){
 	
-	var https = require('https');
-
-	var authHeader = req.headers.authorization;
-
-	console.log("THE AUTH HEADER IS : " + authHeader);
-	var decodedString = Buffer.from(authHeader, 'base64');
-    var splitter = decodedString.toString().split(":");
-    var userID = splitter[0];
-    var passcode = splitter[1];
+	var userID = username;
+    var passcode = passcode;
 
     var Memcached = require('memcached');
 	var memcached = new Memcached(req.app.locals.MEMCACHE_ENDPOINTS);

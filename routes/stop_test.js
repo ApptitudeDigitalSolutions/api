@@ -9,7 +9,7 @@ exports.stopTest = function (req, res) {
 
     
     var authenticate = require("./auth.js");
-     authenticate.authenticate(req,function(returnValue) {
+     authenticate.authenticate(username,passcode,function(returnValue) {
       if(returnValue){
           var async = require('async');
           async.waterfall([stopTestFunction], function (err, result) { console.log("DONE");  connection.end(); });
