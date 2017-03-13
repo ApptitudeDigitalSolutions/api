@@ -63,7 +63,7 @@ function getNodeConfig(availibilityZone){
  	
  			// set environment variables
 				app.locals.BOXTYPE = "staging";
-
+				availibilityZone = "di";
 				// firebase
 	  			app.locals.FIREBASE_SERVER_KEY = configs.staging.firebase[availibilityZone].server_key;
 			
