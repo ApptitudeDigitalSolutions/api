@@ -76,7 +76,7 @@ function getNodeConfig(availibilityZone){
 	  	//  get the IP for the staging instance
 	  	for(i in arrayOfSStagignEndPoints){
 	  		
-	  		console.log("endpoint : " + arrayOfSStagignEndPoints[i]);
+	  		console.log("endpoint : " + arrayOfSStagignEndPoints[i] + " and node IP = " + node_ip);
 	  	
 	  		// CHECKING FOR STAGING NODE
 	  		if(arrayOfSStagignEndPoints[i] == node_ip){
