@@ -178,7 +178,7 @@ function startServer(){
 	    app.use(cookieParser());
 
 
-		var routes = require(".routes/routes.js")(app);
+		var routes = require("routes/routes.js")(app);
 	}
 
 }
