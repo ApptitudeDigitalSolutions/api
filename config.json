@@ -1,6 +1,6 @@
 {
 	"staging": {
-		"endpoints": ["178.62.21.222"],
+		"endpoints": ["35.160.158.110"],
 		"firebase": {
 			"di": {
 				"server_key": "AAAAs80Jbjo:APA91bGDCUTfyPuuDgxrEEjei7t-0jLLf_FrxFfwQz4nm-CHOnQ4o1hsjwUQOURjzzpshSvb8VKFSZpHxsmpR_O2mHx0whxiQhATC5KSG01sQc3-3CVvl3v6dEQHE9I8_95vYLJAgd2a"
