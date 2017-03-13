@@ -60,28 +60,9 @@ function getNodeConfig(availibilityZone){
 
 	  	 var endpointsstring = configs.staging.endpoints;
 	  	 var arrayOfSStagignEndPoints = [];
-
-	  	 if (endpointsstring.indexOf(',') > -1) { 
-
-	  	 	arrayOfSStagignEndPoints = endpointsstring.split(",");
-
-		 }else{
-
-		 	arrayOfSStagignEndPoints.push(configs.staging.endpoints[0]);
-
-		 }
-	  	 
-	  	 console.log("the endponts are " + arrayOfSStagignEndPoints);
-	  	 
-	  	//  get the IP for the staging instance
-	  	for(i in arrayOfSStagignEndPoints){
-	  		
+ 	
 	  		console.log("endpoint : " + arrayOfSStagignEndPoints[i] + " and node IP = " + node_ip);
 	  	
-	  		// CHECKING FOR STAGING NODE
-	  		if(arrayOfSStagignEndPoints[i] == node_ip){
-	  			console.log("We are a staging box");
-			
 			// set environment variables
 				app.locals.BOXTYPE = "staging";
 
@@ -169,16 +150,10 @@ function getNodeConfig(availibilityZone){
 	  			serverRunning = true;
 	  			startServer();
 	  			break;
-	  			}
-	  			
-	  		}else{
-	  		
 	  			
 	  		}
-	  	}	  	
-	
-	}	 
-
+	  }	
+	  	
  });
 
 }
