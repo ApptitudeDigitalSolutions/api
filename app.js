@@ -61,9 +61,7 @@ function getNodeConfig(availibilityZone){
 	  	 var endpointsstring = configs.staging.endpoints;
 	  	 var arrayOfSStagignEndPoints = [];
  	
-	  		console.log("endpoint : " + arrayOfSStagignEndPoints[i] + " and node IP = " + node_ip);
-	  	
-			// set environment variables
+ 			// set environment variables
 				app.locals.BOXTYPE = "staging";
 
 				// firebase
