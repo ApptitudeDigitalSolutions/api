@@ -149,7 +149,7 @@ function getNodeConfig(availibilityZone){
 	  			if(!serverRunning){
 	  			serverRunning = true;
 	  			startServer();
-	  			break;
+	  			
 	  			
 	  		}
 	  }	
