@@ -35,7 +35,7 @@ exports.login = function (req, res) {
                         storedhash = rows[i].password;
                         companyID = rows[i].company_id;
                         name = rows[i].first + " " + rows[i].last;
-                        endpoint = "apptitudedigitalsolutions.com:8080";
+                        endpoint = "adsapp.eu";
                         memcached.set(username, passcode, 300, function(err, result) {
                             if (err) console.error(err);
                             console.dir(result);
