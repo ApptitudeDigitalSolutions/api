@@ -15,7 +15,7 @@ exports.confirmUpload = function (req, res) {
     connectionAC_MACRO.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
 
      var authenticate = require("./auth.js");
-    authenticate.authenticate(username,passcode,function(returnValue) {
+    authenticate.authenticate(username,passcode,req,function(returnValue) {
       if(returnValue){
           var async = require('async');
           async.waterfall([confrim], function (err, result) { console.log("DONE");  connectionAC_MACRO.end(); });

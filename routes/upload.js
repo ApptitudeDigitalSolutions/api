@@ -6,7 +6,7 @@ exports.upload = function (req, res) {
     var mysql = require('mysql');
    
     var authenticate = require("./auth.js");
-     authenticate.authenticate(username,passcode,function(returnValue) {
+     authenticate.authenticate(username,passcode,req,function(returnValue) {
       if(returnValue){
           var async = require('async');
           async.waterfall([getSigedPOSTurl], function (err, result) { console.log("DONE");  connection.end(); });

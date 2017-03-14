@@ -13,7 +13,7 @@ exports.getTestSchedule = function (req, res) {
 
 
      var authenticate = require("./auth.js");
-    authenticate.authenticate(username,passcode,function(returnValue) {
+    authenticate.authenticate(username,passcode,req,function(returnValue) {
       if(returnValue){
           var async = require('async');
           async.waterfall([formatJsonForAllTests], function (err, result) { console.log("DONE");  connectionTEST_MACRO.end(); });

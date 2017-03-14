@@ -1,7 +1,7 @@
 // exports.auth = function (req) {
 module.exports = {
 
-authenticate: function(username,passcode,callback){
+authenticate: function(username,passcode,req,callback){
 	
 	var userID = username;
     var passcode = passcode;
