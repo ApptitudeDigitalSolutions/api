@@ -14,6 +14,8 @@ exports.createCompany = function (req, res) {
 
 
      function createCompanyNow(callback) {
+
+        //  generate dropbox folder URL
             var query = 'INSERT INTO Companies (company_name,create_date, billing_date,plan_type,account_number, account_sort) VALUES (\'' + companyname + '\',NOW(),NOW(),1,1234567889061234,22-22-22);';
             connectionMACRO.query(query, function(err, rows) {if (err) { console.log('Error : The SQL statement is realy batty'); return;} else { 
             console.log("Company successfully created");
