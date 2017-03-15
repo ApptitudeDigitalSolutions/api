@@ -254,6 +254,7 @@ for(i in info.activities){
 					console.log('this means its the first row');
 
 					// split sring 
+					console.log(info.activities[i].activity_report_components[zk].table[j].cells);
 					var arrayOfColumns = info.activities[i].activity_report_components[zk].table[j].cells.split("|");
 					console.log(arrayOfColumns);
 
