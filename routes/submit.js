@@ -171,7 +171,7 @@ function getAC(callback){
             }
           }
 
-          grabDataAndFormat(query,indexOfActivityInArray,j);
+          grabDataAndFormat(query,indexOfActivityInArray,j,info);
 
           //   connectionAC_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
           //     activity_results_for_candidate = rows;
@@ -234,7 +234,7 @@ function getAC(callback){
   }
 
 
-  function grabDataAndFormat(query,indexOfActivityInArraySELECTED,theValueOfJ){
+  function grabDataAndFormat(query,indexOfActivityInArraySELECTED,theValueOfJ,info){
 
       connectionAC_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
               activity_results_for_candidate = rows;
