@@ -12,6 +12,7 @@ var assessment_centre_activities_info = {};
 var allReviewQuestionsForAllActivities = [];
 
 var docxObjectsArray = [];
+var actvities;
 
 var today = new Date();
 var dd = today.getDate();
@@ -102,7 +103,7 @@ function getAC(callback){
 
 
   function getActivitiesQuestions(callback){
-        var actvities = assessment_centre_info[0].activity_types.split(",");
+        actvities = assessment_centre_info[0].activity_types.split(",");
         var query;
         for(i in actvities){
 
@@ -115,12 +116,14 @@ function getAC(callback){
             if(actvities[i] == "rp"){
                 query = 'SELECT * FROM Roleplay_review_questions_'+ACID+';'; 
             }
+
+
             connectionAC_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
                allReviewQuestionsForAllActivities.push(rows);
 
                if(allReviewQuestionsForAllActivities.length == actvities.length){
-                       console.log("AllReviewQuestions INFO >>>>> " + allReviewQuestionsForAllActivities);
-                     callback(null);
+                  console.log("AllReviewQuestions INFO >>>>> " + allReviewQuestionsForAllActivities);
+                  callback(null);
                }
             }});
         }
@@ -157,11 +160,87 @@ function getAC(callback){
           if(assessment_centre_activities_info[j].activity_type == "rp"){
             query = 'SELECT * FROM Roleplay_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id DESC;';
           }
-            connectionAC_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
+
+// get index of activity 
+          var indexOfActivityInArray = 0;
+
+          for(f in activities){
+            if(activities[f] == assessment_centre_activities_info[j].activity_type){
+                indexOfActivityInArray = f;
+            }
+          }
+
+          grabDataAndFormat(query,indexOfActivityInArray);
+
+          //   connectionAC_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
+          //     activity_results_for_candidate = rows;
+             
+          //     // for every activity get the results for a particular user 
+          //     var activity_report = {acticity_type:assessment_centre_activities_info[j].activity_type,
+          //                           activity_report_intro:assessment_centre_activities_info[j].actiity_report_intro_text,
+          //                           activity_report_intro_table:[],
+          //                           activity_performace_overview_table:[],
+          //                           activity_report_components:[]
+          //                         }
+
+          //   // FILLING IN activity_report_intro_table
+
+
+
+
+          //   // FILLING IN activity_performace_overview_table
+
+          //   console.log("THE VALUE OF J = " + j);
+
+          //   console.log("initial review >> " + allReviewQuestionsForAllActivities[currentActivityBringProcessed]);
+          //   console.log("The First Line is : " + allReviewQuestionsForAllActivities[currentActivityBringProcessed][0].review_question);
+          //               // FILLING IN activity_report_components
+          //   activity_report.activity_report_components.push({title:allReviewQuestionsForAllActivities[currentActivityBringProcessed][0].review_question,table:[]});
+
+          //   console.log("table >  " + JSON.stringify(activity_report));
+
+          //   for(m in activity_results_for_candidate){
+          //     var stringToInserIntoCell = activity_results_for_candidate[m].question_id+"|"+activity_results_for_candidate[m].answer_text+"|"+activity_results_for_candidate[m].answer_type;
+          //     console.log(stringToInserIntoCell);
+          //     console.log("table >  " + JSON.stringify(activity_report.activity_report_components[j]));
+          //     activity_report.activity_report_components[j].table.push({cell:stringToInserIntoCell});
+          //   }
+
+          // }});
+
+            // if(j == assessment_centre_activities_info.length){
+
+            //     console.log("The Final JSON object looks like" + info);
+
+            //     // pass to create wizard
+            //     var docGen = require("./WordDocGen.js");
+            //     currentActivityBringProcessed++;
+            //     docGen.generate(info,ACID,function(returnValue) {
+            //       if(returnValue ==true){
+            //         console.log("The doc has been generated");
+            //       }else{
+            //         console.log("Error Generating Doc");
+            //       }
+            //     });
+
+            // }
+        }
+
+        
+        // now on to generate the next report
+      }
+  
+  }
+
+
+  function grabDataAndFormat(query,indexOfActivityInArray){
+
+      connectionAC_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
               activity_results_for_candidate = rows;
              
               // for every activity get the results for a particular user 
-              var activity_report = {acticity_type:assessment_centre_activities_info[j].activity_type,
+              var activity_report = {
+                                    acticity_type:assessment_centre_activities_info[j].activity_type,
                                     activity_report_intro:assessment_centre_activities_info[j].actiity_report_intro_text,
                                     activity_report_intro_table:[],
                                     activity_performace_overview_table:[],
@@ -177,10 +256,10 @@ function getAC(callback){
 
             console.log("THE VALUE OF J = " + j);
 
-            console.log("initial review >> " + allReviewQuestionsForAllActivities[currentActivityBringProcessed]);
-            console.log("The First Line is : " + allReviewQuestionsForAllActivities[currentActivityBringProcessed][0].review_question);
+            console.log("initial review >> " + allReviewQuestionsForAllActivities[indexOfActivityInArray]);
+            console.log("The First Line is : " + allReviewQuestionsForAllActivities[indexOfActivityInArray][0].review_question);
                         // FILLING IN activity_report_components
-            activity_report.activity_report_components.push({title:allReviewQuestionsForAllActivities[currentActivityBringProcessed][0].review_question,table:[]});
+            activity_report.activity_report_components.push({title:allReviewQuestionsForAllActivities[indexOfActivityInArray][0].review_question,table:[]});
 
             console.log("table >  " + JSON.stringify(activity_report));
 
@@ -191,15 +270,12 @@ function getAC(callback){
               activity_report.activity_report_components[j].table.push({cell:stringToInserIntoCell});
             }
 
-          }});
 
-            if(j == assessment_centre_activities_info.length){
-
-                console.log("The Final JSON object looks like" + info);
+             console.log("The Final JSON object looks like" + info);
 
                 // pass to create wizard
                 var docGen = require("./WordDocGen.js");
-                currentActivityBringProcessed++;
+                
                 docGen.generate(info,ACID,function(returnValue) {
                   if(returnValue ==true){
                     console.log("The doc has been generated");
@@ -208,13 +284,9 @@ function getAC(callback){
                   }
                 });
 
-            }
-        }
 
-        
-        // now on to generate the next report
-      }
-  
+          }});
+
   }
 
   function responce(callback){
