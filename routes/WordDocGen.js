@@ -361,8 +361,7 @@ async.parallel ([
 	} // Endif.
 });
 
-return success;
-}
+
 
 
 function ensureExists(path, mask, cb) {
@@ -376,6 +375,9 @@ function ensureExists(path, mask, cb) {
             else cb(err); // something else went wrong
         } else cb(null); // successfully created folder
     });
+}
+
+return success;
 }
 
 };
