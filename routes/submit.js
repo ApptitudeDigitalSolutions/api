@@ -271,6 +271,7 @@ function getAC(callback){
               activity_report.activity_report_components[theValueOfJ].table.push({cell:stringToInserIntoCell});
             }
 
+            info.activities.push(activity_report);
 
              console.log("The Final JSON object looks like" + JSON.stringify(info));
 
