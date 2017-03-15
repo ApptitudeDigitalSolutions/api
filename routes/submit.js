@@ -184,7 +184,7 @@ function getAC(callback){
             console.log("initial review >> " + allReviewQuestionsForAllActivities[currentActivityBringProcessed]);
             console.log("The First Line is : " + allReviewQuestionsForAllActivities[currentActivityBringProcessed][0].review_question);
                         // FILLING IN activity_report_components
-            activity_report.activity_report_components[j].push({title:allReviewQuestionsForAllActivities[currentActivityBringProcessed][0].review_question});
+            activity_report.activity_report_components[j].push({title:allReviewQuestionsForAllActivities[currentActivityBringProcessed][0].review_question,table:[]});
 
             for(m in activity_results_for_candidate){
               var stringToInserIntoCell = activity_results_for_candidate[m].question_id+"|"+activity_results_for_candidate[m].answer_text+"|"+activity_results_for_candidate[m].answer_type;
