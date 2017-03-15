@@ -330,7 +330,7 @@ async.parallel ([
 			var fs = require('fs');
 			 
 			client.sendEmail({
-			    "From": "donotreply@example.com", 
+			    "From": "elliotcampbelton@apptitudedigitalsolutions.com", 
 			    "To": "e.b.campbelton@gmail.com", 
 			    "Subject": "Test", 
 			    "TextBody": "Test Message",
