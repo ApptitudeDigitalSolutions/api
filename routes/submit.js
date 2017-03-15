@@ -12,7 +12,7 @@ var assessment_centre_activities_info = {};
 var allReviewQuestionsForAllActivities = [];
 
 var docxObjectsArray = [];
-var actvities = [];
+var activities = [];
 
 var today = new Date();
 var dd = today.getDate();
@@ -103,17 +103,17 @@ function getAC(callback){
 
 
   function getActivitiesQuestions(callback){
-        actvities = assessment_centre_info[0].activity_types.split(",");
+        activities = assessment_centre_info[0].activity_types.split(",");
         var query;
-        for(i in actvities){
+        for(i in activities){
 
-            if(actvities[i] == "i"){
+            if(activities[i] == "i"){
                 query = 'SELECT * FROM Interview_review_questions_'+ACID+';';
             }
-            if(actvities[i] == "p"){
+            if(activities[i] == "p"){
                 query = 'SELECT * FROM Presentation_review_questions_'+ACID+';'; 
             }
-            if(actvities[i] == "rp"){
+            if(activities[i] == "rp"){
                 query = 'SELECT * FROM Roleplay_review_questions_'+ACID+';'; 
             }
 
@@ -121,7 +121,7 @@ function getAC(callback){
             connectionAC_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
                allReviewQuestionsForAllActivities.push(rows);
 
-               if(allReviewQuestionsForAllActivities.length == actvities.length){
+               if(allReviewQuestionsForAllActivities.length == activities.length){
                   console.log("AllReviewQuestions INFO >>>>> " + allReviewQuestionsForAllActivities);
                   callback(null);
                }
