@@ -130,9 +130,9 @@ function getAC(callback){
   function createWordDocReport(callback){
 
     var currentActivityBringProcessed = 0;
-    for(i in candidate_ids){
+    for(i in candidates_info){
 
-        console.log("Candidate PROCESSING  >>>>> " + candidate_ids[i]);
+        console.log("Candidate PROCESSING  >>>>> " + candidates_info[i]);
         // add ac info to report 
         var info = {title:assessment_centre_info[0].title,
                     candidate_name:candidates_info[i].First + " " + candidates_info[i].Last,
