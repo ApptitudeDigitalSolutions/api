@@ -60,9 +60,11 @@ var authenticate = require("./auth.js");
         var query = 'SELECT company_id FROM Users WHERE username = \''+username+'\';';
         connectionMACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
                 
+
             var query = 'SELECT * FROM Companies WHERE id = '+rows[0].company_id+';';
             connectionMACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
                   company_info = rows;
+                  console.log("Company INFO >>>>> " + company_info);
                   callback(null);
             }});
               
@@ -73,6 +75,7 @@ var authenticate = require("./auth.js");
   			var query = 'SELECT * FROM Assessment_Center_candidates_'+ACID+';';
             connectionAC_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
               candidates_info = rows;
+              console.log("Candidates INFO >>>>> " + candidates_info);
               callback(null);
         	}});
   } 
@@ -82,6 +85,7 @@ function getAC(callback){
           var query = 'SELECT * FROM Assessment_Center_templates WHERE id = '+ACID+';';
             connectionAC_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
               assessment_centre_info = rows;
+              console.log("Assessment Center INFO >>>>> " + assessment_centre_info);
               callback(null);
           }});
   }
@@ -91,6 +95,7 @@ function getAC(callback){
           var query = 'SELECT * FROM Assessment_Center_activities WHERE ac_id = '+ACID+';';
             connectionAC_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
               assessment_centre_activities_info = rows;
+              console.log("Assessment Center Activities INFO >>>>> " + assessment_centre_activities_info);
               callback(null);
           }});
   }
@@ -114,6 +119,7 @@ function getAC(callback){
                allReviewQuestionsForAllActivities.push(rows);
 
                if(allReviewQuestionsForAllActivities.length == activity.length){
+                       console.log("AllReviewQuestions INFO >>>>> " + allReviewQuestionsForAllActivities);
                      callback(null);
                }
             }});
