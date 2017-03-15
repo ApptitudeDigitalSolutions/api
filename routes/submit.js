@@ -187,7 +187,7 @@ function getAC(callback){
             for(m in activity_results_for_candidate){
               var stringToInserIntoCell = activity_results_for_candidate[m].question_id+"|"+activity_results_for_candidate[m].answer_text+"|"+activity_results_for_candidate[m].answer_type;
               console.log(stringToInserIntoCell);
-              console.log("table >  " + JSON.Stringify(activity_report.activity_report_components[j]));
+              console.log("table >  " + JSON.stringify(activity_report.activity_report_components[j]));
               activity_report.activity_report_components[j].table.push({cell:stringToInserIntoCell});
             }
 
