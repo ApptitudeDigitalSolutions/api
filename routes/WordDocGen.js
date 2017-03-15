@@ -312,7 +312,7 @@ for(i in info.activities){
 
 var success =true;
 console.log("SAVE PATH  = " + '/home/ubuntu/api/reports/'+ ACID +'/'+fileNameString);
-var savePath = '../reports/'+ ACID +'/'+fileNameString;
+var savePath = '/home/ubuntu/api/reports/'+ ACID +'/'+fileNameString;
 var out = fs.createWriteStream ( '/home/ubuntu/api/reports/'+ ACID +'/'+fileNameString);
 // wirite file handle in db 
 
