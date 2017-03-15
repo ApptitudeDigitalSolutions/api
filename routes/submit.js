@@ -180,7 +180,7 @@ function getAC(callback){
             console.log("initial review >> " + allReviewQuestionsForAllActivities[currentActivityBringProcessed]);
             console.log("The First Line is : " + allReviewQuestionsForAllActivities[currentActivityBringProcessed][0].review_question);
                         // FILLING IN activity_report_components
-            activity_report.activity_report_components[j].push({title:allReviewQuestionsForAllActivities[currentActivityBringProcessed][0].review_question,table:[]});
+            activity_report.activity_report_components.push({title:allReviewQuestionsForAllActivities[currentActivityBringProcessed][0].review_question,table:[]});
 
             console.log("table >  " + JSON.stringify(activity_report));
 
