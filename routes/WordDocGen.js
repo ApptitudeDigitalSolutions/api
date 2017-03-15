@@ -254,7 +254,7 @@ for(i in info.activities){
 					console.log('this means its the first row AND THE VALUE OF zk = ' +zk);
 
 					// split sring 
-					console.log(info.activities[i].activity_report_components[zk].table[j].cells);
+					console.log(JSON.stringify(info.activities[i].activity_report_components[zk]));
 					var arrayOfColumns = info.activities[i].activity_report_components[zk].table[j].cells.split("|");
 					console.log(arrayOfColumns);
 
