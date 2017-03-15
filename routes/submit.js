@@ -178,7 +178,7 @@ function getAC(callback){
 
 
 
-
+            console.log("initial review >> " + allReviewQuestionsForAllActivities[currentActivityBringProcessed]);
             // FILLING IN activity_report_components
             activity_report.activity_report_components[j].push({title:allReviewQuestionsForAllActivities[currentActivityBringProcessed][0].review_question});
 
@@ -204,7 +204,7 @@ function getAC(callback){
                     console.log("Error Generating Doc");
                   }
                 });
-                
+
             }
         }
 
