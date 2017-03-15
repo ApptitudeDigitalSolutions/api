@@ -41,7 +41,7 @@ console.log("The filename will be > "+ fileNameString);
 
 // page 1 (Intro)
 var pObj = docx.createP ();
-pObj.addImage ( path.resolve(__dirname, './report_generation_assets/logo_croped.png' ) );
+pObj.addImage ( path.resolve(__dirname, '../report_generation_assets/logo_croped.png' ) );
 pObj.addLineBreak ();
 pObj.addLineBreak ();
 
@@ -311,9 +311,9 @@ for(i in info.activities){
 }
 
 var success =true;
-console.log("SAVE PATH  = " + './reports/'+ ACID +'/'+fileNameString);
+console.log("SAVE PATH  = " + '../reports/'+ ACID +'/'+fileNameString);
 var savePath = './reports/'+ ACID +'/'+fileNameString;
-var out = fs.createWriteStream ( './reports/'+ ACID +'/'+fileNameString);
+var out = fs.createWriteStream ( '../reports/'+ ACID +'/'+fileNameString);
 // wirite file handle in db 
 
 out.on ( 'error', function ( err ) {
