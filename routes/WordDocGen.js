@@ -36,6 +36,7 @@ var d = new Date();
 var n = d.getTime();
 
 var fileNameString = info.candidate_name + "_" + info.assessor_name + "_" + n + ".docx";
+var fileNameString = fileNameString.replace(" ", "_");
 console.log("The filename will be > "+ fileNameString);
 
 // page 1 (Intro)
