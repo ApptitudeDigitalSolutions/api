@@ -186,7 +186,7 @@ function getAC(callback){
                         // FILLING IN activity_report_components
             activity_report.activity_report_components[j].push({title:allReviewQuestionsForAllActivities[currentActivityBringProcessed][0].review_question,table:[]});
 
-
+            console.log("table >  " + JSON.stringify(activity_report.activity_report_components[j]));
 
             for(m in activity_results_for_candidate){
               var stringToInserIntoCell = activity_results_for_candidate[m].question_id+"|"+activity_results_for_candidate[m].answer_text+"|"+activity_results_for_candidate[m].answer_type;
