@@ -180,7 +180,7 @@ function getAC(callback){
 
 
             // FILLING IN activity_report_components
-            activity_report.activity_report_components[j].push({title:allReviewQuestionsForAllActivities[currentActivityBringProcessed][0].review_question})
+            activity_report.activity_report_components[j].push({title:allReviewQuestionsForAllActivities[currentActivityBringProcessed][0].review_question});
 
             for(m in activity_results_for_candidate){
               var stringToInserIntoCell = activity_results_for_candidate[m].question_id+"|"+activity_results_for_candidate[m].answer_text+"|"+activity_results_for_candidate[m].answer_type;
@@ -195,6 +195,7 @@ function getAC(callback){
 
         // pass to create wizard
         var docGen = require("./WordDocGen.js");
+        currentActivityBringProcessed++;
         docGen.generate(info,ACID,function(returnValue) {
           if(returnValue ==true){
             console.log("The doc has been generated");
