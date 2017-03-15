@@ -186,10 +186,12 @@ function getAC(callback){
                         // FILLING IN activity_report_components
             activity_report.activity_report_components[j].push({title:allReviewQuestionsForAllActivities[currentActivityBringProcessed][0].review_question,table:[]});
 
+
+
             for(m in activity_results_for_candidate){
               var stringToInserIntoCell = activity_results_for_candidate[m].question_id+"|"+activity_results_for_candidate[m].answer_text+"|"+activity_results_for_candidate[m].answer_type;
               console.log(stringToInserIntoCell);
-              console.log("table >  " + activity_report.activity_report_components[j].table);
+              console.log("table >  " + activity_report.activity_report_components[j]);
               activity_report.activity_report_components[j].table.push({cell:stringToInserIntoCell});
             }
 
