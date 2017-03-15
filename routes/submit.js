@@ -175,7 +175,7 @@ function getAC(callback){
 
             // FILLING IN activity_performace_overview_table
 
-
+            console.log("THE VALUE OF J = " + j);
 
             console.log("initial review >> " + allReviewQuestionsForAllActivities[currentActivityBringProcessed]);
             console.log("The First Line is : " + allReviewQuestionsForAllActivities[currentActivityBringProcessed][0].review_question);
