@@ -131,7 +131,8 @@ function getAC(callback){
 
     var currentActivityBringProcessed = 0;
     for(i in candidate_ids){
-        
+
+        console.log("Candidate PROCESSING  >>>>> " + candidate_ids[i]);
         // add ac info to report 
         var info = {title:assessment_centre_info[0].title,
                     candidate_name:candidates_info[i].First + " " + candidates_info[i].Last,
