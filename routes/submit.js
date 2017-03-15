@@ -268,7 +268,7 @@ function getAC(callback){
               var stringToInserIntoCell = activity_results_for_candidate[m].question_id+"|"+activity_results_for_candidate[m].answer_text+"|"+activity_results_for_candidate[m].answer_type;
               //console.log(stringToInserIntoCell);
               //console.log("table >  " + JSON.stringify(activity_report.activity_report_components[j]));
-              activity_report.activity_report_components[theValueOfJ].table.push({cell:stringToInserIntoCell});
+              activity_report.activity_report_components[theValueOfJ].table.push({cells:stringToInserIntoCell});
             }
 
             info.activities.push(activity_report);
