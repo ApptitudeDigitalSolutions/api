@@ -3,10 +3,14 @@ module.exports = {
 generate: function(info,ACID){
 
 
-var dir = __dirname + './reports/'+ACID;
-if (!path.existsSync(dir)) {
-    fs.mkdirSync(dir, 0744);
-}
+
+
+ensureExists(__dirname + './reports/'+ACID, 0744, function(err) {
+    if (err){
+    	console.log(err);
+    } // handle folder creation error
+});
+
 
 var async = require ( 'async' );
 var officegen = require('officegen');
@@ -358,6 +362,20 @@ async.parallel ([
 });
 
 return success;
+}
+
+
+function ensureExists(path, mask, cb) {
+    if (typeof mask == 'function') { // allow the `mask` parameter to be optional
+        cb = mask;
+        mask = 0777;
+    }
+    fs.mkdir(path, mask, function(err) {
+        if (err) {
+            if (err.code == 'EEXIST') cb(null); // ignore the error if the folder already exists
+            else cb(err); // something else went wrong
+        } else cb(null); // successfully created folder
+    });
 }
 
 };
