@@ -250,15 +250,8 @@ for(i in info.activities){
 				if(table[0].length == 0){
 					console.log('this means its the first row AND THE VALUE OF zk = ' +zk +' and J = ' + j);
 
-					// split sring 
-					console.log(JSON.stringify(info.activities[i].activity_report_components[zk].table[j].cells));
-					var str = info.activities[i].activity_report_components[zk].table[j];
-					console.log(str);
-					
-					var x = str.cells;
-					console.log(x);
 
-					var arrayOfColumns = str.split("|");
+					var arrayOfColumns = info.activities[i].activity_report_components[zk].table[j].cells.split("|");
 					console.log(arrayOfColumns);
 
 					for(k in arrayOfColumns){
@@ -282,9 +275,8 @@ for(i in info.activities){
 
 				}else{
 					console.log('this means it is another row');
-					var str = info.activities[i].activity_report_components[zk].table[j].cells;
-					console.log(str);
-					var arrayOfColumns = str.split("|");
+
+					var arrayOfColumns = info.activities[i].activity_report_components[zk].table[j].cells.split("|");
 					console.log(arrayOfColumns);
 
 					var cellsRow = [];
