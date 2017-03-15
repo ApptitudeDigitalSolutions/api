@@ -9,7 +9,7 @@ var candidates_info={};
 var company_info= {};
 var assessment_centre_info = {};
 var assessment_centre_activities_info = {};
-var allReviewQuestionsForAllActivities = {};
+var allReviewQuestionsForAllActivities = [];
 
 var docxObjectsArray = [];
 
