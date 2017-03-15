@@ -251,7 +251,7 @@ for(i in info.activities){
 			for(j in info.activities[i].activity_report_components[zk].table){
 				// split string down 
 				if(table[0].length == 0){
-					console.log('this means its the first row');
+					console.log('this means its the first row AND THE VALUE OF zk = ' +zk);
 
 					// split sring 
 					console.log(info.activities[i].activity_report_components[zk].table[j].cells);
