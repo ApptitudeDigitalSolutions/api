@@ -118,7 +118,7 @@ function getAC(callback){
             connectionAC_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
                allReviewQuestionsForAllActivities.push(rows);
 
-               if(allReviewQuestionsForAllActivities.length == activity.length){
+               if(allReviewQuestionsForAllActivities.length == actvities.length){
                        console.log("AllReviewQuestions INFO >>>>> " + allReviewQuestionsForAllActivities);
                      callback(null);
                }
