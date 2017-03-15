@@ -162,7 +162,7 @@ function getAC(callback){
              
               // for every activity get the results for a particular user 
               var activity_report = {acticity_type:assessment_centre_activities_info[j].activity_type,
-                                   activity_report_intro:assessment_centre_activities_info[j].actiity_report_intro_text,
+                                    activity_report_intro:assessment_centre_activities_info[j].actiity_report_intro_text,
                                     activity_report_intro_table:[],
                                     activity_performace_overview_table:[],
                                     activity_report_components:[]
@@ -195,7 +195,7 @@ function getAC(callback){
 
         // pass to create wizard
         var docGen = require("./WordDocGen.js");
-        docGen.generate(info,function(returnValue) {
+        docGen.generate(info,ACID,function(returnValue) {
           if(returnValue ==true){
             console.log("The doc has been generated");
           }else{

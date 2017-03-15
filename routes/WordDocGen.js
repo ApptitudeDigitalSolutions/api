@@ -1,6 +1,12 @@
 module.exports = {
 
-generate: function(info){
+generate: function(info,ACID){
+
+
+var dir = __dirname + './reports/'+ACID;
+if (!path.existsSync(dir)) {
+    fs.mkdirSync(dir, 0744);
+}
 
 var async = require ( 'async' );
 var officegen = require('officegen');
@@ -23,10 +29,15 @@ docx.on ( 'error', function ( err ) {
 			console.log ( err );
 		});
 
+var d = new Date();
+var n = d.getTime();
+
+var fileNameString = info.candidate_name + "_" + info.assessor_name + "_" + n + ".docx";
+console.log("The filename will be > "+ fileNameString);
 
 // page 1 (Intro)
 var pObj = docx.createP ();
-pObj.addImage ( path.resolve(__dirname, 'images_for_examples/logo_croped.png' ) );
+pObj.addImage ( path.resolve(__dirname, './report_generation_assets/logo_croped.png' ) );
 pObj.addLineBreak ();
 pObj.addLineBreak ();
 
@@ -296,7 +307,9 @@ for(i in info.activities){
 }
 
 var success =true;
-var out = fs.createWriteStream ( 'tmp/out.docx' );
+console.log("SAVE PATH  = " + './reports/'+ ACID +'/'+fileNameString);
+var savePath = './reports/'+ ACID +'/'+fileNameString;
+var out = fs.createWriteStream ( './reports/'+ ACID +'/'+fileNameString);
 // wirite file handle in db 
 
 out.on ( 'error', function ( err ) {
@@ -319,8 +332,8 @@ async.parallel ([
 			    "TextBody": "Test Message",
 			    "Attachments": [{
 			      // Reading synchronously here to condense code snippet: 
-			      "Content": fs.readFileSync("tmp/out.docx").toString('base64'),
-			      "Name": "out.docx",
+			      "Content": fs.readFileSync(savePath).toString('base64'),
+			      "Name": fileNameString,
 			      "ContentType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
 			    }]
 			}, function(error, result) {
