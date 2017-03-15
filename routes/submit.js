@@ -12,7 +12,7 @@ var assessment_centre_activities_info = {};
 var allReviewQuestionsForAllActivities = [];
 
 var docxObjectsArray = [];
-var actvities;
+var actvities = [];
 
 var today = new Date();
 var dd = today.getDate();
