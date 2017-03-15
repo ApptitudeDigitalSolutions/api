@@ -2,6 +2,10 @@ module.exports = {
 
 generate: function(info,ACID){
 
+var async = require ( 'async' );
+var officegen = require('officegen');
+var fs = require('fs');
+var path = require('path');
 
 
 
@@ -11,11 +15,6 @@ ensureExists(__dirname + './reports/'+ACID, 0744, function(err) {
     } // handle folder creation error
 });
 
-
-var async = require ( 'async' );
-var officegen = require('officegen');
-var fs = require('fs');
-var path = require('path');
 
 var themeXml = fs.readFileSync ( path.resolve ( __dirname, 'testTheme.xml' ), 'utf8' );
 
