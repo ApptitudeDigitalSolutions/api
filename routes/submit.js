@@ -163,7 +163,7 @@ function getAC(callback){
 
 // get index of activity 
           var indexOfActivityInArray = 0;
-
+          console.log("THE activiites are " + actvities);
           for(f in activities){
             if(activities[f] == assessment_centre_activities_info[j].activity_type){
                 indexOfActivityInArray = f;
