@@ -232,10 +232,7 @@ for(i in info.activities){
 		
 			pObj.addLineBreak ();
 			// insert table
-			
 
-			console.log("The tbale looks like : " + table);
-			
 			var tableStyle = {
 				
 				tableSize: 24,
@@ -255,8 +252,12 @@ for(i in info.activities){
 
 					// split sring 
 					console.log(JSON.stringify(info.activities[i].activity_report_components[zk].table[j].cells));
-					var str = info.activities[i].activity_report_components[zk].table[j].cells;
+					var str = info.activities[i].activity_report_components[zk].table[j];
 					console.log(str);
+					
+					var x = str.cells;
+					console.log(x);
+
 					var arrayOfColumns = str.split("|");
 					console.log(arrayOfColumns);
 
