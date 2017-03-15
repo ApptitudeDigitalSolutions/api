@@ -163,9 +163,9 @@ function getAC(callback){
 
 // get index of activity 
           var indexOfActivityInArray = 0;
-          console.log("THE activiites are " + actvities);
+          console.log("THE activiites are " + activities);
           for(f in activities){
-             console.log("THE activiites IS " + actvities[f]);
+             console.log("THE activiites IS " + activities[f]);
             if(activities[f] == assessment_centre_activities_info[j].activity_type){
                 indexOfActivityInArray = f;
             }
