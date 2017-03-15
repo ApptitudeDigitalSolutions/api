@@ -234,7 +234,7 @@ function getAC(callback){
   }
 
 
-  function grabDataAndFormat(query,indexOfActivityInArray){
+  function grabDataAndFormat(query,indexOfActivityInArraySELECTED){
 
       connectionAC_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
               activity_results_for_candidate = rows;
@@ -257,10 +257,10 @@ function getAC(callback){
 
             console.log("THE VALUE OF J = " + j);
 
-            console.log("initial review >> " + allReviewQuestionsForAllActivities[indexOfActivityInArray]);
-            console.log("The First Line is : " + allReviewQuestionsForAllActivities[indexOfActivityInArray][0].review_question);
+            console.log("initial review >> " + allReviewQuestionsForAllActivities[indexOfActivityInArraySELECTED]);
+            console.log("The First Line is : " + allReviewQuestionsForAllActivities[indexOfActivityInArraySELECTED][0].review_question);
                         // FILLING IN activity_report_components
-            activity_report.activity_report_components.push({title:allReviewQuestionsForAllActivities[indexOfActivityInArray][0].review_question,table:[]});
+            activity_report.activity_report_components.push({title:allReviewQuestionsForAllActivities[indexOfActivityInArraySELECTED][0].review_question,table:[]});
 
             console.log("table >  " + JSON.stringify(activity_report));
 
