@@ -168,6 +168,9 @@ function getAC(callback){
                                     activity_report_components:[]
                                   }
 
+              for(q in assessment_centre_activities_info){
+                activity_report.activity_report_components.push([]);
+              }
 
             // FILLING IN activity_report_intro_table
 
