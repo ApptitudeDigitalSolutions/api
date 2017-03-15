@@ -60,7 +60,7 @@ var authenticate = require("./auth.js");
         var query = 'SELECT company_id FROM Users WHERE username = \''+username+'\';';
         connectionMACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
                 
-            var query = 'SELECT * FROM companies WHERE id = '+rows[0].company_id+';';
+            var query = 'SELECT * FROM Companies WHERE id = '+rows[0].company_id+';';
             connectionMACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
                   company_info = rows;
                   callback(null);
