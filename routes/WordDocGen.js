@@ -245,6 +245,7 @@ for(i in info.activities){
 
 			var table=[[]];
 		
+			console.log(JSON.stringify(info.activities[i].activity_report_components[zk].table));
 			for(j in info.activities[i].activity_report_components[zk].table){
 				// split string down 
 				if(table[0].length == 0){
