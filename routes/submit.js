@@ -150,15 +150,15 @@ function getAC(callback){
           var query;
 
           if(assessment_centre_activities_info[j].activity_type == "i"){
-            query = 'SELECT * FROM Interview_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id DESC;';
+            query = 'SELECT DISTINCT(question_id) FROM Interview_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id DESC;';
           }
 
           if(assessment_centre_activities_info[j].activity_type == "p"){
-            query = 'SELECT * FROM Presentation_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id DESC;';
+            query = 'SELECT DISTINCT(question_id) FROM Presentation_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id DESC;';
           }
 
           if(assessment_centre_activities_info[j].activity_type == "rp"){
-            query = 'SELECT * FROM Roleplay_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id DESC;';
+            query = 'SELECT DISTINCT(question_id) FROM Roleplay_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id DESC;';
           }
 
 // get index of activity 
