@@ -223,9 +223,9 @@ for(i in info.activities){
 		 for(zk in info.activities[i].activity_report_components){
 		
 		
-			console.log("we are in here>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+			console.log("we are in here >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 		
-			console.log(info.activities[i].activity_report_components[zk].title);
+			console.log(JSON.stringify(info.activities[i].activity_report_components[zk].title));
 			
 			var pObj = docx.createP ();
 			pObj.addText (info.activities[i].activity_report_components[zk].title, { font_face: 'Arial', font_size: 17 });
@@ -245,7 +245,7 @@ for(i in info.activities){
 
 			var table=[[]];
 		
-			console.log(JSON.stringify(info.activities[i].activity_report_components[zk].table));
+			console.log("Tge value is "  +JSON.stringify(info.activities[i].activity_report_components[zk].table));
 			for(j in info.activities[i].activity_report_components[zk].table){
 				// split string down 
 				if(table[0].length == 0){
