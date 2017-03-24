@@ -65,7 +65,7 @@ var authenticate = require("./auth.js");
             var query = 'SELECT * FROM Companies WHERE id = '+rows[0].company_id+';';
             connectionMACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
                   company_info = rows;
-                 // console.log("Company INFO >>>>> " + company_info);
+                  console.log("SUBMIT - Company INFO >>>>> " + company_info);
                   callback(null);
             }});
               
@@ -76,7 +76,7 @@ var authenticate = require("./auth.js");
   			var query = 'SELECT * FROM Assessment_Center_candidates_'+ACID+';';
             connectionAC_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
               candidates_info = rows;
-              //console.log("Candidates INFO >>>>> " + candidates_info);
+              console.log("SUBMIT - Candidates INFO >>>>> " + candidates_info);
               callback(null);
         	}});
   } 
@@ -86,7 +86,7 @@ function getAC(callback){
           var query = 'SELECT * FROM Assessment_Center_templates WHERE id = '+ACID+';';
             connectionAC_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
               assessment_centre_info = rows;
-            //  console.log("Assessment Center INFO >>>>> " + assessment_centre_info);
+              console.log("SUBMIT - Assessment Center INFO >>>>> " + assessment_centre_info);
               callback(null);
           }});
   }
@@ -96,7 +96,7 @@ function getAC(callback){
           var query = 'SELECT * FROM Assessment_Center_activities WHERE ac_id = '+ACID+';';
             connectionAC_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
               assessment_centre_activities_info = rows;
-             // console.log("Assessment Center Activities INFO >>>>> " + assessment_centre_activities_info);
+              console.log("SUBMIT - Assessment Center Activities INFO >>>>> " + assessment_centre_activities_info);
               callback(null);
           }});
   }
@@ -122,7 +122,7 @@ function getAC(callback){
                allReviewQuestionsForAllActivities.push(rows);
 
                if(allReviewQuestionsForAllActivities.length == activities.length){
-                 // console.log("AllReviewQuestions INFO >>>>> " + allReviewQuestionsForAllActivities);
+                  console.log("SUBMIT -  AllReviewQuestions INFO >>>>> " + allReviewQuestionsForAllActivities);
                   callback(null);
                }
             }});
@@ -135,7 +135,7 @@ function getAC(callback){
     var currentActivityBringProcessed = 0;
     for(i in candidates_info){
 
-        //console.log("Candidate PROCESSING  >>>>> " + candidates_info[i]);
+        console.log("SUBMIT - Candidate PROCESSING  >>>>> " + candidates_info[i]);
         // add ac info to report 
         var info = {title:assessment_centre_info[0].title,
                     candidate_name:candidates_info[i].First + " " + candidates_info[i].Last,
@@ -255,7 +255,7 @@ function getAC(callback){
 
             // FILLING IN activity_performace_overview_table
 
-            //console.log("THE VALUE OF J = " + theValueOfJ);
+            console.log("SUBMIT - THE VALUE OF J = " + theValueOfJ);
 
             //console.log("initial review >> " + allReviewQuestionsForAllActivities[indexOfActivityInArraySELECTED]);
             //console.log("The First Line is : " + allReviewQuestionsForAllActivities[indexOfActivityInArraySELECTED][0].review_question);
@@ -273,7 +273,7 @@ function getAC(callback){
 
             info.activities.push(activity_report);
 
-             console.log("The Final JSON object looks like" + JSON.stringify(info));
+             console.log("SUBMIT - The Final JSON object looks like >> " + JSON.stringify(info));
 
                 // pass to create wizard
                 var docGen = require("./WordDocGen.js");
