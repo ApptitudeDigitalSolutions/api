@@ -245,7 +245,9 @@ for(i in info.activities){
 
 			var table=[[]];
 		
-			console.log("Tge value is "  +JSON.stringify(info.activities[i].activity_report_components[zk].table));
+			console.log("Tge value i A "  +JSON.stringify(info.activities[i].activity_report_components[zk].table));
+			console.log("Tge value i B "  +JSON.stringify(info.activities[i].activity_report_components[zk]));
+			console.log("Tge value i C "  +JSON.stringify(info.activities[i].activity_report_components));
 			for(j in info.activities[i].activity_report_components[zk].table){
 				// split string down 
 				if(table[0].length == 0){
