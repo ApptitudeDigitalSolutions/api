@@ -243,71 +243,76 @@ for(i in info.activities){
 				borders: true
 			}
 
-			var table=[[]];
-		
-			console.log("Tge value i A "  +JSON.stringify(info.activities[i].activity_report_components[zk].table));
-			console.log("Tge value i B "  +JSON.stringify(info.activities[i].activity_report_components[zk]));
-			console.log("Tge value i C "  +JSON.stringify(info.activities[i].activity_report_components));
-			for(j in info.activities[i].activity_report_components[zk].table){
-				// split string down 
-				if(table[0].length == 0){
-					console.log('this means its the first row AND THE VALUE OF zk = ' +zk +' and J = ' + j);
+
+			if(info.activities[i].activity_report_components[zk].table.length() > 0){
+
+				var table=[[]];
+			
+				console.log("Tge value i A "  +JSON.stringify(info.activities[i].activity_report_components[zk].table));
+				console.log("Tge value i B "  +JSON.stringify(info.activities[i].activity_report_components[zk]));
+				console.log("Tge value i C "  +JSON.stringify(info.activities[i].activity_report_components));
+				for(j in info.activities[i].activity_report_components[zk].table){
+					// split string down 
+					if(table[0].length == 0){
+						console.log('this means its the first row AND THE VALUE OF zk = ' +zk +' and J = ' + j);
 
 
-					var arrayOfColumns = info.activities[i].activity_report_components[zk].table[j].cells.split("|");
-					console.log(arrayOfColumns);
+						var arrayOfColumns = info.activities[i].activity_report_components[zk].table[j].cells.split("|");
+						console.log(arrayOfColumns);
 
-					for(k in arrayOfColumns){
-						var columnObject = {
-											val: arrayOfColumns[k],
-											opts: {
-												cellColWidth: 4261,
-												b:true,
-												sz: '22',
-												fontFamily: "Arial",
-												shd: {
-									                fill: "92CDDC",
-									               
-									                "themeFillTint": "80"
-									            }
-											}
-										};
-						table[0][k] = columnObject;
-					}
-					//console.log(table);
-
-				}else{
-					console.log('this means it is another row');
-
-					var arrayOfColumns = info.activities[i].activity_report_components[zk].table[j].cells.split("|");
-					console.log(arrayOfColumns);
-
-					var cellsRow = [];
-					if(arrayOfColumns.length > 1){
 						for(k in arrayOfColumns){
-							cellsRow.push(arrayOfColumns[k]);
+							var columnObject = {
+												val: arrayOfColumns[k],
+												opts: {
+													cellColWidth: 4261,
+													b:true,
+													sz: '22',
+													fontFamily: "Arial",
+													shd: {
+										                fill: "92CDDC",
+										               
+										                "themeFillTint": "80"
+										            }
+												}
+											};
+							table[0][k] = columnObject;
 						}
+						//console.log(table);
+
 					}else{
-						// this means the row is a single one 
-						cellsRow.push({val: arrayOfColumns[0], opts: {gridSpan: table[0].length}});
+						console.log('this means it is another row');
+
+						var arrayOfColumns = info.activities[i].activity_report_components[zk].table[j].cells.split("|");
+						console.log(arrayOfColumns);
+
+						var cellsRow = [];
+						if(arrayOfColumns.length > 1){
+							for(k in arrayOfColumns){
+								cellsRow.push(arrayOfColumns[k]);
+							}
+						}else{
+							// this means the row is a single one 
+							cellsRow.push({val: arrayOfColumns[0], opts: {gridSpan: table[0].length}});
+						}
+
+						table.push(cellsRow);
+						console.log(table);
+
 					}
 
-					table.push(cellsRow);
-					console.log(table);
 
 				}
+				var pObj = docx.createTable (table, tableStyle);
+				docx.putPageBreak ();
 
+			}else{
+				//var pObj = docx.createTable (table, tableStyle);
+				docx.putPageBreak ();
 
 			}
-
-			var pObj = docx.createTable (table, tableStyle);
-			docx.putPageBreak ();
 		}
 
 	}
-
-
-
 
 }
 
