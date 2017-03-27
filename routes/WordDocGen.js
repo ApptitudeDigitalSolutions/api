@@ -25,6 +25,69 @@ var docx = officegen ( {
 
 } );
 
+var info = {title:"Welcome to this test AC",
+			candidate_name: "John Doe",
+			assessor_name: "Michael Blakley",
+			date: "12/12/2016",
+			
+			activities:[
+			{
+				acticity_type:"rp",
+				activity_report_intro:"RolePlay Intro text : Once you have observed the external simulation exercise by the candidate, review your evidence carefully and use the evaluation boxes to rate the candidate?s performance against the described criteria. - Each competency has an evaluation form which is used for evaluating the candidates performance - Within each evaluation form are a number of behavioural indicators - Your task is to refer to your notes and mark each behavioural indicator on the five-point scale - You then need to provide an overall rating for each of the behavioural areas which reflects the spread of scores across the indicators. Assign whole numbers only. Use the rating scale here to help you do this - Following this, you should then complete a number of evidence statements to support the rating you have given. This will help you provide feedback to the candidate and in the report writing.",
+				activity_report_intro_table:[{cells:"Rating|Definition"},
+											 {cells:"5|Excellent - marked strengths on most aspects of the competency."},
+											 {cells:"4|Good - marked strengths on some aspects of the competency and acceptable on others."},
+											 {cells:"3|Satisfactory - acceptable across the competency as a whole with some minor weaknesses. Some development required."},
+											 {cells:"2|Marginal - strong weaknesses across some of the competency areas. Development required."},
+											 {cells:"1|Poor - strong weaknesses across most of the competency. Significant development required."}],
+				activity_performace_overview_table:[{cells:"Behaviour|Overall rating"},
+													{cells:"Takes Ownership|4"},
+													{cells:"Works Collaboratively|4"},
+													{cells:"Leads &amp Engages|4"},
+													{cells:"Overall Performance in Exercise The candidate adopted a very collaborative, engaging and supportive approach. Immediately able to build rapport with The role player and insightful line of questioning used to try and get to root cause of any issues and to build engagement with The role player. The candidate was able to be put steps in place to try and develop an effective relationship with The role player and built on The role player’s ideas to try and motivate him."},
+													],
+					activity_report_components:[
+												{
+													title:"Takes Ownership - Insert description of competency here",
+													table:[
+														{cells:"Negative Behaviours|1|2|3|4|5|Positive Behaviours"},
+														{cells:"Gives limited thought to planning|||X|||Explores and identifies"},
+														{cells:"Fails to engage with the role player||||X||Effectively persuades role player"},
+														{cells:"Aviods risk|||X|||Explores risks with the role player"},
+														{cells:"Poor questioning approach|||X|||Effective questioning approach"},
+														{cells:"The candidate used an incredibly insightful questioning style to identify the underlying issues and framed these issues in a very positive manner. He was able to demonstrate an engaging and persuasive style and tried to inspire The role player when discussing what could be done more effectively. The candidate needs to explore the risks attached to The role player’s plan and consider the resources required to make it successful when implementing it. The candidate offered a lot of praise and tried to ensure that The role player felt like a valued member of the team. Some evidence provided of an adaptable communication style, but more assertion around the communication issue with Other staff members would have been beneficial."},
+														{cells:"4"}
+													]
+												},
+												{
+													title:"Takes Ownership - Insert description of competency here",
+													table:[
+														{cells:"Negative Behaviours|1|2|3|4|5|Positive Behaviours"},
+														{cells:"Gives limited thought to planning|||X|||Explores and identifies"},
+														{cells:"Fails to engage with the role player||||X||Effectively persuades role player"},
+														{cells:"Aviods risk|||X|||Explores risks with the role player"},
+														{cells:"Poor questioning approach|||X|||Effective questioning approach"},
+														{cells:"The candidate used an incredibly insightful questioning style to identify the underlying issues and framed these issues in a very positive manner. He was able to demonstrate an engaging and persuasive style and tried to inspire The role player when discussing what could be done more effectively. The candidate needs to explore the risks attached to The role player’s plan and consider the resources required to make it successful when implementing it. The candidate offered a lot of praise and tried to ensure that The role player felt like a valued member of the team. Some evidence provided of an adaptable communication style, but more assertion around the communication issue with Other staff members would have been beneficial."},
+														{cells:"4"}
+													]
+												},
+												{
+													title:"Takes Ownership - Insert description of competency here",
+													table:[
+														{cells:"Negative Behaviours|1|2|3|4|5|Positive Behaviours"},
+														{cells:"Gives limited thought to planning|||X|||Explores and identifies"},
+														{cells:"Fails to engage with the role player||||X||Effectively persuades role player"},
+														{cells:"Aviods risk|||X|||Explores risks with the role player"},
+														{cells:"Poor questioning approach|||X|||Effective questioning approach"},
+														{cells:"The candidate used an incredibly insightful questioning style to identify the underlying issues and framed these issues in a very positive manner. He was able to demonstrate an engaging and persuasive style and tried to inspire The role player when discussing what could be done more effectively. The candidate needs to explore the risks attached to The role player’s plan and consider the resources required to make it successful when implementing it. The candidate offered a lot of praise and tried to ensure that The role player felt like a valued member of the team. Some evidence provided of an adaptable communication style, but more assertion around the communication issue with Other staff members would have been beneficial."},
+														{cells:"4"}
+													]
+												}											
+												
+											]	
+					}
+			]
+			};
 			
 console.log(info);
 
@@ -138,9 +201,10 @@ for(i in info.activities){
 			}
 		}
 		var pObj = docx.createTable (table, tableStyle);
-	}	
 
+	}	
 	docx.putPageBreak ();
+	
 
 	// ok lets fill in the Overview section
 	if(info.activities[i].activity_performace_overview_table.length > 0){
@@ -211,10 +275,11 @@ for(i in info.activities){
 
 		}
 		var pObj = docx.createTable (table, tableStyle);
+		docx.putPageBreak ();
 	}
 
 
-	docx.putPageBreak ();	
+		
 
 
 	if(info.activities[i].activity_report_components.length > 0){
@@ -313,9 +378,6 @@ for(i in info.activities){
 		}
 
 	}
-
-
-
 
 }
 
