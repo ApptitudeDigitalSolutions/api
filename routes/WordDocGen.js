@@ -217,8 +217,8 @@ for(i in info.activities){
 	docx.putPageBreak ();	
 
 
-	if(info.activities[i].activity_report_components.length > 0){
-		console.log("THE LENGTH IS : " +info.activities[i].activity_report_components.length);
+	if(info.activities[i].activity_report_components.length() > 0){
+		console.log("THE LENGTH IS : " +info.activities[i].activity_report_components.length());
 		
 		 for(zk in info.activities[i].activity_report_components){
 		
