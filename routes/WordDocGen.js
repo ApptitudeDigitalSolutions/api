@@ -385,7 +385,7 @@ console.log("The filename will be > "+ fileNameString);
 
 // page 1 (Intro)
 var pObj = docx.createP ();
-pObj.addImage ( path.resolve(__dirname, 'images_for_examples/logo_croped.png' ) );
+pObj.addImage ( path.resolve(__dirname, '/home/ubuntu/api/report_generation_assets/logo_croped.png' ) );
 pObj.addLineBreak ();
 pObj.addLineBreak ();
 
