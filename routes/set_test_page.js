@@ -50,7 +50,7 @@ var authenticate = require("./auth.js");
 
    function testCompletionFunction(){
         // get count of sections
-        var query = 'UPDATE Test_Admin_' + testID + ' SET currently_on_section = 1000;';
+        var query = 'UPDATE Test_admin_' + testID + ' SET currently_on_section = 1000;';
             connectionTEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {   
           }});
     }
