@@ -33,7 +33,7 @@ var authenticate = require("./auth.js");
     		// get count of sections
     		var query = 'UPDATE Test_applicants_'+testID+' SET min_page_of_test = '+pageNumber+';';
             connectionTEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
-           
+           console.log(testEndFlag);
            if(testEndFlag == "ture"){
               testCompletionFunction();
               prepareReport();
