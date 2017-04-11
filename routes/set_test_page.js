@@ -4,6 +4,11 @@ exports.setPage = function (req, res) {
     var testID = req.params.test_id; 
     var pageNumber = req.body.page_number;
     var testEndFlag = req.body.testEndFlag;
+
+    var async = require ( 'async' );
+var officegen = require('officegen');
+var fs = require('fs');
+var path = require('path');
   
     var mysql = require('mysql');
         var connectionTEST_MACRO = mysql.createConnection({ host: req.app.locals.TEST_MACRO_DB_HOST, user: req.app.locals.TEST_MACRO_DB_USER, password: req.app.locals.TEST_MACRO_DB_PASSWORD, database: req.app.locals.TEST_MACRO_DB_NAME });
