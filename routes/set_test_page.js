@@ -5,10 +5,7 @@ exports.setPage = function (req, res) {
     var pageNumber = req.body.page_number;
     var testEndFlag = req.body.testEndFlag;
 
-    var async = require ( 'async' );
-var officegen = require('officegen');
-var fs = require('fs');
-var path = require('path');
+
   
     var mysql = require('mysql');
         var connectionTEST_MACRO = mysql.createConnection({ host: req.app.locals.TEST_MACRO_DB_HOST, user: req.app.locals.TEST_MACRO_DB_USER, password: req.app.locals.TEST_MACRO_DB_PASSWORD, database: req.app.locals.TEST_MACRO_DB_NAME });
@@ -140,6 +137,11 @@ var authenticate = require("./auth.js");
           rowCounter++;
           sheet.data[rowCounter] = [];
         } 
+        var async = require ( 'async' );
+        var officegen = require('officegen');
+        var fs = require('fs');
+        var path = require('path');
+        
         var savePath = '/home/ubuntu/api/reports/results_'+testID+'.xlsx';
         var out = fs.createWriteStream (savePath);
         
@@ -151,7 +153,6 @@ var authenticate = require("./auth.js");
 
         var postmark = require("postmark");
         var client = new postmark.Client("7424f227-688f-4979-93ac-e7b35d2de10d");
-        var fs = require('fs');
          
         client.sendEmail({
             "From": "elliotcampbelton@apptitudedigitalsolutions.com", 
