@@ -140,9 +140,9 @@ var authenticate = require("./auth.js");
           rowCounter++;
           sheet.data[rowCounter] = [];
         } 
-
-        var out = fs.createWriteStream ( '/home/ubuntu/api/reports/results_'+testID+'.xlsx' );
         var savePath = '/home/ubuntu/api/reports/results_'+testID+'.xlsx';
+        var out = fs.createWriteStream (savePath);
+        
         out.on ( 'error', function ( err ) {
           console.log ( err );
         });
