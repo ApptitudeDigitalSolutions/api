@@ -34,7 +34,7 @@ var authenticate = require("./auth.js");
     		var query = 'UPDATE Test_applicants_'+testID+' SET min_page_of_test = '+pageNumber+';';
             connectionTEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
            console.log(testEndFlag);
-           if(testEndFlag == "ture"){
+           if(testEndFlag == "true"){
               testCompletionFunction();
               prepareReport();
            }
