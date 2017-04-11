@@ -147,6 +147,9 @@ var authenticate = require("./auth.js");
         
         out.on ( 'error', function ( err ) {
           console.log ( err );
+
+          console.log ("DONE GENERATING FILE");
+
         });
 
         xlsx.generate ( out );
