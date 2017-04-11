@@ -73,8 +73,10 @@ var authenticate = require("./auth.js");
         var correctAnswersCounter = 0;
         var averageTimeTakenCounter = 0;
 
+          sheet.data[0] = [];
           sheet.data[0][0] = "All results for test " + testID;
 
+          sheet.data[1] = [];
           sheet.data[1][0] = "Candidate id";
           sheet.data[1][1] = "Candidate email address";
           sheet.data[1][2] = "Question";
@@ -89,11 +91,15 @@ var authenticate = require("./auth.js");
             // calculate the averages
             averageTimeTakenCounter = averageTimeTakenCounter/questionCounter;
             percentageCorrectAnswers = correctAnswersCounter/questionCounter;
+
               rowCounter++;
+              sheet.data[rowCounter] = [];
               sheet.data[rowCounter][0] = "Total correct answers for candidate = " + correctAnswersCounter;
               rowCounter++;
+              sheet.data[rowCounter] = [];
               sheet.data[rowCounter][0] = "Percentage of correct answers for candidate = " + percentageCorrectAnswers;
               rowCounter++;
+              sheet.data[rowCounter] = [];
               sheet.data[rowCounter][0] = "Average Time spent per question = " + percentageCorrectAnswers + " seconds";
   
             // add new row
@@ -107,9 +113,11 @@ var authenticate = require("./auth.js");
             averageTimeTakenCounter = 0;
             
             rowCounter++;
+            sheet.data[rowCounter] = [];
           }
 
           // add each row to the file
+          sheet.data[rowCounter] = [];
           sheet.data[rowCounter][0] = rows[i].candidate_id;
           sheet.data[rowCounter][1] = rows[i].candidate_email;
           sheet.data[rowCounter][2] = rows[i].question_id;
@@ -125,6 +133,7 @@ var authenticate = require("./auth.js");
           questionCounter++;
 
           rowCounter++;
+          sheet.data[rowCounter] = [];
         } 
 
         var out = fs.createWriteStream ( '/home/ubuntu/api/reports/results_'+testID+'.xlsx' );
