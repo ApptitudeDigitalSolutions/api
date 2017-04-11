@@ -44,7 +44,7 @@ var authenticate = require("./auth.js");
               var json = JSON.stringify({success:1});
               console.log('TEST STATE IS ........................... ' + json);
             res.end(json);
-            connectionTEST_MACRO.end();
+            //connectionTEST_MACRO.end();
         	}});
     }
 
