@@ -5,8 +5,12 @@ exports.setPage = function (req, res) {
     var pageNumber = req.body.page_number;
     var testEndFlag = req.body.testEndFlag;
 
-
-  
+    var savePath = "";
+    
+    var async = require ( 'async' );
+    var officegen = require('officegen');
+    var fs = require('fs');
+    var path = require('path');
     var mysql = require('mysql');
         var connectionTEST_MACRO = mysql.createConnection({ host: req.app.locals.TEST_MACRO_DB_HOST, user: req.app.locals.TEST_MACRO_DB_USER, password: req.app.locals.TEST_MACRO_DB_PASSWORD, database: req.app.locals.TEST_MACRO_DB_NAME });
     connectionTEST_MACRO.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
@@ -61,6 +65,35 @@ var authenticate = require("./auth.js");
     function prepareReport(callback){
       var officegen = require('officegen');
       var xlsx = officegen ( 'xlsx' );
+
+      xlsx.on ( 'finalize', function ( written ) {
+      console.log ( 'Finish to create an Excel file.' );
+
+        var postmark = require("postmark");
+        var client = new postmark.Client("7424f227-688f-4979-93ac-e7b35d2de10d");
+         
+        client.sendEmail({
+            "From": "elliotcampbelton@apptitudedigitalsolutions.com", 
+            "To": "e.b.campbelton@gmail.com", 
+            "Subject": "Test", 
+            "TextBody": "Test Message",
+            "Attachments": [{
+              // Reading synchronously here to condense code snippet: 
+              "Content": fs.readFileSync(savePath).toString('base64'),
+              "Name": 'results_'+testID+'.xlsx',
+              "ContentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            }]
+        }, function(error, result) {
+            if(error) {
+                console.error("Unable to send via postmark: " + error.message);
+                return;
+            }
+            console.info("Sent to postmark for delivery")
+        });
+      
+      });
+      
+
       sheet = xlsx.makeNewSheet ();
       sheet.name = 'Results for test ALL';
 
@@ -137,12 +170,8 @@ var authenticate = require("./auth.js");
           rowCounter++;
           sheet.data[rowCounter] = [];
         } 
-        var async = require ( 'async' );
-        var officegen = require('officegen');
-        var fs = require('fs');
-        var path = require('path');
         
-        var savePath = '/home/ubuntu/api/reports/results_'+testID+'.xlsx';
+        savePath = '/home/ubuntu/api/reports/results_'+testID+'.xlsx';
         var out = fs.createWriteStream (savePath);
         
         out.on ( 'error', function ( err ) {
@@ -154,29 +183,7 @@ var authenticate = require("./auth.js");
 
         xlsx.generate ( out );
 
-        var postmark = require("postmark");
-        var client = new postmark.Client("7424f227-688f-4979-93ac-e7b35d2de10d");
-         
-        client.sendEmail({
-            "From": "elliotcampbelton@apptitudedigitalsolutions.com", 
-            "To": "e.b.campbelton@gmail.com", 
-            "Subject": "Test", 
-            "TextBody": "Test Message",
-            "Attachments": [{
-              // Reading synchronously here to condense code snippet: 
-              "Content": fs.readFileSync(savePath).toString('base64'),
-              "Name": 'results_'+testID+'.xlsx',
-              "ContentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-            }]
-        }, function(error, result) {
-            if(error) {
-                console.error("Unable to send via postmark: " + error.message);
-                return;
-            }
-            console.info("Sent to postmark for delivery")
-        });
-
-
+        
       }});
 
     }
