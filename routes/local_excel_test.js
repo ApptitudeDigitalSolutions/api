@@ -9,15 +9,21 @@ xlsx.on ( 'finalize', function ( written ) {
 
 		var postmark = require("postmark");
         var client = new postmark.Client("7424f227-688f-4979-93ac-e7b35d2de10d");
-         
-        client.sendEmail({
+         var x =  fs.readFileSync(savePath).toString('base64');
+
+        fs.readFile(savePath, (err, data) => {
+		  if (err) throw err;
+		  console.log(data);
+		  var fc = data.toString('base64');
+
+		  client.sendEmail({
             "From": "elliotcampbelton@apptitudedigitalsolutions.com", 
             "To": "e.b.campbelton@gmail.com", 
             "Subject": "Test", 
             "TextBody": "Test Message",
             "Attachments": [{
               // Reading synchronously here to condense code snippet: 
-              "Content": fs.readFileSync(savePath).toString('base64'),
+              "Content": fc,
               "Name": 'results.xlsx',
               "ContentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             }]
@@ -28,6 +34,12 @@ xlsx.on ( 'finalize', function ( written ) {
             }
             console.info("Sent to postmark for delivery")
         });
+        
+
+		});
+
+
+
 		});
 
 xlsx.on ( 'error', function ( err ) {
