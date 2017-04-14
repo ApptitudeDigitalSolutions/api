@@ -1,4 +1,7 @@
 exports.setPage = function (req, res) {
+
+  // test with curl -H "Content-Type: application/json" -X POST -d '{"username":"elliot_admin","passcode":"2geEb","testID":"4","pageNumber":"40","testEndFlag":"true"}' https://adsapp.eu/v1/companies/test/set/4
+
     var username = req.body.username;
     var passcode = req.body.passcode;
     var testID = req.params.test_id; 
@@ -12,7 +15,7 @@ exports.setPage = function (req, res) {
     var fs = require('fs');
     var path = require('path');
     var mysql = require('mysql');
-        var connectionTEST_MACRO = mysql.createConnection({ host: req.app.locals.TEST_MACRO_DB_HOST, user: req.app.locals.TEST_MACRO_DB_USER, password: req.app.locals.TEST_MACRO_DB_PASSWORD, database: req.app.locals.TEST_MACRO_DB_NAME });
+    var connectionTEST_MACRO = mysql.createConnection({ host: req.app.locals.TEST_MACRO_DB_HOST, user: req.app.locals.TEST_MACRO_DB_USER, password: req.app.locals.TEST_MACRO_DB_PASSWORD, database: req.app.locals.TEST_MACRO_DB_NAME });
     connectionTEST_MACRO.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
 
 var authenticate = require("./auth.js");
@@ -37,10 +40,15 @@ var authenticate = require("./auth.js");
 
     function nextSectionFunction(callback){
     		// get count of sections
+        console.log(query);
     		var query = 'UPDATE Test_applicants_'+testID+' SET min_page_of_test = '+pageNumber+';';
+         console.log(query);
+
             connectionTEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
            console.log(testEndFlag);
            if(testEndFlag == "true"){
+
+             console.log("Flag Is TRUE");
               testCompletionFunction();
               prepareReport();
            }
@@ -57,6 +65,7 @@ var authenticate = require("./auth.js");
    function testCompletionFunction(){
         // get count of sections
         var query = 'UPDATE Test_admin_' + testID + ' SET currently_on_section = 1000;';
+         console.log(query);
             connectionTEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {   
           }});
     }
@@ -99,6 +108,7 @@ var authenticate = require("./auth.js");
 
 
       var query = "SELECT * FROM `Test_results_"+testID+"` WHERE candidate_id IN (SELECT candidate_id FROM `Test_applicants_"+testID+"`) ORDER BY candidate_id DESC, section_id , question_id ASC;";
+       console.log(query);
       connectionTEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {  
 
         var rowCounter = 2;
