@@ -279,9 +279,9 @@ var authenticate = require("./auth.js");
           console.log('file saved');
 
          // console.log(csv.toString());
-          var c = csv.toString();
-          var fc = c.toString('base64');
-
+          // var c = csv.toString();
+          // var fc = c.toString('base64');
+          var fc = new Buffer(c).toString('base64');
           console.log(fc);
 
           client.sendEmail({
