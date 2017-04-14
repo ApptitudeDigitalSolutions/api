@@ -278,7 +278,7 @@ var authenticate = require("./auth.js");
           if (err) throw err;
           console.log('file saved');
 
-          console.log(csv.toString());
+         // console.log(csv.toString());
           var c = csv.toString();
           var fc = c.toString('base64');
 
