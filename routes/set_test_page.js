@@ -236,7 +236,7 @@ var authenticate = require("./auth.js");
 // do parsing in here 
         for(i in rows){
                  
-                  if(rows[i].candidate_id != currentCanID){
+                  if(rows[i].candidate_id != currentCanID && currentCanID !=0){
                     // calculate the averages
                     averageTimeTakenCounter = averageTimeTakenCounter/questionCounter;
                     percentageCorrectAnswers = correctAnswersCounter/questionCounter;
@@ -256,10 +256,15 @@ var authenticate = require("./auth.js");
                     correctAnswersCounter = 0;
                     averageTimeTakenCounter = 0;
 
+                    currentCanID = rows[i].candidate_id;
+                  }
+
+                  if(currentCanID == 0){
+                    currentCanID = rows[i].candidate_id;
                   }
 
                   // add each row to the file
-                   candidatesRows.push({"Candidate id":rows[i].candidate_id,"Candidate email address":rows[i].candidate_email,"Question":rows[i].question_id,"Section":rows[i].section_id,"Candidate answer":rows[i].answer,"Correct":rows[i].was_correct,"Time taken on question":rows[i].time_taken_on_question});
+                  candidatesRows.push({"Candidate id":rows[i].candidate_id,"Candidate email address":rows[i].candidate_email,"Question":rows[i].question_id,"Section":rows[i].section_id,"Candidate answer":rows[i].answer,"Correct":rows[i].was_correct,"Time taken on question":rows[i].time_taken_on_question});
                   if(rows[i].was_correct == 1){
                     correctAnswersCounter++;
                   }
