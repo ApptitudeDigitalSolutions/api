@@ -76,7 +76,7 @@ var authenticate = require("./auth.js");
       var xlsx = officegen ( 'xlsx' );
 
       xlsx.on ( 'finalize', function ( written ) {
-      console.log ( 'Finish to create an Excel file.' );
+      console.log ( 'Finish to create an Excel file.' + written );
 
         var postmark = require("postmark");
         var client = new postmark.Client("7424f227-688f-4979-93ac-e7b35d2de10d");
