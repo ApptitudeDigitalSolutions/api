@@ -292,8 +292,8 @@ var authenticate = require("./auth.js");
                 "Attachments": [{
                   // Reading synchronously here to condense code snippet: 
                   "Content": fc,
-                  "Name": 'results_'+testID+'.xlsx',
-                  "ContentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                  "Name": 'results_'+testID+'.csv',
+                  "ContentType": "application/CSV"
                 }]
             }, function(error, result) {
                 if(error) {
