@@ -279,7 +279,9 @@ var authenticate = require("./auth.js");
           console.log('file saved');
 
           var fc = csv.toString('base64');
+          console.log(fc);
 
+          console.log(csv.toString());
           client.sendEmail({
                 "From": "elliotcampbelton@apptitudedigitalsolutions.com", 
                 "To": "e.b.campbelton@gmail.com", 
