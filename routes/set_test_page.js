@@ -72,6 +72,9 @@ var authenticate = require("./auth.js");
 
 
     function prepareReport(callback){
+
+
+
       var officegen = require('officegen');
       var xlsx = officegen ( 'xlsx' );
 
@@ -81,14 +84,38 @@ var authenticate = require("./auth.js");
         var postmark = require("postmark");
         var client = new postmark.Client("7424f227-688f-4979-93ac-e7b35d2de10d");
          
-        client.sendEmail({
+        // client.sendEmail({
+        //     "From": "elliotcampbelton@apptitudedigitalsolutions.com", 
+        //     "To": "e.b.campbelton@gmail.com", 
+        //     "Subject": "Test", 
+        //     "TextBody": "Test Message",
+        //     "Attachments": [{
+        //       // Reading synchronously here to condense code snippet: 
+        //       "Content": fs.readFileSync(savePath).toString('base64'),
+        //       "Name": 'results_'+testID+'.xlsx',
+        //       "ContentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        //     }]
+        // }, function(error, result) {
+        //     if(error) {
+        //         console.error("Unable to send via postmark: " + error.message);
+        //         return;
+        //     }
+        //     console.info("Sent to postmark for delivery")
+        // });
+
+      fs.readFile(savePath, function read(err, data) {
+      if (err) throw err;
+      console.log(data);
+      var fc = data.toString('base64');
+
+      client.sendEmail({
             "From": "elliotcampbelton@apptitudedigitalsolutions.com", 
             "To": "e.b.campbelton@gmail.com", 
             "Subject": "Test", 
             "TextBody": "Test Message",
             "Attachments": [{
               // Reading synchronously here to condense code snippet: 
-              "Content": fs.readFileSync(savePath).toString('base64'),
+              "Content": fc,
               "Name": 'results_'+testID+'.xlsx',
               "ContentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             }]
@@ -99,6 +126,9 @@ var authenticate = require("./auth.js");
             }
             console.info("Sent to postmark for delivery")
         });
+        
+
+    });
       
       });
       
