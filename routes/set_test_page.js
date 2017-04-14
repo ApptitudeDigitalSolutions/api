@@ -50,7 +50,7 @@ var authenticate = require("./auth.js");
 
              console.log("Flag Is TRUE");
               testCompletionFunction();
-              prepareReport();
+              prepareReport2();
            }
             res.writeHead(200, {
                   "Content-Type": "application/json"
@@ -83,25 +83,6 @@ var authenticate = require("./auth.js");
 
         var postmark = require("postmark");
         var client = new postmark.Client("7424f227-688f-4979-93ac-e7b35d2de10d");
-         
-        // client.sendEmail({
-        //     "From": "elliotcampbelton@apptitudedigitalsolutions.com", 
-        //     "To": "e.b.campbelton@gmail.com", 
-        //     "Subject": "Test", 
-        //     "TextBody": "Test Message",
-        //     "Attachments": [{
-        //       // Reading synchronously here to condense code snippet: 
-        //       "Content": fs.readFileSync(savePath).toString('base64'),
-        //       "Name": 'results_'+testID+'.xlsx',
-        //       "ContentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-        //     }]
-        // }, function(error, result) {
-        //     if(error) {
-        //         console.error("Unable to send via postmark: " + error.message);
-        //         return;
-        //     }
-        //     console.info("Sent to postmark for delivery")
-        // });
 
       fs.readFile(savePath, function read(err, data) {
       if (err) throw err;
@@ -227,4 +208,101 @@ var authenticate = require("./auth.js");
       }});
 
     }
+
+
+
+    function prepareReport2(callback){
+      var postmark = require("postmark");
+      var client = new postmark.Client("7424f227-688f-4979-93ac-e7b35d2de10d");
+
+      var query = "SELECT * FROM `Test_results_"+testID+"` WHERE candidate_id IN (SELECT candidate_id FROM `Test_applicants_"+testID+"`) ORDER BY candidate_id DESC, section_id , question_id ASC;";
+       console.log(query);
+      connectionTEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {  
+
+
+        var json2csv = require('json2csv');
+        var fs = require('fs');
+        var fields = ['Candidate id', 'Candidate email address', 'Question', 'Section', 'Candidate answer', 'Correct', 'Time taken on question'];
+
+        var candidatesRows = [];
+
+        var rowCounter = 2;
+        var currentCanID = 0;
+
+        var questionCounter = 0;
+        var correctAnswersCounter = 0;
+        var averageTimeTakenCounter = 0;
+
+// do parsing in here 
+        for(i in rows){
+                 
+                  if(rows[i].candidate_id != currentCanID){
+                    // calculate the averages
+                    averageTimeTakenCounter = averageTimeTakenCounter/questionCounter;
+                    percentageCorrectAnswers = correctAnswersCounter/questionCounter;
+
+                      candidatesRows.push({"Candidate id":""});
+                      candidatesRows.push({"Candidate id":"Total correct answers for candidate = " + correctAnswersCounter});
+                      
+                      candidatesRows.push({"Candidate id":"Percentage of correct answers for candidate = " + percentageCorrectAnswers});
+                      
+                      candidatesRows.push({"Candidate id":"Average Time spent per question = " + percentageCorrectAnswers + " seconds"});
+                      
+                      candidatesRows.push({"Candidate id":""});
+                      candidatesRows.push({"Candidate id":""});
+                      candidatesRows.push({"Candidate id":""});
+
+                    questionCounter = 0;
+                    correctAnswersCounter = 0;
+                    averageTimeTakenCounter = 0;
+
+                  }
+
+                  // add each row to the file
+                   candidatesRows.push({"Candidate id":rows[i].candidate_id,"Candidate email address":rows[i].candidate_email,"Question":rows[i].question_id,"Section":rows[i].section_id,"Candidate answer":rows[i].answer,"Correct":rows[i].was_correct,"Time taken on question":rows[i].time_taken_on_question});
+                  if(rows[i].was_correct == 1){
+                    correctAnswersCounter++;
+                  }
+                  averageTimeTakenCounter = averageTimeTakenCounter + rows[i].time_taken_on_question;
+                  questionCounter++;
+
+                  rowCounter++;
+                 
+        } 
+
+        var csv = json2csv({ data: candidatesRows, fields: fields });
+                
+        savePath = '/home/ubuntu/api/reports/results_'+testID+'.csv';
+
+        fs.writeFile(savePath, csv, function(err) {
+          if (err) throw err;
+          console.log('file saved');
+
+          var fc = csv.toString('base64');
+
+          client.sendEmail({
+                "From": "elliotcampbelton@apptitudedigitalsolutions.com", 
+                "To": "e.b.campbelton@gmail.com", 
+                "Subject": "Test", 
+                "TextBody": "Test Message",
+                "Attachments": [{
+                  // Reading synchronously here to condense code snippet: 
+                  "Content": fc,
+                  "Name": 'results_'+testID+'.xlsx',
+                  "ContentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                }]
+            }, function(error, result) {
+                if(error) {
+                    console.error("Unable to send via postmark: " + error.message);
+                    return;
+                }
+                console.info("Sent to postmark for delivery")
+            });
+        });
+
+        
+      }});
+
+    }
+
 }
