@@ -11,7 +11,7 @@ xlsx.on ( 'finalize', function ( written ) {
         var client = new postmark.Client("7424f227-688f-4979-93ac-e7b35d2de10d");
          var x =  fs.readFileSync(savePath).toString('base64');
 
-        fs.readFile(savePath, (err, data) => {
+        fs.readFile(savePath, function read(err, data) {
 		  if (err) throw err;
 		  console.log(data);
 		  var fc = data.toString('base64');
