@@ -200,7 +200,7 @@ function getAC(callback){
 
             console.log("SUBMIT - THE VALUE OF J = " + theValueOfJ);
 
-            activity_report.activity_report_components.push({title:allReviewQuestionsForAllActivities[indexOfActivityInArraySELECTED][0].review_question.table[]});
+            activity_report.activity_report_components.push({title:allReviewQuestionsForAllActivities[indexOfActivityInArraySELECTED][0].review_question,table:[]});
 
             for(m in activity_results_for_candidate){
               var stringToInserIntoCell = activity_results_for_candidate[m].question_id+"|"+activity_results_for_candidate[m].answer_text+"|"+activity_results_for_candidate[m].answer_type;
