@@ -102,7 +102,7 @@ var authenticate = require("./auth.js");
                         return false;
                     } else { 
                         ADMINS_EMAIL_ADDRESS = rows[0].email;
-                        callback(false);
+                        callback(null);
                     }});
     }
 
