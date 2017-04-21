@@ -48,8 +48,12 @@ var authenticate = require("./auth.js");
             for(i in rows){
 
               // send push notification saying test has sended
+
               var token = rows[i].token;
+              
               console.log("HERES THE token = " + token);
+              
+              if(token != "" || token != null){
               //'. Let them know if you can make it by heading to Notifications in Timbo.'
                       var message = new gcm.Message({
                                 priority: 'high',
@@ -65,6 +69,7 @@ var authenticate = require("./auth.js");
                       sender.send(message, token, function (err, response) {
                           if (err) {console.error("Error:", err);}else console.log("Response:", response);
                       });
+              }
 
             }
            
