@@ -24,7 +24,7 @@ var authenticate = require("./auth.js");
      authenticate.authenticate(username,passcode,req,function(returnValue) {
       if(returnValue){
           var async = require('async');
-          async.waterfall([nextSectionFunction], function (err, result) { console.log("DONE");  connectionTEST_MACRO.end(); });
+          async.waterfall([getAdminsEmailAddress,nextSectionFunction], function (err, result) { console.log("DONE");  connectionTEST_MACRO.end(); });
       }else{
           connectionTEST_MACRO.end(); 
           if(!res.headersSent){
