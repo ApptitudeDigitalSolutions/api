@@ -51,7 +51,7 @@ var authenticate = require("./auth.js");
 
              console.log("Flag Is TRUE");
               testCompletionFunction();
-              prepareReport2();
+              prepareReport();
            }
             res.writeHead(200, {
                   "Content-Type": "application/json"
