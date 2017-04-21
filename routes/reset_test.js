@@ -49,7 +49,7 @@ var authenticate = require("./auth.js");
 
               // send push notification saying test has sended
               var token = rows[i].token;
-
+              console.log("HERES THE token = "+token);
               //'. Let them know if you can make it by heading to Notifications in Timbo.'
                       var message = new gcm.Message({
                                 priority: 'high',
