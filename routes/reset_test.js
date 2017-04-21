@@ -53,7 +53,7 @@ var authenticate = require("./auth.js");
               
               console.log("HERES THE token = " + token);
               
-              if(token != "" || token != null){
+              if(token != "null" || token != "" || token != null){
               //'. Let them know if you can make it by heading to Notifications in Timbo.'
                       var message = new gcm.Message({
                                 priority: 'high',
