@@ -189,8 +189,8 @@ var authenticate = require("./auth.js");
           client.sendEmail({
                 "From": "elliotcampbelton@apptitudedigitalsolutions.com", 
                 "To": ADMINS_EMAIL_ADDRESS, 
-                "Subject": "Test", 
-                "TextBody": "Test Message",
+                "Subject": "Test results for candidates : Test ID " + testID, 
+                "TextBody": "Hey ," + username + " attatched are the results for the candidates of test "+ testID + "." ,
                 "Attachments": [{
                   // Reading synchronously here to condense code snippet: 
                   "Content": fc,
