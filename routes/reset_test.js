@@ -41,6 +41,7 @@ var authenticate = require("./auth.js");
 
     function getAllCandidateTokens(callback){
           // get count of sections
+          var gcm = require('node-gcm');
             var query = 'SELECT token FROM Test_applicants_'+testID+';';
             connectionTEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
 
@@ -76,5 +77,5 @@ var authenticate = require("./auth.js");
             connectionTEST_MACRO.end();
             }});
     }
-    
+
 }
