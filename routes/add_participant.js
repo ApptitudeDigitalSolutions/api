@@ -8,6 +8,7 @@ exports.addParticipant = function (req, res) {
     var last = req.body.last;
     var email = req.body.email;
     var DoB = req.body.dob;
+    var Token = req.body.token;
     var other = "";
 
     console.log(req.body);
@@ -30,7 +31,7 @@ exports.addParticipant = function (req, res) {
 
     function addNewParticipant(callback){
     		// get count of sections
-    		var query = 'INSERT INTO Test_applicants_'+testID+' (First,Last,Email,DoB,min_page_of_test,test_stage_state,other) VALUES (\''+first+'\',\''+last+'\',\''+email+'\',\''+DoB+'\',0,\'none\',\''+other+'\');';
+    		var query = 'INSERT INTO Test_applicants_'+testID+' (First,Last,Email,DoB,min_page_of_test,test_stage_state,other,token) VALUES (\''+first+'\',\''+last+'\',\''+email+'\',\''+DoB+'\',0,\'none\',\''+other+'\',\''+Token+'\');';
         console.log(query);
             connectionTEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
 
