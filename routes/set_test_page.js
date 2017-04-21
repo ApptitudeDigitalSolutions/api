@@ -8,6 +8,7 @@ exports.setPage = function (req, res) {
     var pageNumber = req.body.page_number;
     var testEndFlag = req.body.testEndFlag;
     
+    var ADMINS_EMAIL_ADDRESS = "";
 
     var savePath = "";
     
@@ -69,6 +70,40 @@ var authenticate = require("./auth.js");
          console.log(query);
             connectionTEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {   
           }});
+    }
+
+
+    function getAdminsEmailAddress(){
+        // get count of sections
+        var mysql = require('mysql');
+                var connection = mysql.createConnection({
+                    host: req.app.locals.MACRO_DB_HOST,
+                    user: req.app.locals.MACRO_DB_USER,
+                    password: req.app.locals.MACRO_DB_PASSWORD,
+                    database: req.app.locals.MACRO_DB_NAME
+                });
+
+                connection.connect(function(err) {
+                    if (err) {
+                        console.error('error connecting: ' + err.stack);
+                         callback(false);
+                        return false;
+                    }
+                });
+
+
+                var query = 'SELECT * FROM Users WHERE username =\'' + username + '\';';
+                console.log(query);
+
+                connection.query(query, function(err, rows) {
+                    if (err) {
+                       console.log(err);
+                        callback(false);
+                        return false;
+                    } else { 
+                        ADMINS_EMAIL_ADDRESS = rows[0].email;
+                        callback(false);
+                    }});
     }
 
 
@@ -153,7 +188,7 @@ var authenticate = require("./auth.js");
 
           client.sendEmail({
                 "From": "elliotcampbelton@apptitudedigitalsolutions.com", 
-                "To": "e.b.campbelton@gmail.com", 
+                "To": ADMINS_EMAIL_ADDRESS, 
                 "Subject": "Test", 
                 "TextBody": "Test Message",
                 "Attachments": [{
