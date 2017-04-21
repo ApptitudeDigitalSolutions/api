@@ -73,7 +73,7 @@ var authenticate = require("./auth.js");
     }
 
 
-    function getAdminsEmailAddress(){
+    function getAdminsEmailAddress(callback){
         // get count of sections
         var mysql = require('mysql');
                 var connection = mysql.createConnection({
