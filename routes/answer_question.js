@@ -36,8 +36,7 @@ exports.answerQuestion = function (req, res) {
                     res.end(401);
                 }
             }});
-           
-                   
+            
     }
 
 

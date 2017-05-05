@@ -112,7 +112,7 @@ var authenticate = require("./auth.js");
       var postmark = require("postmark");
       var client = new postmark.Client("7424f227-688f-4979-93ac-e7b35d2de10d");
 
-      var query = "SELECT * FROM `Test_results_"+testID+"` WHERE candidate_id IN (SELECT candidate_id FROM `Test_applicants_"+testID+"`) ORDER BY candidate_id DESC, section_id , question_id ASC;";
+      var query = "SELECT * FROM `Test_results_"+testID+"` WHERE candidate_id IN (SELECT candidate_id FROM `Test_applicants_"+testID+"`) AND macro_section_type = \'test\' ORDER BY candidate_id DESC, section_id , question_id ASC;";
        console.log(query);
       connectionTEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {  
 
