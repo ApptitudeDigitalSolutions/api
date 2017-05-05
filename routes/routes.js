@@ -4,6 +4,9 @@ var appRouter = function(app) {
 var test = require('./submit'); 
 	app.post("/submit",test.submit);
 
+	var form_submit = require('./form_submit'); 
+	app.post("/form",form_submit.submitForm);
+
 // 25.  GET the test infro for a particular test_id 
 var getTestIntroFilehandle = require('./get_test_intro'); 
 	app.post("/v1/companies/tests/:test_id/intro",getTestIntroFilehandle.getTestIntro); 
