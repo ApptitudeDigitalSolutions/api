@@ -12,8 +12,8 @@ var postmark = require("postmark");
       var fs = require('fs');
        
       client.sendEmail({
-          "From": email, 
-          "To": "e.b.campbelton@gmail.com", 
+          "From": "michaelblakley@apptitudedigitalsolutions.com", 
+          "To": "michaelblakley@apptitudedigitalsolutions.com", 
           "Subject": "Enquiry", 
           "TextBody": "Name : " + name + " , Phone : " + phone + " Message : " + message
           
