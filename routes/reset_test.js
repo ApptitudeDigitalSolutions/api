@@ -41,7 +41,7 @@ var authenticate = require("./auth.js");
 
     function nextSectionFunctionTwo(callback){
             // get count of sections
-            var query = 'UPDATE Test_admin_'+testID+' SET currently_on_question = 0 AND currently_on_section =0;';
+            var query = 'UPDATE Test_admin_'+testID+' SET currently_on_question = 0 , currently_on_section = 0;';
             connectionTEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
            
             callback(null);
