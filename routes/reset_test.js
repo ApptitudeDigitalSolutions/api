@@ -14,7 +14,7 @@ var authenticate = require("./auth.js");
      authenticate.authenticate(username,passcode,req,function(returnValue) {
       if(returnValue){
           var async = require('async');
-          async.waterfall([nextSectionFunction, getAllCandidateTokens], function (err, result) { console.log("DONE");  connectionTEST_MACRO.end(); });
+          async.waterfall([nextSectionFunction,nextSectionFunctionTwo, getAllCandidateTokens], function (err, result) { console.log("DONE");  connectionTEST_MACRO.end(); });
       }else{
           connectionTEST_MACRO.end(); 
           if(!res.headersSent){
@@ -33,6 +33,15 @@ var authenticate = require("./auth.js");
     function nextSectionFunction(callback){
             // get count of sections
             var query = 'UPDATE Test_applicants_'+testID+' SET min_page_of_test = 0;';
+            connectionTEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
+           
+            callback(null);
+            }});
+    }
+
+    function nextSectionFunctionTwo(callback){
+            // get count of sections
+            var query = 'UPDATE Test_admin_'+testID+' SET currently_on_question = 0 AND currently_on_section =0;';
             connectionTEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
            
             callback(null);
