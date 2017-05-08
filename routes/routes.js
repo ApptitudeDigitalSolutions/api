@@ -144,6 +144,9 @@ var putParticipantFilehandle = require('./add_participant');
 var setTestPageFilehandle = require('./set_test_page'); 
 	app.post("/v1/companies/test/set/:test_id",setTestPageFilehandle.setPage);
 
+var test_action = require('./test_action'); 
+app.post("/v2/companies/test/set/:test_id",test_action.performTestAction);
+
 	var reset = require('./reset_test'); 
 	app.post("/v1/companies/test/reset/:test_id",reset.reset_test);
 

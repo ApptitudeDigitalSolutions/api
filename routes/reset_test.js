@@ -10,7 +10,7 @@ exports.reset_test = function (req, res) {
     connectionTEST_MACRO.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
 
 
-var authenticate = require("./auth.js");
+    var authenticate = require("./auth.js");
      authenticate.authenticate(username,passcode,req,function(returnValue) {
       if(returnValue){
           var async = require('async');
@@ -50,7 +50,7 @@ var authenticate = require("./auth.js");
 
     function getAllCandidateTokens(callback){
           // get count of sections
-          var gcm = require('node-gcm');
+            var gcm = require('node-gcm');
             var query = 'SELECT token FROM Test_applicants_'+testID+';';
             connectionTEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
               var tokens = [];
