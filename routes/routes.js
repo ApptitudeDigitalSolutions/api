@@ -147,6 +147,9 @@ var setTestPageFilehandle = require('./set_test_page');
 var test_action = require('./test_action'); 
 app.post("/v2/companies/test/set/:test_id",test_action.performTestAction);
 
+var get_test_info_admin = require('./get_test_info_admin'); 
+app.post("/v1/companies/test/info/:test_id",get_test_info_admin.getTestInfo);
+
 	var reset = require('./reset_test'); 
 	app.post("/v1/companies/test/reset/:test_id",reset.reset_test);
 
