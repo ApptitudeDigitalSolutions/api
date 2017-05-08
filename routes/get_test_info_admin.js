@@ -42,7 +42,7 @@ exports.getTestInfo = function (req, res) {
         console.log(query);
         connectionTEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
 
-          if(rows.length() > 0){
+          if(rows.length > 0){
 
                var CURRENT_MIN_PAGE = rows[0].min_page_of_test;
                console.log("Current min page = " + CURRENT_MIN_PAGE+ ". Now we need to get all section delimiters for the test so we can work out what the next section title will be.");
