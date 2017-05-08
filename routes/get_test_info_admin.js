@@ -41,40 +41,70 @@ exports.getTestInfo = function (req, res) {
        var query = "SELECT min_page_of_test FROM Test_applicants_"+testID+";"
         console.log(query);
         connectionTEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
-           var CURRENT_MIN_PAGE = rows[0].min_page_of_test;
-           console.log("Current min page = " + CURRENT_MIN_PAGE+ ". Now we need to get all section delimiters for the test so we can work out what the next section title will be.");
 
-            var delimiters_array = [];
-            var delimitersquery = 'SELECT section_delimiters FROM Test_templates WHERE id = '+testID+';';
-            console.log(delimitersquery);
+          if(rows.length() > 0){
 
-            connectionTEST_MACRO.query(delimitersquery, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
+               var CURRENT_MIN_PAGE = rows[0].min_page_of_test;
+               console.log("Current min page = " + CURRENT_MIN_PAGE+ ". Now we need to get all section delimiters for the test so we can work out what the next section title will be.");
 
-                var delimitersString = rows[0].section_delimiters;
-                console.log("Delimiters string for test =  " + delimitersString);
-                delimiters_array = delimitersString.split(",");
+                var delimiters_array = [];
+                var delimitersquery = 'SELECT section_delimiters FROM Test_templates WHERE id = '+testID+';';
+                console.log(delimitersquery);
 
-                console.log("OK so now we need to know the index of CURRENT_MIN_PAGE");
+                connectionTEST_MACRO.query(delimitersquery, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
 
-                var index = delimiters_array.indexOf(CURRENT_MIN_PAGE);
-                console.log("Index of CURRENT_MIN_PAGE = " + index + ". Now we need to look up the title of the page in the test this corresponds too");
+                    var delimitersString = rows[0].section_delimiters;
+                    console.log("Delimiters string for test =  " + delimitersString);
+                    delimiters_array = delimitersString.split(",");
 
-                var updatequery = 'SELECT section_title FROM Test_intro_'+testID+' WHERE id = '+ delimiters_array[index+1] +';';
-                console.log(updatequery);
+                    console.log("OK so now we need to know the index of CURRENT_MIN_PAGE");
 
-                connectionTEST_MACRO.query(updatequery, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
-                    console.log("The NEXT title = "+ rows[0].section_title);
-                    
-                    res.writeHead(200, {
-                      "Content-Type": "application/json"
-                    });
-                    var json = JSON.stringify({info:{next_section_title:rows[0].section_title}});
-                    res.end(json);    
+                    var index = delimiters_array.indexOf(CURRENT_MIN_PAGE);
+                    console.log("Index of CURRENT_MIN_PAGE = " + index + ". Now we need to look up the title of the page in the test this corresponds too");
 
+                    var updatequery = 'SELECT section_title FROM Test_intro_'+testID+' WHERE id = '+ delimiters_array[index+1] +';';
+                    console.log(updatequery);
+
+                    connectionTEST_MACRO.query(updatequery, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
+                        console.log("The NEXT title = "+ rows[0].section_title);
+                        
+                        res.writeHead(200, {
+                          "Content-Type": "application/json"
+                        });
+                        var json = JSON.stringify({info:{next_section_title:rows[0].section_title}});
+                        res.end(json);    
+
+                    }});
+                
                 }});
-            
-            }});
+          }else{
 
+                var delimiters_array = [];
+                var delimitersquery = 'SELECT section_delimiters FROM Test_templates WHERE id = '+testID+';';
+                console.log(delimitersquery);
+
+                connectionTEST_MACRO.query(delimitersquery, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
+
+                    var delimitersString = rows[0].section_delimiters;
+                    console.log("Delimiters string for test =  " + delimitersString);
+                    delimiters_array = delimitersString.split(",");
+
+                    var updatequery = 'SELECT section_title FROM Test_intro_'+testID+' WHERE id = '+ delimiters_array[0] +';';
+                    console.log(updatequery);
+
+                    connectionTEST_MACRO.query(updatequery, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
+                        console.log("The NEXT title = "+ rows[0].section_title);
+                        
+                        res.writeHead(200, {
+                          "Content-Type": "application/json"
+                        });
+                        var json = JSON.stringify({info:{next_section_title:rows[0].section_title}});
+                        res.end(json);    
+
+                    }});
+                
+                }});   
+          }
 
         }});
      }
