@@ -59,7 +59,7 @@ exports.getTestInfo = function (req, res) {
 
                     console.log("OK so now we need to know the index of CURRENT_MIN_PAGE");
 
-                    var index = delimiters_array.indexOf(CURRENT_MIN_PAGE);
+                    var index = delimiters_array.indexOf(CURRENT_MIN_PAGE.toString());
                     console.log("Index of CURRENT_MIN_PAGE = " + index + ". Now we need to look up the title of the page in the test this corresponds too");
 
                     var updatequery = 'SELECT section_title FROM Test_intro_'+testID+' WHERE id = '+ delimiters_array[index+1] +';';
