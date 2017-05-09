@@ -61,14 +61,16 @@ exports.performTestAction = function (req, res) {
                       callback(false);
                       return false;
                   } else { 
+
                       ADMINS_EMAIL_ADDRESS = rows[0].email;
+                      console.log("THE ADMINS EMAIL = "+ADMINS_EMAIL_ADDRESS);
                       callback(null);
                   }});
     }
   
 
      function actionFlow(callback){
-
+      console.log("Now routing the request : "+action);
         if(action == "start"){
             startTest();
         }
