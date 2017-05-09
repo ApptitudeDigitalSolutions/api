@@ -196,7 +196,7 @@ exports.performTestAction = function (req, res) {
                      var gcm = require('node-gcm');
                       var query = 'SELECT token FROM Test_applicants_'+testID+';';
                       connectionTEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
-                        var tokens = [];
+                      var tokens = [];
                       for(i in rows){
 
                         // send push notification saying test has sended
@@ -221,7 +221,7 @@ exports.performTestAction = function (req, res) {
                                                 }
                                             });
                                 
-                              
+                      console.log(tokens);      
                       var sender = new gcm.Sender("AAAAs80Jbjo:APA91bGDCUTfyPuuDgxrEEjei7t-0jLLf_FrxFfwQz4nm-CHOnQ4o1hsjwUQOURjzzpshSvb8VKFSZpHxsmpR_O2mHx0whxiQhATC5KSG01sQc3-3CVvl3v6dEQHE9I8_95vYLJAgd2a");
                       sender.send(message, tokens, function (err, response) {
                           if (err) {console.error("Error:", err);}else console.log("Response:", response);
