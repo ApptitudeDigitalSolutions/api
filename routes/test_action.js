@@ -156,7 +156,7 @@ exports.performTestAction = function (req, res) {
 
                 console.log("OK so now we need to know the index of CURRENT_MIN_PAGE");
 
-                var index = delimiters_array.indexOf(CURRENT_MIN_PAGE);
+                var index = delimiters_array.indexOf(CURRENT_MIN_PAGE.toString());
                 console.log("Index of CURRENT_MIN_PAGE = " + index + ". We need to increase the index by one and then update min_page_of_test accordingly");
 
                 var updatequery = 'UPDATE Test_applicants_'+testID+' SET min_page_of_test = '+ delimiters_array[index+1] +';';
