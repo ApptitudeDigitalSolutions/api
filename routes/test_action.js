@@ -3,7 +3,7 @@ exports.performTestAction = function (req, res) {
     var username = req.body.username;
     var passcode = req.body.passcode;
     var action = req.body.action; 
-    var testID = req.query.test_id; 
+    var testID = req.params.test_id; 
 
     var ADMINS_EMAIL_ADDRESS= "";
     
