@@ -118,7 +118,7 @@ function getAC(callback){
                 query = 'SELECT * FROM Roleplay_review_questions_'+ACID+';'; 
             }
 
-
+//// THIS IS WHERE ITS GOING WRONG  ____ T
             connectionAC_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
                allReviewQuestionsForAllActivities.push(rows);
 
@@ -234,7 +234,7 @@ function getAC(callback){
 
            
            
-            for(mqm in allReviewQuestionsForAllActivities){
+            for(mqm in allReviewQuestionsForAllActivities[indexOfActivityInArraySELECTED]){
 
                activity_report.activity_report_components.push({title:allReviewQuestionsForAllActivities[indexOfActivityInArraySELECTED][0].review_question,table:[]});
 
@@ -263,8 +263,6 @@ function getAC(callback){
                   }
 
                   var stringToInserIntoCell = activity_results_for_candidate[m].question_id+"|"+activity_results_for_candidate[m].answer_text+"|"+answerType;
-                  //console.log(stringToInserIntoCell);
-                  //console.log("table >  " + JSON.stringify(activity_report.activity_report_components[j]));
                   activity_report.activity_report_components[theValueOfJ].table.push({cells:stringToInserIntoCell});
                 }
 
