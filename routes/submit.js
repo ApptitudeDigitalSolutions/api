@@ -234,6 +234,9 @@ function getAC(callback){
 
             activity_report.activity_report_components.push({title:allReviewQuestionsForAllActivities[indexOfActivityInArraySELECTED][0].review_question,table:[]});
 
+            // standard cell headers
+            activity_report.activity_report_components[theValueOfJ].table.push({cells:"Questions|Positive Indicators|Negative Indicators"});
+
             for(m in activity_results_for_candidate){
               var stringToInserIntoCell = activity_results_for_candidate[m].question_id+"|"+activity_results_for_candidate[m].positive_indicators+"|"+activity_results_for_candidate[m].negative_indicators;
               //console.log(stringToInserIntoCell);
