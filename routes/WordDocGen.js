@@ -646,19 +646,19 @@ for(i in info.activities){
 						for(k in arrayOfColumns){
 
 							// we attempt to split each string on some particualr chars, if so we need to add a line break in between each 
-								var partsOFString = arrayOfColumns[k].split("@&@");
+								// var partsOFString = arrayOfColumns[k].split("@&@");
 
-								var pObj = docx.createP();
+								// var pObj = docx.createP();
 
-								if(partsOFString.length > 0){
-									for(dsds in partsOFString){
-										pObj.addText(partsOFString[dsds]);
-										pObj.addLineBreak ();
-									}
-									cellsRow.push(pObj);
-								}else{
+								// if(partsOFString.length > 0){
+								// 	for(dsds in partsOFString){
+								// 		pObj.addText(partsOFString[dsds]);
+								// 		pObj.addLineBreak ();
+								// 	}
+								// 	cellsRow.push(pObj);
+								// }else{
 									cellsRow.push(arrayOfColumns[k]);
-								}
+								// }
 								
 							// 
 

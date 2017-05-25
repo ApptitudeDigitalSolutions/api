@@ -224,7 +224,7 @@ function getAC(callback){
             // FILLING IN activity_report_intro_table
 
 
-
+// for i in tables 
 
             // FILLING IN activity_performace_overview_table
 
@@ -232,17 +232,47 @@ function getAC(callback){
 
             console.log("SUBMIT - THE VALUE OF J = " + theValueOfJ);
 
-            activity_report.activity_report_components.push({title:allReviewQuestionsForAllActivities[indexOfActivityInArraySELECTED][0].review_question,table:[]});
+           
+           
+            for(mqm in allReviewQuestionsForAllActivities){
 
-            // standard cell headers
-            activity_report.activity_report_components[theValueOfJ].table.push({cells:"Questions|Positive Indicators|Negative Indicators"});
+               activity_report.activity_report_components.push({title:allReviewQuestionsForAllActivities[indexOfActivityInArraySELECTED][0].review_question,table:[]});
 
-            for(m in activity_results_for_candidate){
-              var stringToInserIntoCell = activity_results_for_candidate[m].question_id+"|"+activity_results_for_candidate[m].positive_indicators+"|"+activity_results_for_candidate[m].negative_indicators;
-              //console.log(stringToInserIntoCell);
-              //console.log("table >  " + JSON.stringify(activity_report.activity_report_components[j]));
-              activity_report.activity_report_components[theValueOfJ].table.push({cells:stringToInserIntoCell});
+              // a new table for each needs to be created
+
+               activity_report.activity_report_components[theValueOfJ].table.push({cells:"Questions|Answers|Catergory"});
+
+            // now we only want to process the results for the current question ( represnted by mqm here )
+                for(m in activity_results_for_candidate){
+
+                  if(activity_results_for_candidate[m].question_id == mqm){
+
+                  var answerType = "";
+
+                  if(activity_results_for_candidate[m]=="pi"){
+                      answerType = "Positive";
+                  }
+                   if(activity_results_for_candidate[m]=="ni"){
+                      answerType = "Negative";
+                  }
+                   if(activity_results_for_candidate[m]=="s"){
+                      answerType = "Score";
+                  }
+                   if(activity_results_for_candidate[m]=="ac"){
+                      answerType = "Commnet";
+                  }
+
+                  var stringToInserIntoCell = activity_results_for_candidate[m].question_id+"|"+activity_results_for_candidate[m].answer_text+"|"+answerType;
+                  //console.log(stringToInserIntoCell);
+                  //console.log("table >  " + JSON.stringify(activity_report.activity_report_components[j]));
+                  activity_report.activity_report_components[theValueOfJ].table.push({cells:stringToInserIntoCell});
+                }
+
+              }
+
             }
+
+
 
             info.activities.push(activity_report);
 
