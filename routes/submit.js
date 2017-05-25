@@ -209,6 +209,8 @@ function getAC(callback){
 
       connectionAC_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
               activity_results_for_candidate = rows;
+
+              console.log("CANDIDATE RESULTS <<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>> " + JSON.stringify(rows));
              
               // for every activity get the results for a particular user 
               var activity_report = {
