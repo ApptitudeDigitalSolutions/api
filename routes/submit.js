@@ -122,7 +122,7 @@ function getAC(callback){
                allReviewQuestionsForAllActivities.push(rows);
 
                if(allReviewQuestionsForAllActivities.length == activities.length){
-                  console.log("SUBMIT -  AllReviewQuestions INFO >>>>> " + allReviewQuestionsForAllActivities);
+                  console.log("SUBMIT -  AllReviewQuestions INFO >>>>> " + JSON.stringify(allReviewQuestionsForAllActivities));
                   callback(null);
                }
             }});
