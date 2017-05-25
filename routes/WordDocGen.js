@@ -590,7 +590,7 @@ for(i in info.activities){
 			// insert table
 			
 
-			console.log("The tbale looks like : " + table);
+			console.log("The tbale looks like : " + JSON.stringify(table));
 			
 			var tableStyle = {
 				
