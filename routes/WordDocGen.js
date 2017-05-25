@@ -614,7 +614,9 @@ for(i in info.activities){
 					console.log('this means its the first row');
 
 					// split sring 
-					var arrayOfColumns = info.activities[i].activity_report_components[zk].table[j].cells.split("|");
+					//var arrayOfColumns = info.activities[i].activity_report_components[zk].table[j].cells.split("|");
+					var arrayOfColumns = info.activities[i].activity_report_components.table[j].cells.split("|");
+					
 					console.log(arrayOfColumns);
 
 					for(k in arrayOfColumns){
@@ -638,7 +640,7 @@ for(i in info.activities){
 
 				}else{
 					console.log('this means it is another row');
-					var arrayOfColumns = info.activities[i].activity_report_components[zk].table[j].cells.split("|");
+					var arrayOfColumns = info.activities[i].activity_report_components.table[j].cells.split("|");
 					console.log(arrayOfColumns);
 
 					var cellsRow = [];

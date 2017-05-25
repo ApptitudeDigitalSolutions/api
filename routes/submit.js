@@ -178,15 +178,15 @@ function getAC(callback){
           var query;
 
           if(activities[j] == "i"){
-            query = 'SELECT DISTINCT(question_id) FROM Interview_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id DESC;';
+            query = 'SELECT * FROM Interview_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id DESC;';
           }
 
           if(activities[j] == "p"){
-            query = 'SELECT DISTINCT(question_id) FROM Presentation_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id DESC;';
+            query = 'SELECT * FROM Presentation_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id DESC;';
           }
 
           if(activities[j] == "rp"){
-            query = 'SELECT DISTINCT(question_id) FROM Roleplay_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id DESC;';
+            query = 'SELECT * FROM Roleplay_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id DESC;';
           }
 
 // get index of activity 
@@ -228,12 +228,14 @@ function getAC(callback){
 
             // FILLING IN activity_performace_overview_table
 
+            // ok we need to go over each result, then break down 
+
             console.log("SUBMIT - THE VALUE OF J = " + theValueOfJ);
 
             activity_report.activity_report_components.push({title:allReviewQuestionsForAllActivities[indexOfActivityInArraySELECTED][0].review_question,table:[]});
 
             for(m in activity_results_for_candidate){
-              var stringToInserIntoCell = activity_results_for_candidate[m].question_id+"|"+activity_results_for_candidate[m].answer_text+"|"+activity_results_for_candidate[m].answer_type;
+              var stringToInserIntoCell = activity_results_for_candidate[m].question_id+"|"+activity_results_for_candidate[m].positive_indicators+"|"+activity_results_for_candidate[m].negative_indicators;
               //console.log(stringToInserIntoCell);
               //console.log("table >  " + JSON.stringify(activity_report.activity_report_components[j]));
               activity_report.activity_report_components[theValueOfJ].table.push({cells:stringToInserIntoCell});
