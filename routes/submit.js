@@ -104,6 +104,7 @@ function getAC(callback){
 
   function getActivitiesQuestions(callback){
         activities = assessment_centre_info[0].activity_types.split(",");
+      console.log("THE ACTIVITIES ARE "+ activities);
         var query;
         for(i in activities){
 
