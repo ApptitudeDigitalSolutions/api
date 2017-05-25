@@ -567,10 +567,11 @@ for(i in info.activities){
 
 		}
 		var pObj = docx.createTable (table, tableStyle);
+		docx.putPageBreak ();	
 	}
 
 
-	docx.putPageBreak ();	
+	
 
 
 
