@@ -32,7 +32,7 @@ exports.completion = function (req, res) {
     		// get count of sections
     		var query = 'UPDATE Assessment_Center_candidates_'+ac_id+' SET completed_activities = concat(\'p,\',completed_activities) WHERE id = \''+candidate_id+'\';';
             console.log(query);
-            connectionTo_TEST_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
+            connectionAC_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
 
                  
                   res.writeHead(200, {
@@ -41,7 +41,7 @@ exports.completion = function (req, res) {
                   var json = JSON.stringify({success:1});
                   console.log('TEST STATE IS ........................... ' + json);
                   res.end(json);
-                  connectionTo_TEST_MACRO.end();
+                  connectionAC_MACRO.end();
         	}});
     }
 }
