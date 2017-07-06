@@ -83,7 +83,7 @@ var authenticate = require("./auth.js");
             connectionAC_MACRO.query(query, function(err, rows) {if (err) { //console.log('Error SQL :' + err); 
               return;} else {
               candidates_info = rows;
-              console.log("SUBMIT - Candidates INFO >>>>> " +  JSON.stringify(candidates_info));
+              //console.log("SUBMIT - Candidates INFO >>>>> " +  JSON.stringify(candidates_info));
 
               TEMPLATE = 
               callback(null);
@@ -96,7 +96,7 @@ function getAC(callback){
             connectionAC_MACRO.query(query, function(err, rows) {if (err) { //console.log('Error SQL :' + err); 
               return;} else {
               assessment_centre_info = rows;
-              //console.log("SUBMIT - Assessment Center INFO >>>>> " +  JSON.stringify(assessment_centre_info));
+              console.log("SUBMIT - Assessment Center INFO >>>>> " +  JSON.stringify(assessment_centre_info));
               callback(null);
           }});
   }
