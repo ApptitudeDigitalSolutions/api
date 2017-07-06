@@ -236,6 +236,7 @@ function getAC(callback){
            
             for(mqm in allReviewQuestionsForAllActivities[indexOfActivityInArraySELECTED]){
 
+              console.log("BRESK " + allReviewQuestionsForAllActivities[indexOfActivityInArraySELECTED][0].review_question);
                activity_report.activity_report_components.push({title:allReviewQuestionsForAllActivities[indexOfActivityInArraySELECTED][0].review_question,table:[]});
 
               // a new table for each needs to be created
@@ -270,10 +271,7 @@ function getAC(callback){
 
             }
 
-
-
             info.activities.push(activity_report);
-
              console.log("SUBMIT - The Final JSON object looks like >> " + JSON.stringify(info));
 
                 // pass to create wizard
