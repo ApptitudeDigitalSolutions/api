@@ -14,6 +14,8 @@ var allReviewQuestionsForAllActivities = [];
 var docxObjectsArray = [];
 var activities = [];
 
+var TEMPLATE = {};
+
 var today = new Date();
 var dd = today.getDate();
 var mm = today.getMonth()+1; //January is 0!
@@ -68,7 +70,7 @@ var authenticate = require("./auth.js");
             connectionMACRO.query(query, function(err, rows) {if (err) { //console.log('Error SQL :' + err);
              return;} else {
                   company_info = rows;
-                  console.log("SUBMIT - Company INFO >>>>> " + JSON.stringify(company_info));
+                  //console.log("SUBMIT - Company INFO >>>>> " + JSON.stringify(company_info));
 
                   callback(null);
             }});
@@ -82,6 +84,8 @@ var authenticate = require("./auth.js");
               return;} else {
               candidates_info = rows;
               //console.log("SUBMIT - Candidates INFO >>>>> " +  JSON.stringify(candidates_info));
+
+              TEMPLATE = 
               callback(null);
         	}});
   } 
@@ -144,7 +148,7 @@ function getAC(callback){
     var currentActivityBringProcessed = 0;
     for(i in candidates_info){
 
-        //console.log("SUBMIT - Candidate PROCESSING  >>>>> " + candidates_info[i]);
+         console.log("SUBMIT - Candidate PROCESSING  >>>>> " + candidates_info[i]);
         // add ac info to report 
         var info = {title:assessment_centre_info[0].title,
                     candidate_name:candidates_info[i].First + " " + candidates_info[i].Last,
