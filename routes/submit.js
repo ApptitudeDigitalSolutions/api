@@ -41,7 +41,7 @@ var authenticate = require("./auth.js");
      authenticate.authenticate(username,passcode,req,function(returnValue) {
       if(returnValue){
           var async = require('async');
-          async.waterfall([getCompanyInfoForUser,getAllCandidateIDS,getAC,getAllActivities,getActivitiesQuestions,createWordDocReport,responce], function (err, result) { console.log("DONE");  connectionAC_MACRO.end(); });
+          async.waterfall([getCompanyInfoForUser,getAllCandidateIDS,getAC,getAllActivities,getActivitiesQuestions,createWordDocReport,responce], function (err, result) { //console.log("DONE");  connectionAC_MACRO.end(); });
       }else{
           connectionAC_MACRO.end(); 
           if(!res.headersSent){
@@ -59,13 +59,14 @@ var authenticate = require("./auth.js");
 
   function getCompanyInfoForUser(callback){
         var query = 'SELECT company_id FROM Users WHERE username = \''+username+'\';';
-        connectionMACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
+        connectionMACRO.query(query, function(err, rows) {if (err) { //console.log('Error SQL :' + err); return;} else {
                 
 
             var query = 'SELECT * FROM Companies WHERE id = '+rows[0].company_id+';';
-            connectionMACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
+            connectionMACRO.query(query, function(err, rows) {if (err) { //console.log('Error SQL :' + err); return;} else {
                   company_info = rows;
-                  console.log("SUBMIT - Company INFO >>>>> " + JSON.stringify(company_info));
+                  //console.log("SUBMIT - Company INFO >>>>> " + JSON.stringify(company_info));
+                  
                   callback(null);
             }});
               
@@ -74,9 +75,9 @@ var authenticate = require("./auth.js");
 
   function getAllCandidateIDS(callback){
   			var query = 'SELECT * FROM Assessment_Center_candidates_'+ACID+';';
-            connectionAC_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
+            connectionAC_MACRO.query(query, function(err, rows) {if (err) { //console.log('Error SQL :' + err); return;} else {
               candidates_info = rows;
-              console.log("SUBMIT - Candidates INFO >>>>> " +  JSON.stringify(candidates_info));
+              //console.log("SUBMIT - Candidates INFO >>>>> " +  JSON.stringify(candidates_info));
               callback(null);
         	}});
   } 
@@ -84,9 +85,9 @@ var authenticate = require("./auth.js");
 
 function getAC(callback){
           var query = 'SELECT * FROM Assessment_Center_templates WHERE id = '+ACID+';';
-            connectionAC_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
+            connectionAC_MACRO.query(query, function(err, rows) {if (err) { //console.log('Error SQL :' + err); return;} else {
               assessment_centre_info = rows;
-              console.log("SUBMIT - Assessment Center INFO >>>>> " +  JSON.stringify(assessment_centre_info));
+              //console.log("SUBMIT - Assessment Center INFO >>>>> " +  JSON.stringify(assessment_centre_info));
               callback(null);
           }});
   }
@@ -94,9 +95,9 @@ function getAC(callback){
 
   function getAllActivities(callback){
           var query = 'SELECT * FROM Assessment_Center_activities WHERE ac_id = '+ACID+';';
-            connectionAC_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
+            connectionAC_MACRO.query(query, function(err, rows) {if (err) { //console.log('Error SQL :' + err); return;} else {
               assessment_centre_activities_info = rows;
-              console.log("SUBMIT - Assessment Center Activities INFO >>>>> " +  JSON.stringify(assessment_centre_activities_info));
+              //console.log("SUBMIT - Assessment Center Activities INFO >>>>> " +  JSON.stringify(assessment_centre_activities_info));
               callback(null);
           }});
   }
@@ -104,7 +105,7 @@ function getAC(callback){
 
   function getActivitiesQuestions(callback){
         activities = assessment_centre_info[0].activity_types.split(",");
-      console.log("THE ACTIVITIES ARE "+ activities + " AND EVENTS COUNT = " + activities.length);
+      //console.log("THE ACTIVITIES ARE "+ activities + " AND EVENTS COUNT = " + activities.length);
         var query;
         for(i in activities){
 
@@ -119,11 +120,11 @@ function getAC(callback){
             }
 
 //// THIS IS WHERE ITS GOING WRONG____T
-            connectionAC_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
+            connectionAC_MACRO.query(query, function(err, rows) {if (err) { //console.log('Error SQL :' + err); return;} else {
                allReviewQuestionsForAllActivities.push(rows);
 
                if(allReviewQuestionsForAllActivities.length == activities.length){
-                  console.log("SUBMIT -  AllReviewQuestions INFO >>>>> " + JSON.stringify(allReviewQuestionsForAllActivities));
+                  //console.log("SUBMIT -  AllReviewQuestions INFO >>>>> " + JSON.stringify(allReviewQuestionsForAllActivities));
                   callback(null);
                }
             }});
@@ -136,7 +137,7 @@ function getAC(callback){
     var currentActivityBringProcessed = 0;
     for(i in candidates_info){
 
-        console.log("SUBMIT - Candidate PROCESSING  >>>>> " + candidates_info[i]);
+        //console.log("SUBMIT - Candidate PROCESSING  >>>>> " + candidates_info[i]);
         // add ac info to report 
         var info = {title:assessment_centre_info[0].title,
                     candidate_name:candidates_info[i].First + " " + candidates_info[i].Last,
@@ -144,7 +145,7 @@ function getAC(callback){
                     date: today,
                     activities:[]};
 
-        console.log(info);
+        //console.log(info);
 
         for ( j in assessment_centre_activities_info){
           var activity_results_for_candidate ={};
@@ -164,9 +165,9 @@ function getAC(callback){
 
 // get index of activity 
           var indexOfActivityInArray = 0;
-          //console.log("THE activiites are " + activities);
+          ////console.log("THE activiites are " + activities);
           for(f in activities){
-             //console.log("THE activiites IS " + activities[f]);
+             ////console.log("THE activiites IS " + activities[f]);
             if(activities[f] == assessment_centre_activities_info[j].activity_type){
                 indexOfActivityInArray = f;
             }
@@ -191,9 +192,9 @@ function getAC(callback){
 
 // // get index of activity 
 //           var indexOfActivityInArray = 0;
-//           //console.log("THE activiites are " + activities);
+//           ////console.log("THE activiites are " + activities);
 //           for(f in activities){
-//              //console.log("THE activiites IS " + activities[f]);
+//              ////console.log("THE activiites IS " + activities[f]);
 //             if(activities[f] == activities[j]){
 //                 indexOfActivityInArray = f;
 //             }
@@ -207,10 +208,10 @@ function getAC(callback){
 
   function grabDataAndFormat(query,indexOfActivityInArraySELECTED,theValueOfJ,info){
 
-      connectionAC_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
+      connectionAC_MACRO.query(query, function(err, rows) {if (err) { //console.log('Error SQL :' + err); return;} else {
               activity_results_for_candidate = rows;
 
-              console.log("CANDIDATE RESULTS <<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>> " + JSON.stringify(rows));
+              //console.log("CANDIDATE RESULTS <<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>> " + JSON.stringify(rows));
              
               // for every activity get the results for a particular user 
               var activity_report = {
@@ -230,13 +231,13 @@ function getAC(callback){
 
             // ok we need to go over each result, then break down 
 
-            console.log("SUBMIT - THE VALUE OF J = " + theValueOfJ);
+            //console.log("SUBMIT - THE VALUE OF J = " + theValueOfJ);
 
            
            
             for(mqm in allReviewQuestionsForAllActivities[indexOfActivityInArraySELECTED]){
 
-              console.log("BRESK " + allReviewQuestionsForAllActivities[indexOfActivityInArraySELECTED][0].review_question);
+              //console.log("BRESK " + allReviewQuestionsForAllActivities[indexOfActivityInArraySELECTED][0].review_question);
                activity_report.activity_report_components.push({title:allReviewQuestionsForAllActivities[indexOfActivityInArraySELECTED][0].review_question,table:[]});
 
               // a new table for each needs to be created
@@ -272,16 +273,16 @@ function getAC(callback){
             }
 
             info.activities.push(activity_report);
-             console.log("SUBMIT - The Final JSON object looks like >> " + JSON.stringify(info));
+             //console.log("SUBMIT - The Final JSON object looks like >> " + JSON.stringify(info));
 
                 // pass to create wizard
                 var docGen = require("./WordDocGen.js");
                 
                 docGen.generate(info,ACID,function(returnValue) {
                   if(returnValue ==true){
-                    console.log("The doc has been generated");
+                    //console.log("The doc has been generated");
                   }else{
-                    console.log("Error Generating Doc");
+                    //console.log("Error Generating Doc");
                   }
                 });
 
