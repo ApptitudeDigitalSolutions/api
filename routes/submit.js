@@ -41,7 +41,8 @@ var authenticate = require("./auth.js");
      authenticate.authenticate(username,passcode,req,function(returnValue) {
       if(returnValue){
           var async = require('async');
-          async.waterfall([getCompanyInfoForUser,getAllCandidateIDS,getAC,getAllActivities,getActivitiesQuestions,createWordDocReport,responce], function (err, result) { //console.log("DONE");  connectionAC_MACRO.end(); });
+          async.waterfall([getCompanyInfoForUser,getAllCandidateIDS,getAC,getAllActivities,getActivitiesQuestions,createWordDocReport,responce], function (err, result) { //console.log("DONE");  
+            connectionAC_MACRO.end(); });
       }else{
           connectionAC_MACRO.end(); 
           if(!res.headersSent){
