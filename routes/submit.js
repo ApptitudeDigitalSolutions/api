@@ -118,7 +118,7 @@ function getAC(callback){
                 query = 'SELECT * FROM Roleplay_review_questions_'+ACID+';'; 
             }
 
-//// THIS IS WHERE ITS GOING WRONG  ____ T
+//// THIS IS WHERE ITS GOING WRONG____T
             connectionAC_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
                allReviewQuestionsForAllActivities.push(rows);
 
@@ -224,7 +224,7 @@ function getAC(callback){
             // FILLING IN activity_report_intro_table
 
 
-// for i in tables 
+            // for i in tables 
 
             // FILLING IN activity_performace_overview_table
 
@@ -277,15 +277,15 @@ function getAC(callback){
              console.log("SUBMIT - The Final JSON object looks like >> " + JSON.stringify(info));
 
                 // pass to create wizard
-                var docGen = require("./WordDocGen.js");
+                // var docGen = require("./WordDocGen.js");
                 
-                docGen.generate(info,ACID,function(returnValue) {
-                  if(returnValue ==true){
-                    console.log("The doc has been generated");
-                  }else{
-                    console.log("Error Generating Doc");
-                  }
-                });
+                // docGen.generate(info,ACID,function(returnValue) {
+                //   if(returnValue ==true){
+                //     console.log("The doc has been generated");
+                //   }else{
+                //     console.log("Error Generating Doc");
+                //   }
+                // });
 
 
           }});

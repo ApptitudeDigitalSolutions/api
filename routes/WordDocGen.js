@@ -406,6 +406,7 @@ docx.putPageBreak ();
 
 // Page 2 
 for(i in info.activities){
+	console.log("THE LENGTH OF THE AC is = " + info.activities.length);
 	// every activity gets processed in here 
 	var pObj = docx.createP ();
 	if(info.activities[i].acticity_type == "i"){
