@@ -25,7 +25,7 @@ var docx = officegen ( {
 
 } );
 
-var info2 = {title:"Welcome to this test AC",
+var info = {title:"Welcome to this test AC",
 			candidate_name: "John Doe",
 			assessor_name: "Michael Blakley",
 			date: "12/12/2016",
@@ -92,7 +92,7 @@ var info2 = {title:"Welcome to this test AC",
 console.log(" BAD MAN " + JSON.stringify(info));
 
 
-console.log(" CORRECT " + JSON.stringify(info2));
+// console.log(" CORRECT " + JSON.stringify(info2));
 
 docx.on ( 'error', function ( err ) {
 			console.log ( err );
