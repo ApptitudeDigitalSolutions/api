@@ -277,15 +277,15 @@ function getAC(callback){
              console.log("SUBMIT - The Final JSON object looks like >> " + JSON.stringify(info));
 
                 // pass to create wizard
-                // var docGen = require("./WordDocGen.js");
+                var docGen = require("./WordDocGen.js");
                 
-                // docGen.generate(info,ACID,function(returnValue) {
-                //   if(returnValue ==true){
-                //     console.log("The doc has been generated");
-                //   }else{
-                //     console.log("Error Generating Doc");
-                //   }
-                // });
+                docGen.generate(info,ACID,function(returnValue) {
+                  if(returnValue ==true){
+                    console.log("The doc has been generated");
+                  }else{
+                    console.log("Error Generating Doc");
+                  }
+                });
 
 
           }});
