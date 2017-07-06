@@ -83,7 +83,7 @@ var authenticate = require("./auth.js");
             connectionAC_MACRO.query(query, function(err, rows) {if (err) { //console.log('Error SQL :' + err); 
               return;} else {
               candidates_info = rows;
-              //console.log("SUBMIT - Candidates INFO >>>>> " +  JSON.stringify(candidates_info));
+              console.log("SUBMIT - Candidates INFO >>>>> " +  JSON.stringify(candidates_info));
 
               TEMPLATE = 
               callback(null);
@@ -148,7 +148,7 @@ function getAC(callback){
     var currentActivityBringProcessed = 0;
     for(i in candidates_info){
 
-         console.log("SUBMIT - Candidate PROCESSING  >>>>> " + JSON.stringify(candidates_info[i]));
+        // console.log("SUBMIT - Candidate PROCESSING  >>>>> " + JSON.stringify(candidates_info[i]));
         // add ac info to report 
         var info = {title:assessment_centre_info[0].title,
                     candidate_name:candidates_info[i].First + " " + candidates_info[i].Last,
