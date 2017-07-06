@@ -63,10 +63,11 @@ var authenticate = require("./auth.js");
                 
 
             var query = 'SELECT * FROM Companies WHERE id = '+rows[0].company_id+';';
-            connectionMACRO.query(query, function(err, rows) {if (err) { //console.log('Error SQL :' + err); return;} else {
+            connectionMACRO.query(query, function(err, rows) {if (err) { //console.log('Error SQL :' + err);
+             return;} else {
                   company_info = rows;
                   //console.log("SUBMIT - Company INFO >>>>> " + JSON.stringify(company_info));
-                  
+
                   callback(null);
             }});
               
@@ -75,7 +76,8 @@ var authenticate = require("./auth.js");
 
   function getAllCandidateIDS(callback){
   			var query = 'SELECT * FROM Assessment_Center_candidates_'+ACID+';';
-            connectionAC_MACRO.query(query, function(err, rows) {if (err) { //console.log('Error SQL :' + err); return;} else {
+            connectionAC_MACRO.query(query, function(err, rows) {if (err) { //console.log('Error SQL :' + err); 
+              return;} else {
               candidates_info = rows;
               //console.log("SUBMIT - Candidates INFO >>>>> " +  JSON.stringify(candidates_info));
               callback(null);
@@ -85,7 +87,8 @@ var authenticate = require("./auth.js");
 
 function getAC(callback){
           var query = 'SELECT * FROM Assessment_Center_templates WHERE id = '+ACID+';';
-            connectionAC_MACRO.query(query, function(err, rows) {if (err) { //console.log('Error SQL :' + err); return;} else {
+            connectionAC_MACRO.query(query, function(err, rows) {if (err) { //console.log('Error SQL :' + err); 
+              return;} else {
               assessment_centre_info = rows;
               //console.log("SUBMIT - Assessment Center INFO >>>>> " +  JSON.stringify(assessment_centre_info));
               callback(null);
@@ -95,7 +98,8 @@ function getAC(callback){
 
   function getAllActivities(callback){
           var query = 'SELECT * FROM Assessment_Center_activities WHERE ac_id = '+ACID+';';
-            connectionAC_MACRO.query(query, function(err, rows) {if (err) { //console.log('Error SQL :' + err); return;} else {
+            connectionAC_MACRO.query(query, function(err, rows) {if (err) { //console.log('Error SQL :' + err); 
+              return;} else {
               assessment_centre_activities_info = rows;
               //console.log("SUBMIT - Assessment Center Activities INFO >>>>> " +  JSON.stringify(assessment_centre_activities_info));
               callback(null);
@@ -120,7 +124,8 @@ function getAC(callback){
             }
 
 //// THIS IS WHERE ITS GOING WRONG____T
-            connectionAC_MACRO.query(query, function(err, rows) {if (err) { //console.log('Error SQL :' + err); return;} else {
+            connectionAC_MACRO.query(query, function(err, rows) {if (err) { //console.log('Error SQL :' + err); 
+              return;} else {
                allReviewQuestionsForAllActivities.push(rows);
 
                if(allReviewQuestionsForAllActivities.length == activities.length){
