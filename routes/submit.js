@@ -67,7 +67,7 @@ var authenticate = require("./auth.js");
             connectionMACRO.query(query, function(err, rows) {if (err) { //console.log('Error SQL :' + err);
              return;} else {
                   company_info = rows;
-                  //console.log("SUBMIT - Company INFO >>>>> " + JSON.stringify(company_info));
+                  console.log("SUBMIT - Company INFO >>>>> " + JSON.stringify(company_info));
 
                   callback(null);
             }});
