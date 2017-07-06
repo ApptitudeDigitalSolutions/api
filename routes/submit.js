@@ -215,7 +215,7 @@ function getAC(callback){
 
           grabDataAndFormat(query,ACAcitivtyTypes,info);
         }
-      }
+      // }
   }
 
 
