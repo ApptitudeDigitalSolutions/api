@@ -107,7 +107,7 @@ function getAC(callback){
             connectionAC_MACRO.query(query, function(err, rows) {if (err) { //console.log('Error SQL :' + err); 
               return;} else {
               assessment_centre_activities_info = rows;
-              console.log("SUBMIT - Assessment Center Activities INFO >>>>> " +  JSON.stringify(assessment_centre_activities_info));
+              //console.log("SUBMIT - Assessment Center Activities INFO >>>>> " +  JSON.stringify(assessment_centre_activities_info));
               callback(null);
           }});
   }
@@ -135,7 +135,7 @@ function getAC(callback){
                allReviewQuestionsForAllActivities.push(rows);
 
                if(allReviewQuestionsForAllActivities.length == activities.length){
-                  //console.log("SUBMIT -  AllReviewQuestions INFO >>>>> " + JSON.stringify(allReviewQuestionsForAllActivities));
+                  console.log("SUBMIT -  AllReviewQuestions INFO >>>>> " + JSON.stringify(allReviewQuestionsForAllActivities));
                   callback(null);
                }
             }});
