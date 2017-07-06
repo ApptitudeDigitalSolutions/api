@@ -146,47 +146,20 @@ function getAC(callback){
 
         console.log(info);
 
-//         for ( j in assessment_centre_activities_info){
-//           var activity_results_for_candidate ={};
-//           var query;
-
-//           if(assessment_centre_activities_info[j].activity_type == "i"){
-//             query = 'SELECT DISTINCT(question_id) FROM Interview_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id DESC;';
-//           }
-
-//           if(assessment_centre_activities_info[j].activity_type == "p"){
-//             query = 'SELECT DISTINCT(question_id) FROM Presentation_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id DESC;';
-//           }
-
-//           if(assessment_centre_activities_info[j].activity_type == "rp"){
-//             query = 'SELECT DISTINCT(question_id) FROM Roleplay_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id DESC;';
-//           }
-
-// // get index of activity 
-//           var indexOfActivityInArray = 0;
-//           //console.log("THE activiites are " + activities);
-//           for(f in activities){
-//              //console.log("THE activiites IS " + activities[f]);
-//             if(activities[f] == assessment_centre_activities_info[j].activity_type){
-//                 indexOfActivityInArray = f;
-//             }
-//           }
-
-
-        for ( j in activities){
+        for ( j in assessment_centre_activities_info){
           var activity_results_for_candidate ={};
           var query;
 
-          if(activities[j] == "i"){
-            query = 'SELECT * FROM Interview_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id DESC;';
+          if(assessment_centre_activities_info[j].activity_type == "i"){
+            query = 'SELECT DISTINCT(question_id) FROM Interview_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id DESC;';
           }
 
-          if(activities[j] == "p"){
-            query = 'SELECT * FROM Presentation_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id DESC;';
+          if(assessment_centre_activities_info[j].activity_type == "p"){
+            query = 'SELECT DISTINCT(question_id) FROM Presentation_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id DESC;';
           }
 
-          if(activities[j] == "rp"){
-            query = 'SELECT * FROM Roleplay_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id DESC;';
+          if(assessment_centre_activities_info[j].activity_type == "rp"){
+            query = 'SELECT DISTINCT(question_id) FROM Roleplay_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id DESC;';
           }
 
 // get index of activity 
@@ -194,10 +167,37 @@ function getAC(callback){
           //console.log("THE activiites are " + activities);
           for(f in activities){
              //console.log("THE activiites IS " + activities[f]);
-            if(activities[f] == activities[j]){
+            if(activities[f] == assessment_centre_activities_info[j].activity_type){
                 indexOfActivityInArray = f;
             }
           }
+
+
+//         for ( j in activities){
+//           var activity_results_for_candidate ={};
+//           var query;
+
+//           if(activities[j] == "i"){
+//             query = 'SELECT * FROM Interview_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id DESC;';
+//           }
+
+//           if(activities[j] == "p"){
+//             query = 'SELECT * FROM Presentation_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id DESC;';
+//           }
+
+//           if(activities[j] == "rp"){
+//             query = 'SELECT * FROM Roleplay_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id DESC;';
+//           }
+
+// // get index of activity 
+//           var indexOfActivityInArray = 0;
+//           //console.log("THE activiites are " + activities);
+//           for(f in activities){
+//              //console.log("THE activiites IS " + activities[f]);
+//             if(activities[f] == activities[j]){
+//                 indexOfActivityInArray = f;
+//             }
+//           }
 
           grabDataAndFormat(query,indexOfActivityInArray,j,info);
         }
