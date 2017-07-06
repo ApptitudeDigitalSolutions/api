@@ -32,10 +32,10 @@ if(mm<10) {
 today = mm+'/'+dd+'/'+yyyy;
 
 var mysql = require('mysql');
-var connectionAC_MACRO = mysql.createConnection({ host: req.app.locals.AC_MACRO_DB_HOST, user: req.app.locals.AC_MACRO_DB_USER, password: req.app.locals.AC_MACRO_DB_PASSWORD, database: req.app.locals.AC_MACRO_DB_NAME });
+var connectionAC_MACRO = mysql.createConnection({ host: req.app.locals.AC_MACRO_DB_HOST, user: req.app.locals.AC_MACRO_DB_USER, password: req.app.locals.AC_MACRO_DB_PASSWORD, database: req.app.locals.AC_MACRO_DB_NAME , multipleStatements:true});
 connectionAC_MACRO.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
 
-var connectionMACRO = mysql.createConnection({ host: req.app.locals.MACRO_DB_HOST, user: req.app.locals.MACRO_DB_USER, password: req.app.locals.MACRO_DB_PASSWORD, database: req.app.locals.MACRO_DB_NAME });
+var connectionMACRO = mysql.createConnection({ host: req.app.locals.MACRO_DB_HOST, user: req.app.locals.MACRO_DB_USER, password: req.app.locals.MACRO_DB_PASSWORD, database: req.app.locals.MACRO_DB_NAME , multipleStatements:true});
 connectionMACRO.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
 
 
@@ -135,7 +135,7 @@ function getAC(callback){
                allReviewQuestionsForAllActivities.push(rows);
 
                if(allReviewQuestionsForAllActivities.length == activities.length){
-                  console.log("SUBMIT -  AllReviewQuestions INFO >>>>> " + JSON.stringify(allReviewQuestionsForAllActivities));
+                  //console.log("SUBMIT -  AllReviewQuestions INFO >>>>> " + JSON.stringify(allReviewQuestionsForAllActivities));
                   callback(null);
                }
             }});
@@ -161,28 +161,30 @@ function getAC(callback){
         for ( j in assessment_centre_activities_info){
           var activity_results_for_candidate ={};
           var query;
-
+          var ACAcitivtyTypes = [];
           if(assessment_centre_activities_info[j].activity_type == "i"){
-            query = 'SELECT DISTINCT(question_id) FROM Interview_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id DESC;';
+            query = query + 'SELECT DISTINCT(question_id) FROM Interview_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id DESC;';
+            ACAcitivtyTypes.push("i");
           }
 
           if(assessment_centre_activities_info[j].activity_type == "p"){
-            query = 'SELECT DISTINCT(question_id) FROM Presentation_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id DESC;';
+            query = query + 'SELECT DISTINCT(question_id) FROM Presentation_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id DESC;';
+             ACAcitivtyTypes.push("p");
           }
 
           if(assessment_centre_activities_info[j].activity_type == "rp"){
-            query = 'SELECT DISTINCT(question_id) FROM Roleplay_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id DESC;';
+            query = query + 'SELECT DISTINCT(question_id) FROM Roleplay_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id DESC;';
+             ACAcitivtyTypes.push("rp");
           }
 
-// get index of activity 
-          var indexOfActivityInArray = 0;
-          ////console.log("THE activiites are " + activities);
-          for(f in activities){
-             ////console.log("THE activiites IS " + activities[f]);
-            if(activities[f] == assessment_centre_activities_info[j].activity_type){
-                indexOfActivityInArray = f;
-            }
-          }
+          info.activities.push({      
+                                      acticity_type:assessment_centre_activities_info[j].activity_type,
+                                      activity_report_intro:assessment_centre_activities_info[j].actiity_report_intro_text,
+                                      activity_report_intro_table:[],
+                                      activity_performace_overview_table:[],
+                                      activity_report_components:[]
+                                });
+        }
 
 
 //         for ( j in activities){
@@ -211,30 +213,37 @@ function getAC(callback){
 //             }
 //           }
 
-          grabDataAndFormat(query,indexOfActivityInArray,j,info);
+          grabDataAndFormat(query,ACAcitivtyTypes,info);
         }
       }
   }
 
 
-  function grabDataAndFormat(query,indexOfActivityInArraySELECTED,theValueOfJ,info){
+  function grabDataAndFormat(query,ACAcitivtyTypes,info){
 
       connectionAC_MACRO.query(query, function(err, rows) {if (err) { //console.log('Error SQL :' + err); return;} else {
               activity_results_for_candidate = rows;
 
-              //console.log("CANDIDATE RESULTS <<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>> " + JSON.stringify(rows));
+              console.log(info);
+
+              // we should get all results for a candidate in here
+
+              // we want to itterate over all the objects
+
+              // getting and building the json object as per 
+
+              // console.log("CANDIDATE RESULTS <<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>> " + JSON.stringify(rows));
              
               // for every activity get the results for a particular user 
-              var activity_report = {
-                                    acticity_type:assessment_centre_activities_info[theValueOfJ].activity_type,
-                                    activity_report_intro:assessment_centre_activities_info[theValueOfJ].actiity_report_intro_text,
-                                    activity_report_intro_table:[],
-                                    activity_performace_overview_table:[],
-                                    activity_report_components:[]
-                                  }
+              // var activity_report = {
+              //                         acticity_type:assessment_centre_activities_info[theValueOfJ].activity_type,
+              //                         activity_report_intro:assessment_centre_activities_info[theValueOfJ].actiity_report_intro_text,
+              //                         activity_report_intro_table:[],
+              //                         activity_performace_overview_table:[],
+              //                         activity_report_components:[]
+              //                       }
 
             // FILLING IN activity_report_intro_table
-
 
             // for i in tables 
 
@@ -243,8 +252,6 @@ function getAC(callback){
             // ok we need to go over each result, then break down 
 
             //console.log("SUBMIT - THE VALUE OF J = " + theValueOfJ);
-
-           
            
             for(mqm in allReviewQuestionsForAllActivities[indexOfActivityInArraySELECTED]){
 
