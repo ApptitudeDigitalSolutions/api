@@ -200,7 +200,7 @@ function getAC(callback){
               activity_results_for_candidate = rows;
 
               // console.log(info);
-              // console.log(rows);  
+               console.log(rows);  
 
               // we should get all results for a candidate in here
 
