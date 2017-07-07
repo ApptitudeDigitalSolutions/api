@@ -4,6 +4,7 @@ var ACID = req.body.ACID;
 var username = req.body.username;
 var passcode = req.body.passcode;
 var officegen = require('officegen');
+const Pool = require('threads').Pool;
 
 var candidates_info={};
 var company_info= {};
@@ -185,8 +186,21 @@ function getAC(callback){
                                       activity_report_components:[]
                                 });
         }
-
-         grabDataAndFormat(query,ACAcitivtyTypes,info);
+        const spawn = require('threads').spawn;
+        const thread = spawn(function (query,ACAcitivtyTypes,info) {
+          // Remember that this function will be run in another execution context. 
+           
+             return new Promise(resolve => {
+                grabDataAndFormat(query,ACAcitivtyTypes,info);
+              })
+        });
+        
+        thread.send(query,ACAcitivtyTypes,info)
+              // The handlers come here: (none of them is mandatory) 
+              .on('message', function(response) {
+                console.log('DONE THIS ONE ', response);
+                thread.kill();
+              });
          
         }
 
@@ -195,16 +209,16 @@ function getAC(callback){
 
   function grabDataAndFormat(query,ACAcitivtyTypes,info){
              // console.log(query);
-             console.log("CALLED grabDataAndFormat + " + query + " WITH INFO + " + info);
+      console.log("CALLED grabDataAndFormat + " + query + " WITH INFO + " + info);
       connectionAC_MACRO.query(query, function(err, results) {if (err) 
               console.log(err);
                 { //console.log('Error SQL :' + err); return;} else {
               //activity_results_for_candidate = rows;
 
               // console.log(info);
-               console.log("QUERY 1 " + results[0]); 
-               console.log("QUERY 2 " + results[1]); 
-               console.log("QUERY 3 " + results[2]); 
+               // console.log("QUERY 1 " + results[0]); 
+               // console.log("QUERY 2 " + results[1]); 
+               // console.log("QUERY 3 " + results[2]); 
 
 
 
