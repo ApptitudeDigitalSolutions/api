@@ -193,6 +193,7 @@ function getAC(callback){
              // return new Promise(resolve => {
                 // grabDataAndFormat(query,ACAcitivtyTypes,info);
               // })
+              var mysql = require('mysql');
             var connectionAC_MACRO = mysql.createConnection({ host: req.app.locals.AC_MACRO_DB_HOST, user: req.app.locals.AC_MACRO_DB_USER, password: req.app.locals.AC_MACRO_DB_PASSWORD, database: req.app.locals.AC_MACRO_DB_NAME , multipleStatements:true});
 connectionAC_MACRO.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
 
