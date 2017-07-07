@@ -187,12 +187,14 @@ function getAC(callback){
                                 });
         }
         const spawn = require('threads').spawn;
-        const thread = spawn(function (query,ACAcitivtyTypes,info) {
+        const thread = spawn(function (query,ACAcitivtyTypes,info,req) {
           // Remember that this function will be run in another execution context. 
            
              // return new Promise(resolve => {
                 // grabDataAndFormat(query,ACAcitivtyTypes,info);
               // })
+            var connectionAC_MACRO = mysql.createConnection({ host: req.app.locals.AC_MACRO_DB_HOST, user: req.app.locals.AC_MACRO_DB_USER, password: req.app.locals.AC_MACRO_DB_PASSWORD, database: req.app.locals.AC_MACRO_DB_NAME , multipleStatements:true});
+connectionAC_MACRO.connect(function(err) { if (err) { console.error('error connecting: ' + err.stack); return; }});
 
               console.log("CALLED grabDataAndFormat + " + query + " WITH INFO + " + info);
       connectionAC_MACRO.query(query, function(err, results) {if (err) 
@@ -289,7 +291,7 @@ function getAC(callback){
           }});
         });
         
-        thread.send(query,ACAcitivtyTypes,info)
+        thread.send(query,ACAcitivtyTypes,info,req)
               // The handlers come here: (none of them is mandatory) 
               .on('message', function(response) {
                 console.log('DONE THIS ONE ', response);
