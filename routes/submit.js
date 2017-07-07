@@ -195,14 +195,18 @@ function getAC(callback){
 
   function grabDataAndFormat(query,ACAcitivtyTypes,info){
              // console.log(query);
-             console.log("CALLED grabDataAndFormat + " + query);
-      connectionAC_MACRO.query(query, function(err, rows) {if (err) 
+             console.log("CALLED grabDataAndFormat + " + query + " WITH INFO + " + info);
+      connectionAC_MACRO.query(query, function(err, results) {if (err) 
               console.log(err);
                 { //console.log('Error SQL :' + err); return;} else {
               //activity_results_for_candidate = rows;
 
               // console.log(info);
-               console.log(rows);  
+               console.log("QUERY 1 " + results[0]); 
+               console.log("QUERY 2 " + results[1]); 
+               console.log("QUERY 3 " + results[2]); 
+
+
 
               // we should get all results for a candidate in here
 
