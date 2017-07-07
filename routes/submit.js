@@ -156,7 +156,7 @@ function getAC(callback){
                     date: today,
                     activities:[]};
 
-        console.log(assessment_centre_activities_info);
+        //console.log(assessment_centre_activities_info);
         var query;
         for ( j in assessment_centre_activities_info){
           var activity_results_for_candidate ={};
@@ -195,6 +195,7 @@ function getAC(callback){
 
   function grabDataAndFormat(query,ACAcitivtyTypes,info){
              // console.log(query);
+             console.log("CALLED grabDataAndFormat");
       connectionAC_MACRO.query(query, function(err, rows) {if (err) { //console.log('Error SQL :' + err); return;} else {
               activity_results_for_candidate = rows;
 
