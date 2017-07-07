@@ -191,8 +191,102 @@ function getAC(callback){
           // Remember that this function will be run in another execution context. 
            
              // return new Promise(resolve => {
-                grabDataAndFormat(query,ACAcitivtyTypes,info);
+                // grabDataAndFormat(query,ACAcitivtyTypes,info);
               // })
+
+              console.log("CALLED grabDataAndFormat + " + query + " WITH INFO + " + info);
+      connectionAC_MACRO.query(query, function(err, results) {if (err) 
+              console.log(err);
+                { //console.log('Error SQL :' + err); return;} else {
+              //activity_results_for_candidate = rows;
+
+              // console.log(info);
+               // console.log("QUERY 1 " + results[0]); 
+               // console.log("QUERY 2 " + results[1]); 
+               // console.log("QUERY 3 " + results[2]); 
+
+
+
+              // we should get all results for a candidate in here
+
+              // we want to itterate over all the objects
+
+              // getting and building the json object as per 
+
+              // console.log("CANDIDATE RESULTS <<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>> " + JSON.stringify(rows));
+             
+              // for every activity get the results for a particular user 
+              // var activity_report = {
+              //                         acticity_type:assessment_centre_activities_info[theValueOfJ].activity_type,
+              //                         activity_report_intro:assessment_centre_activities_info[theValueOfJ].actiity_report_intro_text,
+              //                         activity_report_intro_table:[],
+              //                         activity_performace_overview_table:[],
+              //                         activity_report_components:[]
+              //                       }
+
+            // FILLING IN activity_report_intro_table
+
+            // for i in tables 
+
+            // FILLING IN activity_performace_overview_table
+
+            // ok we need to go over each result, then break down 
+
+            //console.log("SUBMIT - THE VALUE OF J = " + theValueOfJ);
+           
+            // for(mqm in allReviewQuestionsForAllActivities[indexOfActivityInArraySELECTED]){
+
+            //   //console.log("BRESK " + allReviewQuestionsForAllActivities[indexOfActivityInArraySELECTED][0].review_question);
+            //    activity_report.activity_report_components.push({title:allReviewQuestionsForAllActivities[indexOfActivityInArraySELECTED][0].review_question,table:[]});
+
+            //   // a new table for each needs to be created
+
+            //    activity_report.activity_report_components[theValueOfJ].table.push({cells:"Questions|Answers|Catergory"});
+
+            // // now we only want to process the results for the current question ( represnted by mqm here )
+            //     for(m in activity_results_for_candidate){
+
+            //       if(activity_results_for_candidate[m].question_id == mqm){
+
+            //       var answerType = "";
+
+            //       if(activity_results_for_candidate[m]=="pi"){
+            //           answerType = "Positive";
+            //       }
+            //        if(activity_results_for_candidate[m]=="ni"){
+            //           answerType = "Negative";
+            //       }
+            //        if(activity_results_for_candidate[m]=="s"){
+            //           answerType = "Score";
+            //       }
+            //        if(activity_results_for_candidate[m]=="ac"){
+            //           answerType = "Commnet";
+            //       }
+
+            //       var stringToInserIntoCell = activity_results_for_candidate[m].question_id+"|"+activity_results_for_candidate[m].answer_text+"|"+answerType;
+            //       activity_report.activity_report_components[theValueOfJ].table.push({cells:stringToInserIntoCell});
+            //     }
+
+            //   }
+
+            // }
+
+            // info.activities.push(activity_report);
+            //  //console.log("SUBMIT - The Final JSON object looks like >> " + JSON.stringify(info));
+
+            //     // pass to create wizard
+            //     var docGen = require("./WordDocGen.js");
+                
+            //     docGen.generate(info,ACID,function(returnValue) {
+            //       if(returnValue ==true){
+            //         //console.log("The doc has been generated");
+            //       }else{
+            //         //console.log("Error Generating Doc");
+            //       }
+            //     });
+
+
+          }});
         });
         
         thread.send(query,ACAcitivtyTypes,info)
