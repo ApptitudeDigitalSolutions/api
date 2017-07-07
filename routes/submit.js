@@ -208,11 +208,11 @@ function getAC(callback){
               //activity_results_for_candidate = rows;
 
               // console.log(info);
-               // console.log("QUERY 1 " + results[0]); 
+                console.log("QUERY 1 " + results[0]); 
                // console.log("QUERY 2 " + results[1]); 
                // console.log("QUERY 3 " + results[2]); 
 
-                              console.log("QUERY "); 
+               //               console.log("QUERY "); 
 
               // we should get all results for a candidate in here
 
