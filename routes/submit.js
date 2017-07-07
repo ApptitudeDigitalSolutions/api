@@ -163,17 +163,17 @@ function getAC(callback){
           
           var ACAcitivtyTypes = [];
           if(assessment_centre_activities_info[j].activity_type == "i"){
-            query = query + 'SELECT DISTINCT(question_id) FROM Interview_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id DESC;';
+            query = query + 'SELECT * FROM Interview_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id DESC;';
             ACAcitivtyTypes.push("i");
           }
 
           if(assessment_centre_activities_info[j].activity_type == "p"){
-            query = query + 'SELECT DISTINCT(question_id) FROM Presentation_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id DESC;';
+            query = query + 'SELECT * FROM Presentation_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id DESC;';
              ACAcitivtyTypes.push("p");
           }
 
           if(assessment_centre_activities_info[j].activity_type == "rp"){
-            query = query + 'SELECT DISTINCT(question_id) FROM Roleplay_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id DESC;';
+            query = query + 'SELECT * FROM Roleplay_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id DESC;';
              ACAcitivtyTypes.push("rp");
           }
 
@@ -229,56 +229,56 @@ function getAC(callback){
 
             //console.log("SUBMIT - THE VALUE OF J = " + theValueOfJ);
            
-            for(mqm in allReviewQuestionsForAllActivities[indexOfActivityInArraySELECTED]){
+            // for(mqm in allReviewQuestionsForAllActivities[indexOfActivityInArraySELECTED]){
 
-              //console.log("BRESK " + allReviewQuestionsForAllActivities[indexOfActivityInArraySELECTED][0].review_question);
-               activity_report.activity_report_components.push({title:allReviewQuestionsForAllActivities[indexOfActivityInArraySELECTED][0].review_question,table:[]});
+            //   //console.log("BRESK " + allReviewQuestionsForAllActivities[indexOfActivityInArraySELECTED][0].review_question);
+            //    activity_report.activity_report_components.push({title:allReviewQuestionsForAllActivities[indexOfActivityInArraySELECTED][0].review_question,table:[]});
 
-              // a new table for each needs to be created
+            //   // a new table for each needs to be created
 
-               activity_report.activity_report_components[theValueOfJ].table.push({cells:"Questions|Answers|Catergory"});
+            //    activity_report.activity_report_components[theValueOfJ].table.push({cells:"Questions|Answers|Catergory"});
 
-            // now we only want to process the results for the current question ( represnted by mqm here )
-                for(m in activity_results_for_candidate){
+            // // now we only want to process the results for the current question ( represnted by mqm here )
+            //     for(m in activity_results_for_candidate){
 
-                  if(activity_results_for_candidate[m].question_id == mqm){
+            //       if(activity_results_for_candidate[m].question_id == mqm){
 
-                  var answerType = "";
+            //       var answerType = "";
 
-                  if(activity_results_for_candidate[m]=="pi"){
-                      answerType = "Positive";
-                  }
-                   if(activity_results_for_candidate[m]=="ni"){
-                      answerType = "Negative";
-                  }
-                   if(activity_results_for_candidate[m]=="s"){
-                      answerType = "Score";
-                  }
-                   if(activity_results_for_candidate[m]=="ac"){
-                      answerType = "Commnet";
-                  }
+            //       if(activity_results_for_candidate[m]=="pi"){
+            //           answerType = "Positive";
+            //       }
+            //        if(activity_results_for_candidate[m]=="ni"){
+            //           answerType = "Negative";
+            //       }
+            //        if(activity_results_for_candidate[m]=="s"){
+            //           answerType = "Score";
+            //       }
+            //        if(activity_results_for_candidate[m]=="ac"){
+            //           answerType = "Commnet";
+            //       }
 
-                  var stringToInserIntoCell = activity_results_for_candidate[m].question_id+"|"+activity_results_for_candidate[m].answer_text+"|"+answerType;
-                  activity_report.activity_report_components[theValueOfJ].table.push({cells:stringToInserIntoCell});
-                }
+            //       var stringToInserIntoCell = activity_results_for_candidate[m].question_id+"|"+activity_results_for_candidate[m].answer_text+"|"+answerType;
+            //       activity_report.activity_report_components[theValueOfJ].table.push({cells:stringToInserIntoCell});
+            //     }
 
-              }
+            //   }
 
-            }
+            // }
 
-            info.activities.push(activity_report);
-             //console.log("SUBMIT - The Final JSON object looks like >> " + JSON.stringify(info));
+            // info.activities.push(activity_report);
+            //  //console.log("SUBMIT - The Final JSON object looks like >> " + JSON.stringify(info));
 
-                // pass to create wizard
-                var docGen = require("./WordDocGen.js");
+            //     // pass to create wizard
+            //     var docGen = require("./WordDocGen.js");
                 
-                docGen.generate(info,ACID,function(returnValue) {
-                  if(returnValue ==true){
-                    //console.log("The doc has been generated");
-                  }else{
-                    //console.log("Error Generating Doc");
-                  }
-                });
+            //     docGen.generate(info,ACID,function(returnValue) {
+            //       if(returnValue ==true){
+            //         //console.log("The doc has been generated");
+            //       }else{
+            //         //console.log("Error Generating Doc");
+            //       }
+            //     });
 
 
           }});
