@@ -157,7 +157,7 @@ function getAC(callback){
                     activities:[]};
 
         //console.log(assessment_centre_activities_info);
-        var query;
+        var query = "";
         for ( j in assessment_centre_activities_info){
           var activity_results_for_candidate ={};
           
