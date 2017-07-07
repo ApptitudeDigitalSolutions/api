@@ -201,14 +201,14 @@ function getAC(callback){
 
   function grabDataAndFormat(query,ACAcitivtyTypes,info){
              // console.log(query);
-      console.log("CALLED grabDataAndFormat + " + query + " WITH INFO + " + info);
+      //console.log("CALLED grabDataAndFormat + " + query + " WITH INFO + " + info);
       connectionAC_MACRO.query(query, function(err, results) {if (err) 
               console.log(err);
                 { //console.log('Error SQL :' + err); return;} else {
               //activity_results_for_candidate = rows;
 
               // console.log(info);
-                console.log("QUERY 1 " + results[0]); 
+                console.log(JSON.stringify(info) + "+ QUERY 1 " + results[0]); 
                // console.log("QUERY 2 " + results[1]); 
                // console.log("QUERY 3 " + results[2]); 
 
