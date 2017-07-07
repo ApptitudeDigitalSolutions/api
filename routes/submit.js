@@ -156,11 +156,11 @@ function getAC(callback){
                     date: today,
                     activities:[]};
 
-        //console.log(info);
-
+        console.log(assessment_centre_activities_info);
+        var query;
         for ( j in assessment_centre_activities_info){
           var activity_results_for_candidate ={};
-          var query;
+          
           var ACAcitivtyTypes = [];
           if(assessment_centre_activities_info[j].activity_type == "i"){
             query = query + 'SELECT DISTINCT(question_id) FROM Interview_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id DESC;';
@@ -186,46 +186,20 @@ function getAC(callback){
                                 });
         }
 
-
-//         for ( j in activities){
-//           var activity_results_for_candidate ={};
-//           var query;
-
-//           if(activities[j] == "i"){
-//             query = 'SELECT * FROM Interview_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id DESC;';
-//           }
-
-//           if(activities[j] == "p"){
-//             query = 'SELECT * FROM Presentation_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id DESC;';
-//           }
-
-//           if(activities[j] == "rp"){
-//             query = 'SELECT * FROM Roleplay_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id DESC;';
-//           }
-
-// // get index of activity 
-//           var indexOfActivityInArray = 0;
-//           ////console.log("THE activiites are " + activities);
-//           for(f in activities){
-//              ////console.log("THE activiites IS " + activities[f]);
-//             if(activities[f] == activities[j]){
-//                 indexOfActivityInArray = f;
-//             }
-//           }
-
-          grabDataAndFormat(query,ACAcitivtyTypes,info);
+         grabDataAndFormat(query,ACAcitivtyTypes,info);
+         
         }
-      // }
+
   }
 
 
   function grabDataAndFormat(query,ACAcitivtyTypes,info){
-console.log(query);
+              console.log(query);
       connectionAC_MACRO.query(query, function(err, rows) {if (err) { //console.log('Error SQL :' + err); return;} else {
               activity_results_for_candidate = rows;
 
-              console.log(info);
-              console.log(rows);  
+              // console.log(info);
+              // console.log(rows);  
 
               // we should get all results for a candidate in here
 
