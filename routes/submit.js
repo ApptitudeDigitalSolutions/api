@@ -190,9 +190,9 @@ function getAC(callback){
         const thread = spawn(function (query,ACAcitivtyTypes,info) {
           // Remember that this function will be run in another execution context. 
            
-             return new Promise(resolve => {
+             // return new Promise(resolve => {
                 grabDataAndFormat(query,ACAcitivtyTypes,info);
-              })
+              // })
         });
         
         thread.send(query,ACAcitivtyTypes,info)
