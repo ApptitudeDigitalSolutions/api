@@ -267,7 +267,7 @@ function getAC(callback){
                           }
 
                           if(areAnswersFOrQuestion){
-                              var object = {titles:allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].review_question 
+                              var object = {title:allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].review_question 
                                       ,table:[]};
 
                                object.cells.push({cells:"Catergory|Answer"});                       // get the answers and add them to the cells array  

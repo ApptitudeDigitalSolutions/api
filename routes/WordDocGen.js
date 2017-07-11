@@ -583,7 +583,7 @@ for(i in info.activities){
 		
 		 for(zk in info.activities[i].activity_report_components){
 		
-			console.log("The question title is = "+info.activities[i].activity_report_components[zk].title);
+			//console.log("The question title is = "+info.activities[i].activity_report_components[zk].title);
 			
 			var pObj = docx.createP ();
 			pObj.addText (info.activities[i].activity_report_components[zk].title, { font_face: 'Arial', font_size: 17 });
