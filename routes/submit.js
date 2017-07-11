@@ -263,8 +263,8 @@ function getAC(callback){
                           // now we need to see if there are answes to this question int he results block provioded
                           var areAnswersFOrQuestion = false;
                           for(d in results[A]){
-                            console.log(allReviewQuestionsForAllActivities);
-                          //console.log("q id = "+ results[A][d].question_id + " and aq id = " + allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].id);
+                           // console.log(allReviewQuestionsForAllActivities);
+                          console.log("q id = "+ results[A][d].question_id + " and aq id = " + allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].review_question_id);
                             if(results[A][d].question_id == allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].review_question_id){
                               // this measn their are answers to thsi question
                               areAnswersFOrQuestion = true;
