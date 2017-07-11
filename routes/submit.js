@@ -223,7 +223,7 @@ function getAC(callback){
                         if(ACAcitivtyTypes[A] == "i"){
                           // now we need to get the index of the questions array block
                           for(B in activityTypesInOrderOfProcessing){
-                          if (activityTypesInOrderOfProcessing[b] == "i"){
+                          if (activityTypesInOrderOfProcessing[B] == "i"){
                             indexOfQuestionsForACActivity = B;
                           }
                           }
@@ -232,7 +232,7 @@ function getAC(callback){
                         if(ACAcitivtyTypes[A] == "p"){
                           // now we need to get the index of the questions array block
                           for(B in activityTypesInOrderOfProcessing){
-                          if (activityTypesInOrderOfProcessing[b] == "p"){
+                          if (activityTypesInOrderOfProcessing[B] == "p"){
                             indexOfQuestionsForACActivity = B;
                           }
                           }
@@ -241,7 +241,7 @@ function getAC(callback){
                         if(ACAcitivtyTypes[A] == "rp"){
                           // now we need to get the index of the questions array block
                           for(B in activityTypesInOrderOfProcessing){
-                          if (activityTypesInOrderOfProcessing[b] == "rp"){
+                          if (activityTypesInOrderOfProcessing[B] == "rp"){
                             indexOfQuestionsForACActivity = B;
                           }
                           }
