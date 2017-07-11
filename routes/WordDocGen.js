@@ -319,7 +319,7 @@ for(i in info.activities){
 				borders: true
 			}
 
-			var table=[[]];
+			var table=[[],[]];
 		
 			for(j in info.activities[i].activity_report_components[zk].table){
 				// split string down 
@@ -334,17 +334,17 @@ for(i in info.activities){
 						var columnObject = {
 											val: arrayOfColumns[k]
 											,
-											// opts: {
-											// 	cellColWidth: 4261,
-											// 	b:true,
-											// 	sz: '22',
-											// 	fontFamily: "Arial",
-											// 	shd: {
-									  //               fill: "92CDDC",
+											opts: {
+												cellColWidth: 4261,
+												b:true,
+												sz: '22',
+												fontFamily: "Arial",
+												shd: {
+									                fill: "92CDDC",
 									               
-									  //               "themeFillTint": "80"
-									  //           }
-											// }
+									                "themeFillTint": "80"
+									            }
+											}
 										};
 						table[0][k] = columnObject;
 					}
@@ -365,8 +365,8 @@ for(i in info.activities){
 						cellsRow.push({val: arrayOfColumns[0], opts: {gridSpan: table[0].length}});
 					}
 
-					table.push(cellsRow);
-					console.log(table);
+					table[1].push(cellsRow);
+					//console.log(table);
 
 				}
 
