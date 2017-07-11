@@ -89,7 +89,7 @@ var docx = officegen ( {
 // 			]
 // 			};
 			
-// console.log(" BAD MAN " + JSON.stringify(info));
+console.log(" BAD MAN " + JSON.stringify(info));
 
 
 // console.log(" CORRECT " + JSON.stringify(info2));

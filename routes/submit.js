@@ -135,7 +135,7 @@ function getAC(callback){
 
   function getActivitiesQuestions(callback){
         activities = assessment_centre_info[0].activity_types.split(",");
-        console.log("THE ACTIVITIES ARE "+ activities + " AND EVENTS COUNT = " + activities.length);
+        //console.log("THE ACTIVITIES ARE "+ activities + " AND EVENTS COUNT = " + activities.length);
         var query = "";
         for(i in activities){
 
@@ -185,7 +185,7 @@ function getAC(callback){
         var query = "";
         var ACAcitivtyTypes = [];
         for ( j in assessment_centre_activities_info){
-          console.log(assessment_centre_activities_info[j].activity_type);
+          //console.log(assessment_centre_activities_info[j].activity_type);
     
           var activity_results_for_candidate ={};
           
@@ -234,7 +234,7 @@ function getAC(callback){
                  for(A in results){
 
                       if(results[A].length > 0){
-                        console.log("Arry of tag = " + ACAcitivtyTypes[A]);
+                        //console.log("Arry of tag = " + ACAcitivtyTypes[A]);
                         //console.log(JSON.stringify(results[A]));
                         // this means there are results of this acticity , question is  which activity was it 
                         // we know this by getting the 
@@ -323,7 +323,7 @@ function getAC(callback){
 
 
 
-                     console.log(object);
+                     //console.log(object);
                      if(object.length > 0){
                         info.activities[A].activity_report_components.push(object);
                       }else{
@@ -344,7 +344,7 @@ function getAC(callback){
 
             //  info.activities.push(activity_report);
             if(info.activities.length > 0){
-             console.log("SUBMIT - The Final JSON object looks like >> " + JSON.stringify(info));
+             //console.log("SUBMIT - The Final JSON object looks like >> " + JSON.stringify(info));
 
                 // pass to create wizard
 
