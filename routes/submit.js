@@ -169,6 +169,7 @@ function getAC(callback){
   function createWordDocReport(callback){
 
     var currentActivityBringProcessed = 0;
+    console.log(assessment_centre_activities_info);
     for(i in candidates_info){
 
         // console.log("SUBMIT - Candidate PROCESSING  >>>>> " + JSON.stringify(candidates_info[i]));
@@ -179,7 +180,7 @@ function getAC(callback){
                     date: today,
                     activities:[]};
 
-        console.log(assessment_centre_activities_info);
+
         var query = "";
         for ( j in assessment_centre_activities_info){
           var activity_results_for_candidate ={};
