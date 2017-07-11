@@ -171,9 +171,8 @@ function getAC(callback){
   function createWordDocReport(callback){
 
     var currentActivityBringProcessed = 0;
-    console.log(assessment_centre_activities_info);
     for(i in candidates_info){
-
+    
         // console.log("SUBMIT - Candidate PROCESSING  >>>>> " + JSON.stringify(candidates_info[i]));
         // add ac info to report 
         var info = {title:assessment_centre_info[0].title,
@@ -185,6 +184,8 @@ function getAC(callback){
 
         var query = "";
         for ( j in assessment_centre_activities_info){
+          console.log(assessment_centre_activities_info[j].activity_type);
+    
           var activity_results_for_candidate ={};
           
           var ACAcitivtyTypes = [];
