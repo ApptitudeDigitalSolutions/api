@@ -86,9 +86,7 @@ var authenticate = require("./auth.js");
             connectionAC_MACRO.query(query, function(err, rows) {if (err) { //console.log('Error SQL :' + err); 
               return;} else {
               candidates_info = rows;
-              //console.log("SUBMIT - Candidates INFO >>>>> " +  JSON.stringify(candidates_info));
-
-              TEMPLATE = 
+             
               callback(null);
         	}});
   } 
@@ -109,7 +107,7 @@ function getAC(callback){
           var query = 'SELECT * FROM Assessment_Center_activities WHERE ac_id = '+ACID+';';
             connectionAC_MACRO.query(query, function(err, rows) {if (err) { //console.log('Error SQL :' + err); 
               return;} else {
-              assessment_centre_activities_info = rows;
+              //assessment_centre_activities_info = rows;
 
               // we watn to add these rows to assessment_centre_activities_info only if the activity type is also found in the template
               var hasAdded;
@@ -120,6 +118,7 @@ function getAC(callback){
                 for(j in acts){
                   if(rows[i].activity_type == acts[j] && hasAdded == false){
                     assessment_centre_activities_info.push(rows[i]);
+                    console.log("ADDING ROW " + rows[i]);
                     hasAdded=true;
                   }
                 } 
@@ -135,7 +134,7 @@ function getAC(callback){
 
   function getActivitiesQuestions(callback){
         activities = assessment_centre_info[0].activity_types.split(",");
-        console.log("THE ACTIVITIES ARE "+ activities + " AND EVENTS COUNT = " + activities.length);
+        //console.log("THE ACTIVITIES ARE "+ activities + " AND EVENTS COUNT = " + activities.length);
         var query = "";
         for(i in activities){
 
