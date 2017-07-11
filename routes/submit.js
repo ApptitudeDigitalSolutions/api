@@ -110,7 +110,7 @@ function getAC(callback){
               //assessment_centre_activities_info = rows;
 
               // we watn to add these rows to assessment_centre_activities_info only if the activity type is also found in the template
-              var hasAdded;
+              var hasAdded = false;
               var acts = assessment_centre_info[0].activity_types.split(",");
               console.log(acts);
               for(i in rows){
