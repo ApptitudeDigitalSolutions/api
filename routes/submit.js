@@ -99,10 +99,7 @@ function getAC(callback){
             connectionAC_MACRO.query(query, function(err, rows) {if (err) { //console.log('Error SQL :' + err); 
               return;} else {
               assessment_centre_info = rows;
-              for(i in rows){
-                activities.push(rows[i].activity_types);
-              }
-              //console.log("SUBMIT - Assessment Center INFO >>>>> " +  JSON.stringify(assessment_centre_info));
+             
               callback(null);
           }});
   }
@@ -113,6 +110,20 @@ function getAC(callback){
             connectionAC_MACRO.query(query, function(err, rows) {if (err) { //console.log('Error SQL :' + err); 
               return;} else {
               assessment_centre_activities_info = rows;
+
+              // we watn to add these rows to assessment_centre_activities_info only if the activity type is also found in the template
+              var hasAdded;
+              var acts = assessment_centre_info[0].activity_types.split(",");
+              for(i in rows){
+
+                for(j in acts){
+                  if(rows[i].activity_type == acts[j] && hasAdded == false){
+                    assessment_centre_activities_info.push(rows[i]);
+                    hasAdded=true;
+                  }
+                } 
+                hasAdded=false;
+              }
               //console.log("SUBMIT - Assessment Center Activities INFO >>>>> " +  JSON.stringify(assessment_centre_activities_info));
               callback(null);
           }});
@@ -122,8 +133,8 @@ function getAC(callback){
 // itterate over the activities,but you need some way of keeping track of which queries were perfomed in what order, and theres no 
 
   function getActivitiesQuestions(callback){
-        // activities = assessment_centre_info[0].activity_types.split(",");
-        console.log("THE ACTIVITIES ARE "+ activities + " AND EVENTS COUNT = " + activities.length);
+         activities = assessment_centre_info[0].activity_types.split(",");
+        //console.log("THE ACTIVITIES ARE "+ activities + " AND EVENTS COUNT = " + activities.length);
         var query = "";
         for(i in activities){
 
