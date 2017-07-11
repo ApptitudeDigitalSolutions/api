@@ -215,6 +215,8 @@ function getAC(callback){
                  for(A in results){
 
                       if(results[A].length > 0){
+
+                        console.log(JSON.stringify(results[A]));
                         // this means there are results of this acticity , question is  which activity was it 
                         // we know this by getting the 
 
@@ -317,7 +319,7 @@ function getAC(callback){
 
             //  info.activities.push(activity_report);
             if(info.activities.length > 0){
-             console.log("SUBMIT - The Final JSON object looks like >> " + JSON.stringify(info));
+            // console.log("SUBMIT - The Final JSON object looks like >> " + JSON.stringify(info));
 
                 // pass to create wizard
 
