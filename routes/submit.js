@@ -135,7 +135,7 @@ function getAC(callback){
 
   function getActivitiesQuestions(callback){
         activities = assessment_centre_info[0].activity_types.split(",");
-        //console.log("THE ACTIVITIES ARE "+ activities + " AND EVENTS COUNT = " + activities.length);
+        console.log("THE ACTIVITIES ARE "+ activities + " AND EVENTS COUNT = " + activities.length);
         var query = "";
         for(i in activities){
 
@@ -158,6 +158,7 @@ function getAC(callback){
           return;} else {
 
             for ( i in results){
+              console.log("Adding Results");
               allReviewQuestionsForAllActivities.push(results[i]);
             }
             //console.log(JSON.stringify(allReviewQuestionsForAllActivities));
