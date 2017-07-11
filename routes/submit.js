@@ -235,7 +235,7 @@ function getAC(callback){
                  for(A in results){
 
                       if(results[A].length > 0){
-console.log("Arry of tags = " + ACAcitivtyTypes[A]);
+console.log("Arry of tag = " + ACAcitivtyTypes[A]);
                         //console.log(JSON.stringify(results[A]));
                         // this means there are results of this acticity , question is  which activity was it 
                         // we know this by getting the 
@@ -271,14 +271,14 @@ console.log("Arry of tags = " + ACAcitivtyTypes[A]);
 
 
 
-                        console.log("Index for Interview quesitons = " + indexOfQuestionsForACActivity + " for results at index " + A + " for activty tupe " + ACAcitivtyTypes[A]);
+                        console.log("Index for quesitons = " + indexOfQuestionsForACActivity + " for results at index " + A + " for activty tupe " + ACAcitivtyTypes[A]);
 
 
                         // ok now we can fill out the JSON objects
                         var object ={};
                          for(c in allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity]){
                           
-                          //console.log("QUESTION = " + allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].review_question);
+                          console.log("QUESTIONs = " + JSON.stringify(allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity]));
 
                           // now we need to see if there are answes to this question int he results block provioded
                           var areAnswersFOrQuestion = false;
