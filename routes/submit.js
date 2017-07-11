@@ -257,12 +257,13 @@ function getAC(callback){
                         // ok now we can fill out the JSON objects
                         var object ={};
                          for(c in allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity]){
-                          console.log("hi")
+                          
                           //console.log("QUESTION = " + allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].review_question);
 
                           // now we need to see if there are answes to this question int he results block provioded
                           var areAnswersFOrQuestion = false;
                           for(d in results[A]){
+                          console.log("q id = "+ results[A][d].question_id);
                             if(results[A][d].question_id == allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].id){
                               // this measn their are answers to thsi question
                               areAnswersFOrQuestion = true;
