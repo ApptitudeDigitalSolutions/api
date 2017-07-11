@@ -253,7 +253,7 @@ function getAC(callback){
 
 
                         // ok now we can fill out the JSON objects
-
+                        var object ={};
                          for(c in allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity]){
                           //console.log("QUESTION = " + allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].review_question);
 
@@ -267,7 +267,7 @@ function getAC(callback){
                           }
 
                           if(areAnswersFOrQuestion){
-                              var object = {title:allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].review_question 
+                               object = {title:allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].review_question 
                                       ,table:[]};
 
                                object.cells.push({cells:"Catergory|Answer"});                       // get the answers and add them to the cells array  
@@ -295,12 +295,19 @@ function getAC(callback){
                       }
                      }
 
-                    }
-                      if(object != null){
+                     if(object.length > 0){
                       info.activities[A].activity_report_components.push(object);
                     }else{
                        info.activities.splice(A, 1);
                     }
+
+                    } 
+
+                    // if(object.length > 0){
+                    //   info.activities[A].activity_report_components.push(object);
+                    // }else{
+                    //    info.activities.splice(A, 1);
+                    // }
                  }
 
                  // Ok so now we can push this compoent of the report into the table 
