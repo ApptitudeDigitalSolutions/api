@@ -333,7 +333,7 @@ function getAC(callback){
 
             for(itter in info.activities){
               console.log("COMPONETS " + JSON.stringify(info.activities[itter].activity_report_components));
-              if(info.activities[itter].activity_report_components.length < 1 && JSON.stringify(info.activities[itter].activity_report_components) != "{}"){
+              if(info.activities[itter].activity_report_components.length < 1){
                 // we need to remove the object as its empty 
                 info.activities.splice(itter,1);
               }
