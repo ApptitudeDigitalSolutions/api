@@ -295,6 +295,7 @@ function getAC(callback){
                       }
                      }
 
+                     console.log(object);
                      if(object.length > 0){
                       info.activities[A].activity_report_components.push(object);
                     }else{
