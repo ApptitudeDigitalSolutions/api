@@ -235,7 +235,7 @@ function getAC(callback){
                  for(A in results){
 
                       if(results[A].length > 0){
-console.log("Arry of tags = " + CAcitivtyTypes[A]);
+console.log("Arry of tags = " + ACAcitivtyTypes[A]);
                         //console.log(JSON.stringify(results[A]));
                         // this means there are results of this acticity , question is  which activity was it 
                         // we know this by getting the 
