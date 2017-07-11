@@ -398,28 +398,28 @@ async.parallel ([
 		out.on ( 'close', function () {
 			console.log ( 'Finish to create a DOCX file.' );
 
-			// var postmark = require("postmark");
-			// var client = new postmark.Client("7424f227-688f-4979-93ac-e7b35d2de10d");
-			// var fs = require('fs');
+			var postmark = require("postmark");
+			var client = new postmark.Client("7424f227-688f-4979-93ac-e7b35d2de10d");
+			var fs = require('fs');
 			 
-			// client.sendEmail({
-			//     "From": "elliotcampbelton@apptitudedigitalsolutions.com", 
-			//     "To": "e.b.campbelton@gmail.com", 
-			//     "Subject": "Test", 
-			//     "TextBody": "Test Message",
-			//     "Attachments": [{
-			//       // Reading synchronously here to condense code snippet: 
-			//       "Content": fs.readFileSync(savePath).toString('base64'),
-			//       "Name": fileNameString,
-			//       "ContentType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-			//     }]
-			// }, function(error, result) {
-			//     if(error) {
-			//         console.error("Unable to send via postmark: " + error.message);
-			//         return;
-			//     }
-			//     console.info("Sent to postmark for delivery")
-			// });
+			client.sendEmail({
+			    "From": "elliotcampbelton@apptitudedigitalsolutions.com", 
+			    "To": "e.b.campbelton@gmail.com", 
+			    "Subject": "Test", 
+			    "TextBody": "Test Message",
+			    "Attachments": [{
+			      // Reading synchronously here to condense code snippet: 
+			      "Content": fs.readFileSync(savePath).toString('base64'),
+			      "Name": fileNameString,
+			      "ContentType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+			    }]
+			}, function(error, result) {
+			    if(error) {
+			        console.error("Unable to send via postmark: " + error.message);
+			        return;
+			    }
+			    console.info("Sent to postmark for delivery")
+			});
 
 			done ( null );
 		});
