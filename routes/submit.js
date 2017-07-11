@@ -249,12 +249,13 @@ function getAC(callback){
 
 
 
-                       // console.log("Index for Interview quesitons = " + indexOfQuestionsForACActivity + " for results at index " + A);
+                        console.log("Index for Interview quesitons = " + indexOfQuestionsForACActivity + " for results at index " + A);
 
 
                         // ok now we can fill out the JSON objects
                         var object ={};
                          for(c in allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity]){
+                          //console.log("")
                           //console.log("QUESTION = " + allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].review_question);
 
                           // now we need to see if there are answes to this question int he results block provioded
