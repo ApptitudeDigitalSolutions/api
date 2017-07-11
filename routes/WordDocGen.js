@@ -389,7 +389,7 @@ console.log("SAVE PATH END = " + '/home/ubuntu/api/reports/'+ ACID +'/'+fileName
 var savePath = '/home/ubuntu/api/reports/'+ ACID +'/'+fileNameString;
 var out = fs.createWriteStream ( '/home/ubuntu/api/reports/'+ ACID +'/'+fileNameString);
 // wirite file handle in db 
-
+console.log("createWriteStream NOW ");
 out.on ( 'error', function ( err ) {
 	console.log ( "ERRROR BRO " + err );
 });
