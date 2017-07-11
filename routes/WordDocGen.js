@@ -332,18 +332,19 @@ for(i in info.activities){
 
 					for(k in arrayOfColumns){
 						var columnObject = {
-											val: arrayOfColumns[k],
-											opts: {
-												cellColWidth: 4261,
-												b:true,
-												sz: '22',
-												fontFamily: "Arial",
-												shd: {
-									                fill: "92CDDC",
+											val: arrayOfColumns[k]
+											,
+											// opts: {
+											// 	cellColWidth: 4261,
+											// 	b:true,
+											// 	sz: '22',
+											// 	fontFamily: "Arial",
+											// 	shd: {
+									  //               fill: "92CDDC",
 									               
-									                "themeFillTint": "80"
-									            }
-											}
+									  //               "themeFillTint": "80"
+									  //           }
+											// }
 										};
 						table[0][k] = columnObject;
 					}
@@ -384,7 +385,7 @@ for(i in info.activities){
 }
 
 var success =true;
-console.log("SAVE PATH  = " + '/home/ubuntu/api/reports/'+ ACID +'/'+fileNameString);
+console.log("SAVE PATH END = " + '/home/ubuntu/api/reports/'+ ACID +'/'+fileNameString);
 var savePath = '/home/ubuntu/api/reports/'+ ACID +'/'+fileNameString;
 var out = fs.createWriteStream ( '/home/ubuntu/api/reports/'+ ACID +'/'+fileNameString);
 // wirite file handle in db 
