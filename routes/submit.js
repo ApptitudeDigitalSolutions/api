@@ -154,11 +154,11 @@ function getAC(callback){
         }
 
 //// THIS IS WHERE ITS GOING WRONG____T
-        connectionAC_MACRO.query(query, function(err, results) {if (err) { //console.log('Error SQL :' + err); 
+          connectionAC_MACRO.query(query, function(err, results) {if (err) { //console.log('Error SQL :' + err); 
           return;} else {
 
             for ( i in results){
-              console.log("Adding Results");
+              console.log("Adding Questions");
               allReviewQuestionsForAllActivities.push(results[i]);
             }
             //console.log(JSON.stringify(allReviewQuestionsForAllActivities));
@@ -283,7 +283,7 @@ function getAC(callback){
                           var areAnswersFOrQuestion = false;
                           for(d in results[A]){
                            // console.log(allReviewQuestionsForAllActivities);
-                          console.log("q id = "+ results[A][d].question_id + " and aq id = " + allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].review_question_id);
+                          console.log("q id = "+ results[A][d].question_id + " and aq id = " + allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c]);
                             if(results[A][d].question_id == allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].review_question_id){
                               // this measn their are answers to thsi question
                               areAnswersFOrQuestion = true;
