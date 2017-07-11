@@ -269,7 +269,7 @@ function getAC(callback){
                               // this measn their are answers to thsi question
                               areAnswersFOrQuestion = true;
                             }
-                          }
+                          
 
                           if(areAnswersFOrQuestion){
                                object = {title:allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].review_question 
@@ -295,9 +295,10 @@ function getAC(callback){
                                 var stringToInserIntoCell = answerType+"|"+results[A][c].answer_text;
                                   object.table.push({cells:stringToInserIntoCell});
                       
-                          }
+                             }
                                                    
                       }
+                    }
                      }
 
                      console.log(object);
