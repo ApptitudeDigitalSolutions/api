@@ -229,8 +229,8 @@ function getAC(callback){
                   // ok so now we have the answers and the questions, we need to itterate over the questiosn and get the question, then grab the answes for each candidate
 
                   // so we begin with the for loop
-                  console.log(ACAcitivtyTypes);
-                  console.log(info.candidate_name);
+                  console.log("Arry of tags = " + ACAcitivtyTypes);
+                 // console.log(info.candidate_name);
                  for(A in results){
 
                       if(results[A].length > 0){
