@@ -320,8 +320,9 @@ function getAC(callback){
                               }
                           }
                      }
-
+                        if(object.table.length > 0){
                         info.activities[A].activity_report_components.push(object);
+                      }
 
                     } 
 
