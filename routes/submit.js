@@ -278,7 +278,7 @@ console.log("Arry of tag = " + ACAcitivtyTypes[A]);
                         var object ={};
                          for(c in allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity]){
                           
-                          console.log("QUESTIONs = " + JSON.stringify(allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c]));
+                          console.log("QUESTIONs = " + JSON.stringify(allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].review_question_id));
 
                           // now we need to see if there are answes to this question int he results block provioded
                           var areAnswersFOrQuestion = false;
