@@ -114,6 +114,7 @@ function getAC(callback){
               // we watn to add these rows to assessment_centre_activities_info only if the activity type is also found in the template
               var hasAdded;
               var acts = assessment_centre_info[0].activity_types.split(",");
+              console.log(acts);
               for(i in rows){
 
                 for(j in acts){
@@ -133,7 +134,7 @@ function getAC(callback){
 // itterate over the activities,but you need some way of keeping track of which queries were perfomed in what order, and theres no 
 
   function getActivitiesQuestions(callback){
-         activities = assessment_centre_info[0].activity_types.split(",");
+        activities = assessment_centre_info[0].activity_types.split(",");
         console.log("THE ACTIVITIES ARE "+ activities + " AND EVENTS COUNT = " + activities.length);
         var query = "";
         for(i in activities){
@@ -159,7 +160,7 @@ function getAC(callback){
             for ( i in results){
               allReviewQuestionsForAllActivities.push(results[i]);
             }
-            console.log(JSON.stringify(allReviewQuestionsForAllActivities));
+            //console.log(JSON.stringify(allReviewQuestionsForAllActivities));
             callback(null);
         }});
         
