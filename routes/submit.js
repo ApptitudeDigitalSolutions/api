@@ -212,6 +212,7 @@ function getAC(callback){
 
                   // so we begin with the for loop
                   console.log(ACAcitivtyTypes);
+                  console.log(info.candidate_name);
                  for(A in results){
 
                       if(results[A].length > 0){
