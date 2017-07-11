@@ -331,7 +331,7 @@ function getAC(callback){
             // ok now we need to clean up the JSON, we need to remove items from the activities set that have no activity_report_components
 
             for(itter in info.activities){
-              console.log(JSON.stringify(info.activities[itter].activity_report_components));
+              console.log("COMPONETS " + JSON.stringify(info.activities[itter].activity_report_components));
               if(info.activities[itter].activity_report_components.length < 1 && JSON.stringify(info.activities[itter].activity_report_components) != "{}"){
                 // we need to remove the object as its empty 
                 info.activities.splice(itter,1);
