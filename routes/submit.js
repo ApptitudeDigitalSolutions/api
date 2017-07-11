@@ -230,10 +230,12 @@ function getAC(callback){
                   // ok so now we have the answers and the questions, we need to itterate over the questiosn and get the question, then grab the answes for each candidate
 
                   // so we begin with the for loop
+                var hasAddedContent = false;
 
                  for(A in results){
 
                       if(results[A].length > 0){
+                        hasAddedContent = true;
                         //console.log("Arry of tag = " + ACAcitivtyTypes[A]);
                         //console.log(JSON.stringify(results[A]));
                         // this means there are results of this acticity , question is  which activity was it 
@@ -319,10 +321,11 @@ function getAC(callback){
                                                          
                               }
                           }
-                     }
-                        if(object != {}){
-                        info.activities[A].activity_report_components.push(object);
                       }
+                        if(JSON.stringify(object) != "{}"){
+                          console.log("COMPONETS ");
+                          info.activities[A].activity_report_components.push(object);
+                        }
 
                     } 
 
@@ -332,7 +335,7 @@ function getAC(callback){
             // ok now we need to clean up the JSON, we need to remove items from the activities set that have no activity_report_components
 
             for(itter in info.activities){
-              console.log("COMPONETS " + JSON.stringify(info.activities[itter].activity_report_components));
+              // console.log("COMPONETS " + JSON.stringify(info.activities[itter].activity_report_components));
               if(info.activities[itter].activity_report_components.length < 1){
                 // we need to remove the object as its empty 
                 info.activities.splice(itter,1);
