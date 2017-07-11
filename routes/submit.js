@@ -279,13 +279,13 @@ console.log("Arry of tag = " + ACAcitivtyTypes[A]);
                          for(c in allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity]){
                           
                           console.log("QUESTIONs = " + JSON.stringify(allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].review_question_id));
-
+                          var x = allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].review_question_id;
                           // now we need to see if there are answes to this question int he results block provioded
                           var areAnswersFOrQuestion = false;
                           for(d in results[A]){
                            // console.log(allReviewQuestionsForAllActivities);
                           console.log("q id = "+ results[A][d].question_id + " and aq id = " + JSON.stringify(allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c]));
-                            if(results[A][d].question_id == allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].review_question_id){
+                            if(results[A][d].question_id == x){
                               // this measn their are answers to thsi question
                               areAnswersFOrQuestion = true;
                             }
