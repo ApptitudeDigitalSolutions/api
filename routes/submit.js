@@ -251,7 +251,7 @@ function getAC(callback){
 
 
 
-                        console.log("Index for Interview quesitons = " + indexOfQuestionsForACActivity + " for results at index " + A);
+                        console.log("Index for Interview quesitons = " + indexOfQuestionsForACActivity + " for results at index " + A + " for activty tupe " + ACAcitivtyTypes[A]);
 
 
                         // ok now we can fill out the JSON objects
