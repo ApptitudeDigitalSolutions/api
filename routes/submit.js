@@ -116,7 +116,7 @@ function getAC(callback){
               for(i in rows){
 
                 for(j in acts){
-                  console.log("activity_type" + rows[i].activity_type + ", acts" +  acts[j] )
+                  console.log("activity_type = " + rows[i].activity_type + ", acts = " +  acts[j]);
                   if(rows[i].activity_type == acts[j] && hasAdded == false){
                     assessment_centre_activities_info.push(rows[i]);
                     console.log("ADDING ROW " + rows[i]);
