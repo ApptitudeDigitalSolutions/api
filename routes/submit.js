@@ -183,12 +183,13 @@ function getAC(callback){
 
 
         var query = "";
+        var ACAcitivtyTypes = [];
         for ( j in assessment_centre_activities_info){
           console.log(assessment_centre_activities_info[j].activity_type);
     
           var activity_results_for_candidate ={};
           
-          var ACAcitivtyTypes = [];
+          
           if(assessment_centre_activities_info[j].activity_type == "i"){
             query = query + 'SELECT * FROM Interview_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id ASC;';
             ACAcitivtyTypes.push("i");
