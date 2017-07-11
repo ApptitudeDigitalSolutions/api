@@ -270,7 +270,7 @@ function getAC(callback){
 
 
 
-                        console.log("Index for quesitons = " + indexOfQuestionsForACActivity + " for results at index " + A + " for activty tupe " + ACAcitivtyTypes[A]);
+                        //console.log("Index for quesitons = " + indexOfQuestionsForACActivity + " for results at index " + A + " for activty tupe " + ACAcitivtyTypes[A]);
 
 
                         // ok now we can fill out the JSON objects
@@ -344,7 +344,7 @@ function getAC(callback){
 
             //  info.activities.push(activity_report);
             if(info.activities.length > 0){
-            // console.log("SUBMIT - The Final JSON object looks like >> " + JSON.stringify(info));
+             console.log("SUBMIT - The Final JSON object looks like >> " + JSON.stringify(info));
 
                 // pass to create wizard
 
