@@ -390,10 +390,11 @@ var out = fs.createWriteStream ( '/home/ubuntu/api/reports/'+ ACID +'/'+fileName
 // wirite file handle in db 
 
 out.on ( 'error', function ( err ) {
-	console.log ( err );
+	console.log ( "ERRROR BRO " + err );
 });
-
-async.parallel ([
+//async.waterfall([async.apply(grabDataAndFormat,query,ACAcitivtyTypes,info)], function (err, result) { console.log("DONE"); });
+         
+async.waterfall ([
 	function ( done ) {
 		out.on ( 'close', function () {
 			console.log ( 'Finish to create a DOCX file.' );
