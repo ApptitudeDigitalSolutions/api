@@ -296,17 +296,22 @@ function getAC(callback){
                      }
 
                     }
-
+                      if(object != null){
                       info.activities[A].activity_report_components.push(object);
+                    }else{
+                       info.activities.splice(A, 1);
+                    }
                  }
 
                  // Ok so now we can push this compoent of the report into the table 
 
 
             //  info.activities.push(activity_report);
+            if(info.activities.length > 0){
              console.log("SUBMIT - The Final JSON object looks like >> " + JSON.stringify(info));
 
                 // pass to create wizard
+
                 var docGen = require("./WordDocGen.js");
                 
                 docGen.generate(info,ACID,function(returnValue) {
@@ -316,6 +321,9 @@ function getAC(callback){
                     //console.log("Error Generating Doc");
                   }
                 });
+            }else{
+              console.log("No info for candidate" + info.candidate_name);
+            }
 
 
           }});
