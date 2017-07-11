@@ -343,7 +343,7 @@ function getAC(callback){
 
 
             //  info.activities.push(activity_report);
-            if(info.activities.length > 0){
+            if(info.activities.activity_report_components.length > 0){
              //console.log("SUBMIT - The Final JSON object looks like >> " + JSON.stringify(info));
 
                 // pass to create wizard
