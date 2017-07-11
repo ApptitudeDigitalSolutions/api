@@ -290,7 +290,7 @@ function getAC(callback){
                                object = {title:allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].review_question 
                                       ,table:[]};
 
-                               object.cells.push({cells:"Catergory|Answer"});                       // get the answers and add them to the cells array  
+                               object.table.push({cells:"Catergory|Answer"});                       // get the answers and add them to the cells array  
                               for(c in results[A]){
                                   // now we need to format the cells and add them
                                   var answerType = "";
