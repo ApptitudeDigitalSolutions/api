@@ -311,7 +311,7 @@ for(i in info.activities){
 			
 			var tableStyle = {
 				
-				tableSize: 24,
+				tableSize: 4000,
 				tableBorder:1,
 				tableColor: "ada",
 				tableAlign: "left",
@@ -335,7 +335,7 @@ for(i in info.activities){
 											val: arrayOfColumns[k]
 											,
 											opts: {
-												cellColWidth: 4261,
+												cellColWidth: 2000,
 												b:true,
 												sz: '22',
 												fontFamily: "Arial",
