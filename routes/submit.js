@@ -179,7 +179,7 @@ function getAC(callback){
                     date: today,
                     activities:[]};
 
-        //console.log(assessment_centre_activities_info);
+        console.log(assessment_centre_activities_info);
         var query = "";
         for ( j in assessment_centre_activities_info){
           var activity_results_for_candidate ={};
