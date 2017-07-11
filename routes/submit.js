@@ -265,7 +265,7 @@ function getAC(callback){
                           for(d in results[A]){
                             console.log(allReviewQuestionsForAllActivities);
                           //console.log("q id = "+ results[A][d].question_id + " and aq id = " + allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].id);
-                            if(results[A][d].question_id == allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].id){
+                            if(results[A][d].question_id == allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].review_question_id){
                               // this measn their are answers to thsi question
                               areAnswersFOrQuestion = true;
                             }
