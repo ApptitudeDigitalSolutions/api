@@ -11,6 +11,8 @@ var assessment_centre_info = {};
 var assessment_centre_activities_info = {};
 var allReviewQuestionsForAllActivities = [];
 
+var activityTypesInOrderOfProcessing= [];
+
 var docxObjectsArray = [];
 var activities = [];
 
@@ -114,35 +116,41 @@ function getAC(callback){
   }
 
 
+// itterate over the activities,but you need some way of keeping track of which queries were perfomed in what order, and theres no 
+
   function getActivitiesQuestions(callback){
         activities = assessment_centre_info[0].activity_types.split(",");
-      //console.log("THE ACTIVITIES ARE "+ activities + " AND EVENTS COUNT = " + activities.length);
-        var query;
+        //console.log("THE ACTIVITIES ARE "+ activities + " AND EVENTS COUNT = " + activities.length);
+        var query = "";
         for(i in activities){
 
             if(activities[i] == "i"){
-                query = 'SELECT * FROM Interview_review_questions_'+ACID+';';
+                query = query + 'SELECT * FROM Interview_review_questions_'+ACID+';';
+                activityTypesInOrderOfProcessing.push("i");
             }
             if(activities[i] == "p"){
-                query = 'SELECT * FROM Presentation_review_questions_'+ACID+';'; 
+                query = query + 'SELECT * FROM Presentation_review_questions_'+ACID+';'; 
+                activityTypesInOrderOfProcessing.push("p");
             }
             if(activities[i] == "rp"){
-                query = 'SELECT * FROM Roleplay_review_questions_'+ACID+';'; 
+                query = query + 'SELECT * FROM Roleplay_review_questions_'+ACID+';'; 
+                activityTypesInOrderOfProcessing.push("rp");
             }
+        }
 
 //// THIS IS WHERE ITS GOING WRONG____T
-            connectionAC_MACRO.query(query, function(err, rows) {if (err) { //console.log('Error SQL :' + err); 
-              return;} else {
-               allReviewQuestionsForAllActivities.push(rows);
+        connectionAC_MACRO.query(query, function(err, results) {if (err) { //console.log('Error SQL :' + err); 
+          return;} else {
 
-               if(allReviewQuestionsForAllActivities.length == activities.length){
-                  //console.log("SUBMIT -  AllReviewQuestions INFO >>>>> " + JSON.stringify(allReviewQuestionsForAllActivities));
-                  callback(null);
-               }
-            }});
-        }
+            for ( i in results){
+              allReviewQuestionsForAllActivities.push(results[i]);
+            }
+            console.log(JSON.stringify(allReviewQuestionsForAllActivities));
+            callback(null);
+        }});
+        
   }
-
+//  we need to go per activiry, get the questions and 
 
   function createWordDocReport(callback){
 
@@ -164,17 +172,17 @@ function getAC(callback){
           
           var ACAcitivtyTypes = [];
           if(assessment_centre_activities_info[j].activity_type == "i"){
-            query = query + 'SELECT * FROM Interview_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id DESC;';
+            query = query + 'SELECT * FROM Interview_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id ASC;';
             ACAcitivtyTypes.push("i");
           }
 
           if(assessment_centre_activities_info[j].activity_type == "p"){
-            query = query + 'SELECT * FROM Presentation_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id DESC;';
+            query = query + 'SELECT * FROM Presentation_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id ASC;';
              ACAcitivtyTypes.push("p");
           }
 
           if(assessment_centre_activities_info[j].activity_type == "rp"){
-            query = query + 'SELECT * FROM Roleplay_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id DESC;';
+            query = query + 'SELECT * FROM Roleplay_review_results_'+ACID+' WHERE candidate_id = '+candidates_info[i].id+' ORDER BY question_id ASC;';
              ACAcitivtyTypes.push("rp");
           }
 
@@ -187,12 +195,7 @@ function getAC(callback){
                                 });
         }
 
-          async.waterfall([async.apply(grabDataAndFormat,query,ACAcitivtyTypes,info)], function (err, result) { console.log("DONE");  
-           });
-         
-
-         // grabDataAndFormat(query,ACAcitivtyTypes,info);
-
+          async.waterfall([async.apply(grabDataAndFormat,query,ACAcitivtyTypes,info)], function (err, result) { console.log("DONE"); });
          
         }
 
@@ -200,97 +203,119 @@ function getAC(callback){
 
 
   function grabDataAndFormat(query,ACAcitivtyTypes,info){
-             // console.log(query);
-      //console.log("CALLED grabDataAndFormat + " + query + " WITH INFO + " + info);
+      
       connectionAC_MACRO.query(query, function(err, results) {if (err) 
               console.log(err);
-                { //console.log('Error SQL :' + err); return;} else {
-              //activity_results_for_candidate = rows;
+                {
 
-              // console.log(info);
-                console.log(JSON.stringify(info) + "+ QUERY 1 " + results[0]); 
-               // console.log("QUERY 2 " + results[1]); 
-               // console.log("QUERY 3 " + results[2]); 
+                  // ok so now we have the answers and the questions, we need to itterate over the questiosn and get the question, then grab the answes for each candidate
 
-               //               console.log("QUERY "); 
+                  // so we begin with the for loop
 
-              // we should get all results for a candidate in here
+                 for(A in results){
 
-              // we want to itterate over all the objects
+                      if(results[A].length > 0){
+                        // this means there are results of this acticity , question is  which activity was it 
+                        // we know this by getting the 
 
-              // getting and building the json object as per 
+                        // so we do need to knwo the index becasue of the review quesitons 
+                        var indexOfQuestionsForACActivity = 0;
+                        if(ACAcitivtyTypes[A] == "i"){
+                          // now we need to get the index of the questions array block
+                          for(B in activityTypesInOrderOfProcessing){
+                          if (activityTypesInOrderOfProcessing[b] == "i"){
+                            indexOfQuestionsForACActivity = B;
+                          }
+                          }
+                        }
 
-              // console.log("CANDIDATE RESULTS <<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>> " + JSON.stringify(rows));
-             
-              // for every activity get the results for a particular user 
-              // var activity_report = {
-              //                         acticity_type:assessment_centre_activities_info[theValueOfJ].activity_type,
-              //                         activity_report_intro:assessment_centre_activities_info[theValueOfJ].actiity_report_intro_text,
-              //                         activity_report_intro_table:[],
-              //                         activity_performace_overview_table:[],
-              //                         activity_report_components:[]
-              //                       }
+                        if(ACAcitivtyTypes[A] == "p"){
+                          // now we need to get the index of the questions array block
+                          for(B in activityTypesInOrderOfProcessing){
+                          if (activityTypesInOrderOfProcessing[b] == "p"){
+                            indexOfQuestionsForACActivity = B;
+                          }
+                          }
+                        }
 
-            // FILLING IN activity_report_intro_table
+                        if(ACAcitivtyTypes[A] == "rp"){
+                          // now we need to get the index of the questions array block
+                          for(B in activityTypesInOrderOfProcessing){
+                          if (activityTypesInOrderOfProcessing[b] == "rp"){
+                            indexOfQuestionsForACActivity = B;
+                          }
+                          }
+                        }
 
-            // for i in tables 
 
-            // FILLING IN activity_performace_overview_table
 
-            // ok we need to go over each result, then break down 
+                       // console.log("Index for Interview quesitons = " + indexOfQuestionsForACActivity + " for results at index " + A);
 
-            //console.log("SUBMIT - THE VALUE OF J = " + theValueOfJ);
-           
-            // for(mqm in allReviewQuestionsForAllActivities[indexOfActivityInArraySELECTED]){
 
-            //   //console.log("BRESK " + allReviewQuestionsForAllActivities[indexOfActivityInArraySELECTED][0].review_question);
-            //    activity_report.activity_report_components.push({title:allReviewQuestionsForAllActivities[indexOfActivityInArraySELECTED][0].review_question,table:[]});
+                        // ok now we can fill out the JSON objects
 
-            //   // a new table for each needs to be created
+                         for(c in allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity]){
+                          //console.log("QUESTION = " + allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].review_question);
 
-            //    activity_report.activity_report_components[theValueOfJ].table.push({cells:"Questions|Answers|Catergory"});
+                          // now we need to see if there are answes to this question int he results block provioded
+                          var areAnswersFOrQuestion = false;
+                          for(d in results[A]){
+                            if(results[A][d].question_id == allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].id){
+                              // this measn their are answers to thsi question
+                              areAnswersFOrQuestion = true;
+                            }
+                          }
 
-            // // now we only want to process the results for the current question ( represnted by mqm here )
-            //     for(m in activity_results_for_candidate){
+                          if(areAnswersFOrQuestion){
+                              var object = {titles:allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].review_question 
+                                      ,table:[]};
 
-            //       if(activity_results_for_candidate[m].question_id == mqm){
+                               object.cells.push({cells:"Catergory|Answer"});                       // get the answers and add them to the cells array  
+                              for(c in results[A]){
+                                  // now we need to format the cells and add them
+                                  var answerType = "";
+                                  if(results[A][c].answer_type == "pi"){
+                                      answerType = "Positive";
+                                  }
+                                  if(results[A][c].answer_type == "ni"){
+                                      answerType = "Negative";
+                                  }
+                                  if(results[A][c].answer_type == "ac"){
+                                      answerType = "Commnet";
+                                  }
+                                  if(results[A][c].answer_type == "s"){
+                                      answerType = "Score";
+                                  }
 
-            //       var answerType = "";
+                                var stringToInserIntoCell = answerType+"|"+results[A][c].answer_text;
+                                  object.table.push({cells:stringToInserIntoCell});
+                      
+                          }
+                                                   
+                      }
+                     }
 
-            //       if(activity_results_for_candidate[m]=="pi"){
-            //           answerType = "Positive";
-            //       }
-            //        if(activity_results_for_candidate[m]=="ni"){
-            //           answerType = "Negative";
-            //       }
-            //        if(activity_results_for_candidate[m]=="s"){
-            //           answerType = "Score";
-            //       }
-            //        if(activity_results_for_candidate[m]=="ac"){
-            //           answerType = "Commnet";
-            //       }
+                    }
 
-            //       var stringToInserIntoCell = activity_results_for_candidate[m].question_id+"|"+activity_results_for_candidate[m].answer_text+"|"+answerType;
-            //       activity_report.activity_report_components[theValueOfJ].table.push({cells:stringToInserIntoCell});
-            //     }
+                      info.activities[A].activity_report_components.push(object);
+                 }
 
-            //   }
+                 // Ok so now we can push this compoent of the report into the table 
 
-            // }
 
-            // info.activities.push(activity_report);
-            //  //console.log("SUBMIT - The Final JSON object looks like >> " + JSON.stringify(info));
+            //  info.activities.push(activity_report);
+             console.log("SUBMIT - The Final JSON object looks like >> " + JSON.stringify(info));
 
-            //     // pass to create wizard
-            //     var docGen = require("./WordDocGen.js");
+                // pass to create wizard
+                var docGen = require("./WordDocGen.js");
                 
-            //     docGen.generate(info,ACID,function(returnValue) {
-            //       if(returnValue ==true){
-            //         //console.log("The doc has been generated");
-            //       }else{
-            //         //console.log("Error Generating Doc");
-            //       }
-            //     });
+                docGen.generate(info,ACID,function(returnValue) {
+                  if(returnValue ==true){
+                    //console.log("The doc has been generated");
+                  }else{
+                    //console.log("Error Generating Doc");
+                  }
+                });
 
 
           }});

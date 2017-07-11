@@ -489,11 +489,11 @@ for(i in info.activities){
 
 		}
 		var pObj = docx.createTable (table, tableStyle);
-		
+		docx.putPageBreak ();
 	}	
 
 
-	docx.putPageBreak ();
+	
 	
 
 
@@ -583,19 +583,12 @@ for(i in info.activities){
 		
 		 for(zk in info.activities[i].activity_report_components){
 		
-		
-			console.log("we are in here>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-		
-			console.log(info.activities[i].activity_report_components[zk].title);
+			console.log("The question title is = "+info.activities[i].activity_report_components[zk].title);
 			
 			var pObj = docx.createP ();
 			pObj.addText (info.activities[i].activity_report_components[zk].title, { font_face: 'Arial', font_size: 17 });
 		
 			pObj.addLineBreak ();
-			// insert table
-			
-
-			console.log("The tbale looks like : " + JSON.stringify(table));
 			
 			var tableStyle = {
 				
@@ -645,25 +638,7 @@ for(i in info.activities){
 					var cellsRow = [];
 					if(arrayOfColumns.length > 1){
 						for(k in arrayOfColumns){
-
-							// we attempt to split each string on some particualr chars, if so we need to add a line break in between each 
-								// var partsOFString = arrayOfColumns[k].split("@&@");
-
-								// var pObj = docx.createP();
-
-								// if(partsOFString.length > 0){
-								// 	for(dsds in partsOFString){
-								// 		pObj.addText(partsOFString[dsds]);
-								// 		pObj.addLineBreak ();
-								// 	}
-								// 	cellsRow.push(pObj);
-								// }else{
-									cellsRow.push(arrayOfColumns[k]);
-								// }
-								
-							// 
-
-							
+							cellsRow.push(arrayOfColumns[k]);
 						}
 					}else{
 						// this means the row is a single one 
