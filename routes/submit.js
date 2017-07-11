@@ -230,12 +230,11 @@ function getAC(callback){
                   // ok so now we have the answers and the questions, we need to itterate over the questiosn and get the question, then grab the answes for each candidate
 
                   // so we begin with the for loop
-                  
-                 // console.log(info.candidate_name);
+
                  for(A in results){
 
                       if(results[A].length > 0){
-console.log("Arry of tag = " + ACAcitivtyTypes[A]);
+                        console.log("Arry of tag = " + ACAcitivtyTypes[A]);
                         //console.log(JSON.stringify(results[A]));
                         // this means there are results of this acticity , question is  which activity was it 
                         // we know this by getting the 
@@ -278,56 +277,58 @@ console.log("Arry of tag = " + ACAcitivtyTypes[A]);
                         var object ={};
                          for(c in allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity]){
                           
-                          console.log("QUESTIONs = " + JSON.stringify(allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].review_question_id));
+                          //console.log("QUESTIONs = " + JSON.stringify(allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].review_question_id));
                           var x = allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].review_question_id;
                           var y = allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].review_question;
                           // now we need to see if there are answes to this question int he results block provioded
                           var areAnswersFOrQuestion = false;
                           for(d in results[A]){
-                           // console.log(allReviewQuestionsForAllActivities);
-                          console.log("q id = "+ results[A][d].question_id + " and aq id = " + JSON.stringify(allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c]));
-                            if(results[A][d].question_id == x){
-                              // this measn their are answers to thsi question
-                              areAnswersFOrQuestion = true;
-                            }
-                          
+                                 // console.log(allReviewQuestionsForAllActivities);
+                                //console.log("q id = "+ results[A][d].question_id + " and aq id = " + JSON.stringify(allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c]));
+                                  if(results[A][d].question_id == x){
+                                    // this measn their are answers to thsi question
+                                    areAnswersFOrQuestion = true;
+                                  }
+                                
 
-                          if(areAnswersFOrQuestion){
-                               object = {title:y 
-                                      ,table:[]};
+                                if(areAnswersFOrQuestion){
+                                     object = {title:y 
+                                            ,table:[]};
 
-                               object.table.push({cells:"Catergory|Answer"});                       // get the answers and add them to the cells array  
-                              for(c in results[A]){
-                                  // now we need to format the cells and add them
-                                  var answerType = "";
-                                  if(results[A][c].answer_type == "pi"){
-                                      answerType = "Positive";
-                                  }
-                                  if(results[A][c].answer_type == "ni"){
-                                      answerType = "Negative";
-                                  }
-                                  if(results[A][c].answer_type == "ac"){
-                                      answerType = "Commnet";
-                                  }
-                                  if(results[A][c].answer_type == "s"){
-                                      answerType = "Score";
-                                  }
+                                     object.table.push({cells:"Catergory|Answer"});                       // get the answers and add them to the cells array  
+                                    for(c in results[A]){
+                                        // now we need to format the cells and add them
+                                        var answerType = "";
+                                        if(results[A][c].answer_type == "pi"){
+                                            answerType = "Positive";
+                                        }
+                                        if(results[A][c].answer_type == "ni"){
+                                            answerType = "Negative";
+                                        }
+                                        if(results[A][c].answer_type == "ac"){
+                                            answerType = "Commnet";
+                                        }
+                                        if(results[A][c].answer_type == "s"){
+                                            answerType = "Score";
+                                        }
 
-                                var stringToInserIntoCell = answerType+"|"+results[A][c].answer_text;
-                                  object.table.push({cells:stringToInserIntoCell});
-                      
-                             }
-                                                   
-                      }
-                    }
+                                      var stringToInserIntoCell = answerType+"|"+results[A][c].answer_text;
+                                        object.table.push({cells:stringToInserIntoCell});
+                            
+                                   }
+                                                         
+                              }
+                          }
                      }
+
+
 
                      console.log(object);
                      if(object.length > 0){
-                      info.activities[A].activity_report_components.push(object);
-                    }else{
-                       info.activities.splice(A, 1);
-                    }
+                        info.activities[A].activity_report_components.push(object);
+                      }else{
+                         info.activities.splice(A, 1);
+                      }
 
                     } 
 
