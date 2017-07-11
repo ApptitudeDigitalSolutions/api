@@ -321,30 +321,23 @@ function getAC(callback){
                           }
                      }
 
-
-
-                     //console.log(object);
-                     // if(object.length > 0){
                         info.activities[A].activity_report_components.push(object);
-                      // }else{
-                      //    info.activities.splice(A, 1);
-                      // }
 
                     } 
 
-                    // if(object.length > 0){
-                    //   info.activities[A].activity_report_components.push(object);
-                    // }else{
-                    //    info.activities.splice(A, 1);
-                    // }
                  }
 
-                 // Ok so now we can push this compoent of the report into the table 
+               
+            // ok now we need to clean up the JSON, we need to remove items from the activities set that have no activity_report_components
 
+            for(itter in info.activities){
+              if(info.activities[itter].activity_report_components.length < 1){
+                // we need to remove the object as its empty 
+                info.activities.splice(itter,1);
+              }
+            }
 
-            //  info.activities.push(activity_report);
-            console.log(JSON.stringify(info));
-            if(info.activities.activity_report_components.length > 0){
+            if(info.activities.length > 0){
              //console.log("SUBMIT - The Final JSON object looks like >> " + JSON.stringify(info));
 
                 // pass to create wizard
