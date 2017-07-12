@@ -323,7 +323,7 @@ for(i in info.activities){
 		
 			for(j in info.activities[i].activity_report_components[zk].table){
 				// split string down 
-				if(table[0].length == 0){
+				if(table[0][0].length == 0){
 					console.log('this means its the first row');
 
 					// split sring 
