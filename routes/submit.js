@@ -161,7 +161,7 @@ function getAC(callback){
               console.log("Adding Questions");
               allReviewQuestionsForAllActivities.push(results[i]);
             }
-            //console.log(JSON.stringify(allReviewQuestionsForAllActivities));
+            console.log(JSON.stringify(allReviewQuestionsForAllActivities));
             callback(null);
         }});
         
