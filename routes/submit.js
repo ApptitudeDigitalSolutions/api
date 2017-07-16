@@ -284,7 +284,7 @@ function getAC(callback){
                           var x = allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].review_question_id;
                           var y = allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].review_question;
 
-                          console.log(JSON.stringify(y));
+                          console.log("THIS QUESTION IS " + JSON.stringify(y));
                           // now we need to see if there are answes to this question int he results block provioded
                           var areAnswersFOrQuestion = false;
                           for(d in results[A]){
