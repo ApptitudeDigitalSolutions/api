@@ -321,6 +321,7 @@ function getAC(callback){
                                                          
                               }
                           }
+                          indexOfQuestionsForACActivity++;
                       }
                         if(JSON.stringify(object) != "{}"){
                           console.log("COMPONETS ");
