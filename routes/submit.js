@@ -277,6 +277,7 @@ function getAC(callback){
 
                         // ok now we can fill out the JSON objects
                         var object ={};
+                        console.log("Number of q's = " + allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity].length+ " and Q's" + JSON.stringify(allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity]) + " " )
                          for(c in allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity]){
                           
                           //console.log("QUESTIONs = " + JSON.stringify(allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].review_question_id));
@@ -323,7 +324,7 @@ function getAC(callback){
                                                          
                               }
                           }
-                          indexOfQuestionsForACActivity++;
+                          //indexOfQuestionsForACActivity++;
                       }
                         if(JSON.stringify(object) != "{}"){
                           console.log("COMPONETS ");
