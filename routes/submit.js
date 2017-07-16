@@ -300,6 +300,7 @@ function getAC(callback){
                                      object = {title:y 
                                             ,table:[]};
 
+                                    console.log("THIS QUESTION IS " + JSON.stringify(object.title));
                                      object.table.push({cells:"Catergory|Answer"});                       // get the answers and add them to the cells array  
                                     for(c in results[A]){
                                         // now we need to format the cells and add them
