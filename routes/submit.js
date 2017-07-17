@@ -286,10 +286,11 @@ function getAC(callback){
 
                          // console.log("THIS QUESTION IS " + JSON.stringify(y));
                           // now we need to see if there are answes to this question int he results block provioded
+                          // now we itterate over the answers to that question and add them as needed 
                           var areAnswersFOrQuestion = false;
                           for(d in results[A]){
                                  // console.log(allReviewQuestionsForAllActivities);
-                                //console.log("q id = "+ results[A][d].question_id + " and aq id = " + JSON.stringify(allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c]));
+                                console.log("q id = "+ results[A][d].question_id + " and aq id = " + JSON.stringify(allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c]));
                                   if(results[A][d].question_id == x){
                                     // this measn their are answers to thsi question
                                     areAnswersFOrQuestion = true;
