@@ -299,6 +299,95 @@ for(i in info.activities){
 
 
 
+// 	if(info.activities[i].activity_report_components.length > 0){
+// 		console.log("THE LENGTH IS : " +info.activities[i].activity_report_components.length);
+		
+// 		 for(zk in info.activities[i].activity_report_components){
+		
+// 			console.log("The question title is = "+info.activities[i].activity_report_components[zk]);
+			
+// 			var pObj = docx.createP ();
+// 			pObj.addText (info.activities[i].activity_report_components[zk].title, { font_face: 'Arial', font_size: 17 });
+		
+// 			pObj.addLineBreak ();
+			
+// 			var tableStyle = {
+				
+// 				tableSize: 4000,
+// 				tableBorder:1,
+// 				tableColor: "ada",
+// 				tableAlign: "left",
+// 				tableFontFamily: "Arial",
+// 				borders: true
+// 			}
+
+// 			var table=[[],[]];
+		
+// 			for(j in info.activities[i].activity_report_components[zk].table){
+// 				// split string down 
+// 				if(table[0].length == 0){
+// 					console.log('this means its the first row');
+
+// 					// split sring 
+// 					var arrayOfColumns = info.activities[i].activity_report_components[zk].table[j].cells.split("|");
+// 					console.log(arrayOfColumns);
+
+// 					for(k in arrayOfColumns){
+// 						var columnObject = {
+// 											val: arrayOfColumns[k]
+// 											,
+// 											opts: {
+// 												cellColWidth: 2000,
+// 												b:true,
+// 												sz: '22',
+// 												fontFamily: "Arial",
+// 												shd: {
+// 									                fill: "92CDDC",
+									               
+// 									                "themeFillTint": "80"
+// 									            }
+// 											}
+// 										};
+// 						table[0][k] = columnObject;
+// 					}
+// 					//console.log(table);
+
+// 				}else{
+// 					console.log('this means it is another row');
+// 					var arrayOfColumns = info.activities[i].activity_report_components[zk].table[j].cells.split("|");
+// 					console.log(arrayOfColumns);
+
+// 					var cellsRow = [];
+// 					if(arrayOfColumns.length > 1){
+// 						for(k in arrayOfColumns){
+// 							cellsRow.push(arrayOfColumns[k]);
+// 						}
+// 					}else{
+// 						// this means the row is a single one 
+// 						cellsRow.push({val: arrayOfColumns[0], opts: {gridSpan: table[0].length}});
+// 					}
+
+// 					table[1].push(cellsRow);
+// 					//console.log(table);
+
+// 				}
+
+
+// 			}
+
+// 			var pObj = docx.createTable (table, tableStyle);
+// 			docx.putPageBreak ();
+// 		}
+
+// 	}
+
+
+
+
+// }
+
+
+
 	if(info.activities[i].activity_report_components.length > 0){
 		console.log("THE LENGTH IS : " +info.activities[i].activity_report_components.length);
 		
@@ -313,7 +402,8 @@ for(i in info.activities){
 			
 			var tableStyle = {
 				
-				tableSize: 4000,
+				tableSize: 300,
+				tableColWidth: 7261,
 				tableBorder:1,
 				tableColor: "ada",
 				tableAlign: "left",
@@ -321,7 +411,7 @@ for(i in info.activities){
 				borders: true
 			}
 
-			var table=[[],[]];
+			var table=[[]];
 		
 			for(j in info.activities[i].activity_report_components[zk].table){
 				// split string down 
@@ -333,11 +423,13 @@ for(i in info.activities){
 					console.log(arrayOfColumns);
 
 					for(k in arrayOfColumns){
-						var columnObject = {
+
+						if(k ==0){
+							var columnObject = {
 											val: arrayOfColumns[k]
 											,
 											opts: {
-												cellColWidth: 2000,
+												cellColWidth: 2261,
 												b:true,
 												sz: '22',
 												fontFamily: "Arial",
@@ -348,6 +440,24 @@ for(i in info.activities){
 									            }
 											}
 										};
+						}else{
+							var columnObject = {
+											val: arrayOfColumns[k]
+											,
+											opts: {
+												cellColWidth: 4261,
+												b:true,
+												sz: '22',
+												fontFamily: "Arial",
+												shd: {
+									                fill: "92CDDC",
+									               
+									                "themeFillTint": "80"
+									            }
+											}
+										};
+						}
+						
 						table[0][k] = columnObject;
 					}
 					//console.log(table);
@@ -357,17 +467,17 @@ for(i in info.activities){
 					var arrayOfColumns = info.activities[i].activity_report_components[zk].table[j].cells.split("|");
 					console.log(arrayOfColumns);
 
-					var cellsRow = [];
-					if(arrayOfColumns.length > 1){
-						for(k in arrayOfColumns){
-							cellsRow.push(arrayOfColumns[k]);
-						}
-					}else{
-						// this means the row is a single one 
-						cellsRow.push({val: arrayOfColumns[0], opts: {gridSpan: table[0].length}});
-					}
+					// var cellsRow = [];
+					// if(arrayOfColumns.length > 1){
+					// 	for(k in arrayOfColumns){
+					// 		cellsRow.push(arrayOfColumns[k]);
+					// 	}
+					// }else{
+					// 	// this means the row is a single one 
+					// 	cellsRow.push({val: arrayOfColumns[0], opts: {gridSpan: table[0].length}});
+					// }
 
-					table[1].push(cellsRow);
+					table.push(arrayOfColumns);
 					//console.log(table);
 
 				}
