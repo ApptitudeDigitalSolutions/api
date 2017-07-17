@@ -276,7 +276,7 @@ function getAC(callback){
 
 
                         // ok now we can fill out the JSON objects
-                        var object ={};
+                        // object ={};
                         //console.log(" Activity type = "+ ACAcitivtyTypes[A]+ " Number of q's = " + allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity].length+ " and Q's" + JSON.stringify(allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity]) + " " )
                          for(c in allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity]){
                           
@@ -288,7 +288,7 @@ function getAC(callback){
                           // now we need to see if there are answes to this question int he results block provioded
                           // now we itterate over the answers to that question and add them as needed 
                           var areAnswersFOrQuestion = false;
-                          object = {title:y 
+                          var object = {title:y 
                                     ,table:[]};
                           object.table.push({cells:"Catergory|Answer"}); 
 
@@ -303,13 +303,13 @@ function getAC(callback){
                                 
 
                                 if(areAnswersFOrQuestion){
-                                     // object = {title:y 
-                                     //        ,table:[]};
+                                    // object = {title:y 
+                                    //        ,table:[]};
                                     
                                     //console.log("THIS QUESTION IS " + JSON.stringify(object.title));
-                                     // object.table.push({cells:"Catergory|Answer"});                       // get the answers and add them to the cells array  
+                                    // object.table.push({cells:"Catergory|Answer"});                       // get the answers and add them to the cells array  
                                     // for(c in results[A]){
-                                        // now we need to format the cells and add them
+                                    // now we need to format the cells and add them
                                         var answerType = "";
                                         if(results[A][d].answer_type == "pi"){
                                             answerType = "Positive";
@@ -327,6 +327,7 @@ function getAC(callback){
                                       var stringToInserIntoCell = answerType+"|"+results[A][d].answer_text;
                                       console.log("PUSHING " + stringToInserIntoCell);
                                         object.table.push({cells:stringToInserIntoCell});
+                                        console.log(JSON.stringify(object));
                             
                                    // }
                                                          
@@ -338,7 +339,7 @@ function getAC(callback){
                           //indexOfQuestionsForACActivity++;
                       }
                         if(JSON.stringify(object) != "{}"){
-                         
+                          console.log("ADDING OBJECT"+JSON.stringify(object));
                           info.activities[A].activity_report_components.push(object);
                         }
 
