@@ -296,8 +296,6 @@ function getAC(callback){
                                  // console.log(allReviewQuestionsForAllActivities);
                                 console.log("q id = "+ results[A][d].question_id + " and aq id = " + JSON.stringify(allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].review_question_id));
                                   if(results[A][d].question_id == x){
-                                    // this measn their are answers to thsi question
-
                                     areAnswersFOrQuestion = true;
                                   }
                                 
@@ -337,11 +335,12 @@ function getAC(callback){
 
                           }
                           //indexOfQuestionsForACActivity++;
-                      }
-                        if(JSON.stringify(object) != "{}"){
+                          if(JSON.stringify(object) != "{}"){
                           console.log("ADDING OBJECT"+JSON.stringify(object));
                           info.activities[A].activity_report_components.push(object);
                         }
+                      }
+                        
 
                     } 
 
