@@ -290,7 +290,7 @@ function getAC(callback){
                           var areAnswersFOrQuestion = false;
                           for(d in results[A]){
                                  // console.log(allReviewQuestionsForAllActivities);
-                                console.log("q id = "+ results[A][d].question_id + " and aq id = " + JSON.stringify(allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c]));
+                                console.log("q id = "+ results[A][d].question_id + " and aq id = " + JSON.stringify(allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].review_question_id));
                                   if(results[A][d].question_id == x){
                                     // this measn their are answers to thsi question
 
