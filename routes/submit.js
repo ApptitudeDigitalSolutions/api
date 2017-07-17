@@ -217,6 +217,7 @@ function getAC(callback){
           async.waterfall([async.apply(grabDataAndFormat,query,ACAcitivtyTypes,info)], function (err, result) { console.log("DONE"); });
          
         }
+        callback(null);
 
   }
 
@@ -377,7 +378,7 @@ function getAC(callback){
 
 
           }});
-      callback(null);
+      //callback(null);
   }
 
   function responce(callback){
