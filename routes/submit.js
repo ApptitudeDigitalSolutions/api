@@ -277,7 +277,7 @@ function getAC(callback){
 
                         // ok now we can fill out the JSON objects
                         var object ={};
-                        console.log("Number of q's = " + allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity].length+ " and Q's" + JSON.stringify(allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity]) + " " )
+                        console.log(" Activity type = "+ ACAcitivtyTypes[A]+ "Number of q's = " + allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity].length+ " and Q's" + JSON.stringify(allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity]) + " " )
                          for(c in allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity]){
                           
                           //console.log("QUESTIONs = " + JSON.stringify(allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].review_question_id));
