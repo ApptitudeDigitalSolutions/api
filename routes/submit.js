@@ -288,6 +288,10 @@ function getAC(callback){
                           // now we need to see if there are answes to this question int he results block provioded
                           // now we itterate over the answers to that question and add them as needed 
                           var areAnswersFOrQuestion = false;
+                          object = {title:y 
+                                    ,table:[]};
+                          object.table.push({cells:"Catergory|Answer"}); 
+
                           for(d in results[A]){
                                  // console.log(allReviewQuestionsForAllActivities);
                                 console.log("q id = "+ results[A][d].question_id + " and aq id = " + JSON.stringify(allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].review_question_id));
@@ -299,11 +303,11 @@ function getAC(callback){
                                 
 
                                 if(areAnswersFOrQuestion){
-                                     object = {title:y 
-                                            ,table:[]};
-
-                                    console.log("THIS QUESTION IS " + JSON.stringify(object.title));
-                                     object.table.push({cells:"Catergory|Answer"});                       // get the answers and add them to the cells array  
+                                     // object = {title:y 
+                                     //        ,table:[]};
+                                    
+                                    //console.log("THIS QUESTION IS " + JSON.stringify(object.title));
+                                     // object.table.push({cells:"Catergory|Answer"});                       // get the answers and add them to the cells array  
                                     // for(c in results[A]){
                                         // now we need to format the cells and add them
                                         var answerType = "";
@@ -321,6 +325,7 @@ function getAC(callback){
                                         }
 
                                       var stringToInserIntoCell = answerType+"|"+results[A][d].answer_text;
+                                      console.log("PUSHING " + stringToInserIntoCell);
                                         object.table.push({cells:stringToInserIntoCell});
                             
                                    // }
