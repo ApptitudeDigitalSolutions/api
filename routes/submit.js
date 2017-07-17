@@ -324,11 +324,14 @@ function getAC(callback){
                                    }
                                                          
                               }
+
+                              areAnswersFOrQuestion = false;
+
                           }
                           //indexOfQuestionsForACActivity++;
                       }
                         if(JSON.stringify(object) != "{}"){
-                          console.log("COMPONETS ");
+                         
                           info.activities[A].activity_report_components.push(object);
                         }
 
