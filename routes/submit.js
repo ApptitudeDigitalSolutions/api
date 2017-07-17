@@ -302,26 +302,26 @@ function getAC(callback){
 
                                     console.log("THIS QUESTION IS " + JSON.stringify(object.title));
                                      object.table.push({cells:"Catergory|Answer"});                       // get the answers and add them to the cells array  
-                                    for(c in results[A]){
+                                    // for(c in results[A]){
                                         // now we need to format the cells and add them
                                         var answerType = "";
-                                        if(results[A][c].answer_type == "pi"){
+                                        if(results[A][d].answer_type == "pi"){
                                             answerType = "Positive";
                                         }
-                                        if(results[A][c].answer_type == "ni"){
+                                        if(results[A][d].answer_type == "ni"){
                                             answerType = "Negative";
                                         }
-                                        if(results[A][c].answer_type == "ac"){
+                                        if(results[A][d].answer_type == "ac"){
                                             answerType = "Commnet";
                                         }
-                                        if(results[A][c].answer_type == "s"){
+                                        if(results[A][d].answer_type == "s"){
                                             answerType = "Score";
                                         }
 
-                                      var stringToInserIntoCell = answerType+"|"+results[A][c].answer_text;
+                                      var stringToInserIntoCell = answerType+"|"+results[A][d].answer_text;
                                         object.table.push({cells:stringToInserIntoCell});
                             
-                                   }
+                                   // }
                                                          
                               }
 
