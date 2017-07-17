@@ -366,7 +366,7 @@ function getAC(callback){
                 
                 docGen.generate(info,ACID,function(returnValue) {
                   if(returnValue ==true){
-                    console.log("The doc has been generated");
+                    //console.log("The doc has been generated");
                   }else{
                     //console.log("Error Generating Doc");
                   }
@@ -377,7 +377,7 @@ function getAC(callback){
 
 
           }});
-
+      callback(null);
   }
 
   function responce(callback){
