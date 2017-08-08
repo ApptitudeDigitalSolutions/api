@@ -292,14 +292,14 @@ function getAC(callback){
                           var x = allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].review_question_id;
                           var y = allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].review_question;
 
-                          console.log("THIS QUESTION IS " + JSON.stringify(y));
+                          console.log("THIS QUESTION IS ID " + x);
                           // now we need to see if there are answes to this question int he results block provioded
                           // now we itterate over the answers to that question and add them as needed 
                           var areAnswersFOrQuestion = false;
                           var object = {title:y 
                                     ,table:[]};
                           object.table.push({cells:"Catergory|Answer"}); 
-                          console.log("THE ANSWERS FOR THIS QUESTION ARE : " + JSON.stringify(results[A]));
+                         // console.log("THE ANSWERS FOR THIS QUESTION ARE : " + JSON.stringify(results[A]));
                           for(d in results[A]){
                                  // console.log(allReviewQuestionsForAllActivities);
                                 // console.log("q id = "+ results[A][d].question_id + " and aq id = " + JSON.stringify(allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].review_question_id));
