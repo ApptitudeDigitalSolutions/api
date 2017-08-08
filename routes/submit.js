@@ -386,7 +386,7 @@ function getAC(callback){
               "Content-Type": "application/json"
           });
           var json = JSON.stringify({
-             status:"unauthorized"
+             status:"success"
               });
           res.end(json);
   } 
