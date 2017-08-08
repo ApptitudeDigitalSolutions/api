@@ -302,9 +302,11 @@ function getAC(callback){
                           console.log("THE ANSWERS FOR THIS QUESTION ARE : " + JSON.stringify(results[A]));
                           for(d in results[A]){
                                  // console.log(allReviewQuestionsForAllActivities);
-                                //console.log("q id = "+ results[A][d].question_id + " and aq id = " + JSON.stringify(allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].review_question_id));
+                                // console.log("q id = "+ results[A][d].question_id + " and aq id = " + JSON.stringify(allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].review_question_id));
                                   if(results[A][d].question_id == x){
                                     areAnswersFOrQuestion = true;
+                                    console.log("q id = "+ results[A][d].question_id + " and aq id = " + JSON.stringify(allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].review_question_id));
+                                
                                   }
                                 
 
@@ -333,7 +335,7 @@ function getAC(callback){
                                       var stringToInserIntoCell = answerType+"|"+results[A][d].answer_text;
                                       //console.log("PUSHING " + stringToInserIntoCell);
                                         object.table.push({cells:stringToInserIntoCell});
-                                        console.log(JSON.stringify(object));
+                                       // console.log(JSON.stringify(object));
                             
                                    // }
                                                          
