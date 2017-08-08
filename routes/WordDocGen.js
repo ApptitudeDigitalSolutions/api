@@ -122,8 +122,8 @@ pObj.addLineBreak ();
 pObj.addText ( 'Assessors Name(s) :'+info.assessor_name, { font_face: 'Arial', font_size: 20 });
 pObj.addLineBreak ();
 pObj.addText ( 'Date :'+info.date, { font_face: 'Arial', font_size: 20 });
-pObj.addLineBreak ();pObj.addLineBreak ();
-// docx.putPageBreak ();
+// pObj.addLineBreak ();pObj.addLineBreak ();
+ docx.putPageBreak ();
 
 // Page 2 
 for(i in info.activities){
@@ -518,7 +518,7 @@ async.waterfall ([
 			 
 			client.sendEmail({
 			    "From": "elliotcampbelton@apptitudedigitalsolutions.com", 
-			    "To": "e.b.campbelton@gmail.com", 
+			    "To": "michaelblakley@apptitudedigitalsolutions.com", 
 			    "Subject": "Test", 
 			    "TextBody": "Test Message",
 			    "Attachments": [{
