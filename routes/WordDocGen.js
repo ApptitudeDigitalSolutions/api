@@ -123,7 +123,7 @@ pObj.addText ( 'Assessors Name(s) :'+info.assessor_name, { font_face: 'Arial', f
 pObj.addLineBreak ();
 pObj.addText ( 'Date :'+info.date, { font_face: 'Arial', font_size: 20 });
 pObj.addLineBreak ();pObj.addLineBreak ();
-docx.putPageBreak ();
+// docx.putPageBreak ();
 
 // Page 2 
 for(i in info.activities){
