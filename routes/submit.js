@@ -205,9 +205,16 @@ function getAC(callback){
              ACAcitivtyTypes.push("rp");
           }
 
-          info.activities.push({      
+          // info.activities.push({      
+          //                             acticity_type:assessment_centre_activities_info[j].activity_type,
+          //                             activity_report_intro:assessment_centre_activities_info[j].actiity_report_intro_text,
+          //                             activity_report_intro_table:[],
+          //                             activity_performace_overview_table:[],
+          //                             activity_report_components:[]
+          //                       });
+           info.activities.push({      
                                       acticity_type:assessment_centre_activities_info[j].activity_type,
-                                      activity_report_intro:assessment_centre_activities_info[j].actiity_report_intro_text,
+                                      activity_report_intro:"",
                                       activity_report_intro_table:[],
                                       activity_performace_overview_table:[],
                                       activity_report_components:[]
