@@ -303,7 +303,7 @@ function getAC(callback){
                           for(d in results[A]){
                                  // console.log(allReviewQuestionsForAllActivities);
                                 // console.log("q id = "+ results[A][d].question_id + " and aq id = " + JSON.stringify(allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].review_question_id));
-                                  if(results[A][d].question_id == x){
+                                  if(results[A][d].question_id == (x-1)){
                                     areAnswersFOrQuestion = true;
                                     console.log("q id = "+ results[A][d].question_id + " and aq id = " + JSON.stringify(allReviewQuestionsForAllActivities[indexOfQuestionsForACActivity][c].review_question_id));
                                 
