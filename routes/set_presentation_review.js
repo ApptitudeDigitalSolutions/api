@@ -33,7 +33,7 @@ exports.setPresentationReview = function (req, res) {
 
     function addAnswer(callback){
     		// get count of sections
-        answer = answer.replace("'","\'");
+        answer = answer.replace("'","ssssss");
     		var query = 'INSERT INTO Presentation_review_results_'+ac_id+' (candidate_id,question_id,answer_text,answer_type) VALUES (\''+candidate_id+'\','+question_id+',\''+answer+'\',\''+answer_type+'\');';
             console.log(query);
             connectionAC_MACRO.query(query, function(err, rows) {if (err) { console.log('Error SQL :' + err); return;} else {
