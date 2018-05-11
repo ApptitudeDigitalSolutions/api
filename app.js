@@ -25,7 +25,7 @@ var date = new Date();
 
 var options = {
 		    ca: fs.readFileSync('certificates/gd_bundle-g2-g1.crt', 'utf8'),
-		    cert: fs.readFileSync('certificates/fb69616b44c4fa31.crt', 'utf8'),
+		    cert: fs.readFileSync('certificates/ac1417c5b1a54eed.crt', 'utf8'),
 		    key: fs.readFileSync('certificates/adsapp.pem', 'utf8')
 		}
 
